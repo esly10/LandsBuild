@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>  
+    <definition name="guest" template="/WEB-INF/tiles/templates/guest.jsp">
+		<put-attribute name="main-content" value="" />
+	</definition>
+	
+    <definition name="public" template="/WEB-INF/jsp/templates/public.jsp">
+		<put-attribute name="main-content" value="" />
+	</definition>
+    
+	<definition name="public-index" template="/WEB-INF/jsp/templates/index.jsp">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/index.jsp" />
+	</definition>
+	
+	<definition name="error" template="/WEB-INF/tiles/templates/error.jsp">
+		<put-attribute name="main-content" value="" />
+	</definition>
+	
+	<definition name="change-password" template="/WEB-INF/jsp/templates/index.jsp">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/change_password.jsp" />
+	</definition>  
+
+	<definition name="register-owner" extends="error">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/register-owner.jsp" />
+	</definition>
+	
+	<definition name="success-account" extends="error">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/owner-account-success.jsp" />
+	</definition>
+	
+	<definition name="owner" template="/WEB-INF/jsp/templates/owner.jsp">
+		<put-attribute name="main-content" value="" />
+	</definition>
+	
+	
+	<definition name="owner-account" extends="owner">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/owner-account.jsp"/>
+	</definition>
+	
+	<definition name="view-permit-popup" template="/WEB-INF/jsp/public/includes/view-permit-popup.jsp"></definition>
+	
+	<definition name="owner-citation" extends="owner">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/citation-owner.jsp"/>
+	</definition>
+	
+	<definition name="owner-citation-details" extends="owner">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/citation-details.jsp"/>
+	</definition>
+	
+	<definition name="owner-citation-pay" extends="owner">
+		<put-attribute name="main-content" value="owner-billing" />
+	</definition>
+	
+	<definition name="owner-billing" template="/WEB-INF/jsp/public/citation-billing.jsp">
+		<put-attribute name="billing-form" value="/WEB-INF/jsp/public/billing-form.jsp" />
+		<put-attribute name="payment-form" value="/WEB-INF/jsp/public/payment-method.jsp" />
+		<put-attribute name="citation-view" value="/WEB-INF/jsp/public/citation-view.jsp" />
+	</definition>
+		
+	<definition name="owner-citation-review" extends="owner">
+		<put-attribute name="main-content" value="citation-view"/>
+	</definition>
+	
+	<definition name="citation-view" template="/WEB-INF/jsp/public/citation-review.jsp">
+		<put-attribute name="citation-view" value="/WEB-INF/jsp/public/citation-view.jsp" />
+	</definition>
+	
+	<definition name="owner-citation-success" extends="owner">
+		<put-attribute name="main-content" value="owner-citation-success-file" />
+	</definition>
+	
+	<definition name="owner-citation-success-file" template="/WEB-INF/jsp/public/citation-success.jsp">
+		<put-attribute name="citation-success" value="/WEB-INF/custom/pages/citation-success.jsp" />
+		<put-attribute name="public-citation-success" value="/WEB-INF/jsp/public/public-citation-success.jsp" />
+	</definition>
+	
+	<definition name="owner-permit-details" extends="owner">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/permit-details.jsp" />
+	</definition>
+	
+	<definition name="owner-permit-pay" extends="owner">
+		<put-attribute name="main-content" value="owner-billing-permit" />
+	</definition>
+	
+	<definition name="owner-billing-permit" template="/WEB-INF/jsp/public/permit-billing.jsp">
+		<put-attribute name="billing-form" value="/WEB-INF/jsp/public/billing-form.jsp" />
+		<put-attribute name="payment-form" value="/WEB-INF/jsp/public/payment-method.jsp" />
+	</definition>
+	
+	<definition name="owner-permit-review" extends="owner">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/permit-review.jsp" />
+	</definition>
+	
+	<definition name="owner-permit-success" extends="owner">
+		<put-attribute name="main-content" value="owner-permit-success-file" />
+	</definition>
+	
+	<definition name="owner-permit-success-file" template="/WEB-INF/jsp/public/permit-success.jsp">
+		<put-attribute name="permit-success" value="/WEB-INF/custom/pages/permit-success.jsp" />
+		<put-attribute name="public-permit-success" value="/WEB-INF/jsp/public/public-permit-success.jsp" />
+	</definition>
+	
+	<definition name="owner-transactions" extends="owner">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/owner-transactions.jsp" />
+	</definition>
+	
+	 <definition name="error" extends="error">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/error.jsp" />
+	</definition>
+	
+	<definition name="register-owner-edit" extends="owner">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/owner-account-edit.jsp" />
+	</definition>
+	
+	<definition name="terms-conditions" extends="public">
+		<put-attribute name="main-content" value="terms-conditions-file" />
+	</definition>
+	
+	<definition name="terms-conditions-file" template="/WEB-INF/jsp/public/terms-and-conditions.jsp">
+		<put-attribute name="file-content" value="/WEB-INF/custom/pages/terms-and-conditions.jsp" />
+		<put-attribute name="public-file-content" value="/WEB-INF/jsp/public/public-terms-and-conditions.jsp" />
+	</definition>
+	
+	<definition name="privacy-policy" extends="public">
+		<put-attribute name="main-content" value="privacy-policy-file" />
+	</definition>
+	
+	<definition name="privacy-policy-file" template="/WEB-INF/jsp/public/privacy-policy.jsp">
+		<put-attribute name="file-content" value="/WEB-INF/custom/pages/privacy-policy.jsp" />
+		<put-attribute name="public-file-content" value="/WEB-INF/jsp/public/public-privacy-policy.jsp" />
+	</definition>
+	
+	<definition name="print-frame" template="/WEB-INF/jsp/public/includes/print-frame.jsp">
+		<put-attribute name="print-content" value="" />
+	</definition>
+	
+	<definition name="permit-print" extends="print-frame">
+		<put-attribute name="print-content" value="/WEB-INF/jsp/public/includes/permit-print.jsp" />
+	</definition>
+	
+	<definition name="custom-permit-print" extends="print-frame">
+		<put-attribute name="print-content" value="/WEB-INF/custom/print-template/permit-print.jsp" />
+	</definition>
+	
+	<definition name="print-invoice-frame" template="/WEB-INF/jsp/public/includes/print-invoice-frame.jsp">
+		<put-attribute name="print-content" value="" />
+	</definition>
+	
+	<definition name="invoice-citation-print" extends="print-invoice-frame">
+		<put-attribute name="print-content" value="/WEB-INF/jsp/public/includes/invoice-citation-print.jsp" />
+	</definition>
+	
+	<definition name="invoice-permit-print" extends="print-invoice-frame">
+		<put-attribute name="print-content" value="/WEB-INF/jsp/public/includes/invoice-permit-print.jsp" />
+	</definition>
+	
+	<definition name="custom-invoice-citation-print" extends="print-invoice-frame">
+		<put-attribute name="print-content" value="/WEB-INF/custom/print-template/invoice-citation-print.jsp" />
+	</definition>
+	
+	<definition name="custom-invoice-permit-print" extends="print-invoice-frame">
+		<put-attribute name="print-content" value="/WEB-INF/custom/print-template/invoice-permit-print.jsp" />
+	</definition>
+			
+</tiles-definitions>

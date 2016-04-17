@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+	
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+
+	<bean class="com.cambiolabs.citewrite.controller.UserController" >
+	 	<property name="authenticationManager" ref="adminAuthManager" />
+	</bean>
+	
+		<bean class="com.cambiolabs.citewrite.controller.RoomsController" />
+	<bean class="com.cambiolabs.citewrite.controller.ReservationController" />
+	<bean class="com.cambiolabs.citewrite.controller.CalendarController" />
+		<bean class="com.cambiolabs.citewrite.controller.AdministrationController" />
+	<bean class="com.cambiolabs.citewrite.controller.ReportController" />
+		<bean class="com.cambiolabs.citewrite.controller.GuestsController" />
+	<bean class="com.cambiolabs.citewrite.controller.ServiceController" />
+	<bean class="com.cambiolabs.citewrite.controller.AgencyController" />
+	<bean class="com.cambiolabs.citewrite.controller.PaymentsController" />
+	
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+		<property name="prefix">
+			<value>/WEB-INF/jsp/admin/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<mvc:view-controller path="/" view-name="index" />
+	<mvc:view-controller path="/login" view-name="login" />	
+</beans>

@@ -1,0 +1,26 @@
+.x-grid3-simple-totals .x-grid3-row-last {
+    margin-bottom: 25px;
+}
+      
+.x-grid3-simple-totals .x-grid-total-row {
+   /* position: absolute;
+    bottom: 10px;
+    left: 0;
+    /*background: #F9F9F9 url(../../resources/images/default/grid/grid3-hrow.gif);*/
+}
+
+.x-grid3-simple-totals .x-grid-total-row td {
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    border-top: 1px solid #FFFFFF;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.x-grid3-simple-totals .x-grid-total-row tr:first-child td  {
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    border-top: 1px solid #D0D0D0;
+    padding-left: 0px;
+    padding-right: 0px;
+}

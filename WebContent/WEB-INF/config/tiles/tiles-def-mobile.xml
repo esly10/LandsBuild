@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+   
+<tiles-definitions>
+
+	
+	<definition name="mobile" template="/WEB-INF/jsp/templates/mobile.jsp">
+		<put-attribute name="main-content" value="" />
+	</definition>
+
+	<definition name="mobile-guest-index" extends="mobile">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/mobile/index.jsp"/>
+	</definition>
+	
+	<definition name="mobile-guest-citation-details" extends="mobile">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/mobile/citation-details.jsp"/>
+	</definition>
+	
+	<definition name="mobile-guest-citation-dispute" extends="mobile">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/mobile/citation-dispute.jsp"/>
+	</definition>
+	
+	<definition name="mobile-guest-citation-pay" extends="mobile">
+	    <put-attribute name="main-content" value="/WEB-INF/jsp/mobile/citation-billing.jsp" />
+	</definition>
+	
+	<definition name="mobile-guest-citation-review" extends="mobile">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/mobile/citation-view.jsp" />
+	</definition>
+		
+	<definition name="mobile-guest-citation-success" extends="mobile">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/mobile/citation-success.jsp" />
+	</definition>
+	
+	<definition name="mobile-terms-conditions" extends="mobile">
+		<put-attribute name="main-content" value="mobile-terms-conditions-page" />
+	</definition>
+	
+	<definition name="mobile-terms-conditions-page" template="/WEB-INF/jsp/mobile/terms-and-conditions.jsp">
+		<put-attribute name="file-content" value="/WEB-INF/custom/pages/terms-and-conditions.jsp" />
+	</definition>
+	
+	<definition name="mobile-privacy-policy" extends="mobile">
+		<put-attribute name="main-content" value="mobile-privacy-policy-page" />
+	</definition>
+	
+	<definition name="mobile-privacy-policy-page" template="/WEB-INF/jsp/mobile/privacy-policy.jsp">
+		<put-attribute name="file-content" value="/WEB-INF/custom/pages/privacy-policy.jsp" />
+	</definition>
+	
+	<definition name="mobile-guest-citation-map" template="/WEB-INF/jsp/mobile/citation-map.jsp"></definition>
+
+</tiles-definitions>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+   
+<tiles-definitions>
+
+	<definition name="guest-index" template="/WEB-INF/jsp/templates/guest-login.jsp">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/guest/index.jsp" />
+	</definition>
+	
+	<definition name="guest" template="/WEB-INF/jsp/templates/guest.jsp">
+		<put-attribute name="main-content" value="" />
+	</definition>
+	
+	<definition name="public" template="/WEB-INF/jsp/templates/public.jsp">
+		<put-attribute name="main-content" value="" />
+	</definition>
+	
+	<definition name="error-template" template="/WEB-INF/jsp/templates/error.jsp">
+		<put-attribute name="main-content" value="" />
+	</definition>
+
+	<definition name="guest-citation-details" extends="guest">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/citation-details.jsp"/>
+	</definition>
+	
+	<definition name="guest-citation-pay" extends="guest">
+	    <put-attribute name="main-content" value="guest-billing" />
+	</definition>
+	
+	<definition name="guest-billing" template="/WEB-INF/jsp/public/citation-billing.jsp">
+		<put-attribute name="billing-form" value="/WEB-INF/jsp/public/billing-form.jsp" />
+		<put-attribute name="payment-form" value="/WEB-INF/jsp/public/payment-method.jsp" />
+		<put-attribute name="citation-view" value="/WEB-INF/jsp/public/citation-view.jsp" />
+	</definition>
+		
+	<definition name="guest-citation-review" extends="guest">
+		<put-attribute name="main-content" value="citation-view" />
+	</definition>
+	
+	<definition name="citation-view" template="/WEB-INF/jsp/public/citation-review.jsp">
+		<put-attribute name="citation-view" value="/WEB-INF/jsp/public/citation-view.jsp" />
+	</definition>
+	
+	<definition name="guest-citation-success" extends="guest">
+		<put-attribute name="main-content" value="guest-citation-success-file" />
+	</definition>
+	
+	<definition name="guest-citation-success-file" template="/WEB-INF/jsp/public/citation-success.jsp">
+		<put-attribute name="citation-success" value="/WEB-INF/custom/pages/citation-success.jsp" />
+		<put-attribute name="public-citation-success" value="/WEB-INF/jsp/public/public-citation-success.jsp" />
+	</definition>
+	
+	<definition name="error" extends="error-template">
+		<put-attribute name="main-content" value="/WEB-INF/jsp/public/error.jsp" />
+	</definition>
+	
+	
+
+</tiles-definitions>

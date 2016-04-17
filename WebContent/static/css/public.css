@@ -1,0 +1,248 @@
+@charset "utf-8";
+body{
+	 font-family: 'helvetica',tahoma,helvetica,sans-serif;
+       font-size: 12px;
+       background: #151F33 url(../images/public/gradient-body.png) top left repeat-x;
+       padding: 0px;
+       margin: 0px;
+}
+
+/* globals */
+h1 {font-size: 40px;font-weight:normal;padding:0px; margin:0px; padding-bottom:20px;}
+h2 {font-size: 22px;font-weight: normal;padding:0px;margin:0px 0px 0px 20px;}
+h3{font-size: 16px;font-weight:bold;padding:0px; margin:0px;}
+h4{font-size: 16px;font-weight:bold;padding:0px; margin:0px; height:30px; line-height: 30px; float: left;}
+h5{font-size: 20px;font-weight:bold;padding:0px; margin:0px;}
+h6{font-size: 18px;font-weight:bold;padding:0px; margin:0px;}
+div#header{height:110px; position: relative; margin: 0px 14px; }
+div#header div#welcome {width:450px; font-size:21px; text-align: right; color: #ADB1B8; position: absolute; right: 0px; top: 15px;}
+div#header div#account {font-size:12px; text-align: right; position: absolute; right: 0px; top: 65px;}
+div#header div#account a { color: #F2F3F6;text-decoration:none; font-weight: bold;  }
+div#header div#logo {width: 200px; height: 50px; background: url(../images/public/logouniversity.png) top left no-repeat; position: absolute; left: -10px; top: 40px;	}
+div#content-container { width: 1012px; height: 600px; background: url(../images/public/container-background.png) left center no-repeat; }
+div#main-content { margin: 0px 3px 0px 0px; padding-top: 5px;}
+div#content-title{font-size:22px; text-align: left; height: 45px; line-height:45px; padding-left:10px; border-bottom:1px solid #CCCCCC;}
+div#content-title span{background: url(../images/public/separator.png) left center no-repeat;color:#000000; display: block; float: left;margin-left:10px;padding-left:15px;opacity:0.3; filter:alpha(opacity=30);}
+div#content-title span.first-active{background-image:none;margin-left: 0px;padding-left: 0px; opacity:1;filter:alpha(opacity=100);}
+div#content-title span.color-active{background-image:none;margin-left: 0px;padding-left: 0px; opacity:1;filter:alpha(opacity=100); color:#395488;}
+div#content-title span.color{ color:#395488;opacity:1;filter:alpha(opacity=100);}
+div#content-title span.active{opacity:1;filter:alpha(opacity=100);}
+div#content-title span.car{background: url(../images/public/car.png) right center no-repeat; margin-right: 30px; float: right;opacity:1;filter:alpha(opacity=100);}
+div#content-title span.sheets{background: url(../images/public/sheets.png) right center no-repeat; position:relative; left:40px; float: right;opacity:1;filter:alpha(opacity=100);}
+div#content-title span.account{background: url(../images/public/account-logo.png) right center no-repeat;width:24px; margin-right: 15px; float: right;opacity:1;filter:alpha(opacity=100);}
+div#lock {width: 26px; height: 26px; background: url(../images/public/lock.png) left center no-repeat;}
+div#printer {width: 22px; height: 22px; background: url(../images/public/printer.png);margin: -20px 0px 30px 450px; position: absolute; cursor: pointer;}
+label#permit-amount {color:#669900; font-weight:bold; font-size: 22px;position: relative; top: 5px;}
+div.details{display: none; background-color: #FAFAFA;}
+div.details-dark{display: none; background-color: #F0F0F0;}
+div#container{ width: 985px; height: 50px; background: url(../images/public/container-top.png) left center no-repeat; }
+div#container-body{width: 973px; height:auto; min-height:505px; background: url(../images/public/container-body.png) left top repeat; padding-left: 10px;margin-right: 10px; position: relative;}
+div#container-botton{  width: 985px; height: 50px; background: url(../images/public/container-botton.png) left top no-repeat;}
+
+div#body-frame{ background: transparent url(../images/public/body-background.png) top center no-repeat;}
+div#site-frame{width: 990px; margin:0px auto; overflow: visibile; }
+div#footer {clear:both; padding-top: 45px; font-size: 11px; color: #5B6271;margin: 10px auto 20px auto; width: 350px; text-align: center; padding-top: 10px; }
+div#site-preference{clear:both; padding-top: 45px; font-size: 11px; color: #5B6271;margin: 10px auto 0px auto; width: 273px; text-align: center; padding-top: 10px;}
+div#site-preference a{font-size: 11px; color: #FFFDEE; margin-top: 5px; text-decoration: none;}
+div#footer a { font-size: 11px; color: #FFFDEE; margin-top: 5px; text-decoration: none; }
+div#footer label {font-size: 11px; color: #FFFDEE}
+/* globals buttons*/
+button::-moz-focus-inner { border: 0px; padding: 0px; }
+button { cursor: pointer; height: 56px; border: none; margin: 0px; padding: 0px 0px 0px 25px; overflow: visible; background: transparent url(../images/public/btn-left.png) no-repeat top left; margin-right: 2px;}
+button div { white-space: normal; line-height: 56px; height: 56px; background: transparent url(../images/public/btn-right.png) no-repeat top right;text-align: center; color: #FFFFFF;font-weight: bold; font-size: 20px; margin: 0px; padding: 0px 25px 0px 0px;}
+
+button.medium { height: 32px; padding: 0px 0px 0px 20px; background-image: url(../images/public/btn-left-medium.png);}
+button.medium div { line-height: 32px; height: 32px; background-image:  url(../images/public/btn-right-medium.png) ; font-size: 13px; padding: 0px 20px 0px 0px;}
+button.cancel { height: 32px; padding: 0px 0px 0px 15px; background-image: url(../images/public/btn-gray-left.png);}
+button.cancel div{ line-height: 32px; height: 32px; background-image:  url(../images/public/btn-gray-right.png) ; font-size: 13px; padding: 0px 15px 0px 0px;color: #333333;}
+
+button.edit{height: 32px; background: transparent url(../images/public/btn-edit.png) no-repeat top left;padding-right: 15px;}
+
+/* global pop up */
+div.popup{position: absolute;top:220px;left:350px; padding: 20px 0px 0px 20px;-moz-border-radius: 5px; -webkit-border-radius: 10px; border-radius: 10px;background-color: #FFFFFF; z-index: 3001; display: none;}
+div.popup div.container{position: relative;bottom: 10px;}
+div.popup-mask{top:0px ; left:0px; background-color:#000000; opacity:0.5; filter:alpha(opacity=50); position: absolute; width:100%; height: 100%; z-index: 3000;}
+div.popup div.close{cursor: pointer; width:32px; height:32px; background: transparent url(../images/public/close-popup.png); position: relative; right:-10px; top: -20px; float: right;}
+div.popup a { color: #336699;text-decoration:none;}
+
+/*global table*/
+div.table ul{padding: 0px;margin: 0px;list-style: none; width: 462px; clear: left;height: 25px;}
+div.table.citation ul{width: 950px;}
+div.table.invoice ul{width: 950px;}
+div.table ul li {float: left;padding: 0px 10px 0px 10px;border-right:solid 1px #CFD1C7;display: inline;width:58px;border-bottom:solid 1px #FFFFFF; height: 25px; line-height: 25px;}
+div.table.permit ul li{width:160px;}
+div.table.citation ul li{width: auto;}
+div.table ul li.buttons{border-right:none; margin: 0px;width: 46px;}
+div.table.permit li.buttons {width: 70px;}
+div.table div.header ul {font-size:13px; font-weight: bold;background-color: #F0F0F0;}
+div.table div.header ul li {border-bottom:solid 1px #CCCCCC;}
+div.table div.body ul {background-color:#FAFAFA;}
+div.table div.body ul.alt-row {background-color: #F0F0F0;}
+.content-background{background-color:#FAFAFA}
+div.table div.body ul li div{width: 20px; height: 20px; background: url(../images/public/btn_edit_table.png) left center no-repeat; cursor: pointer;float: left; margin-top: 2px;}
+div.table div.body ul li div.update.inactive{background-image: url(../images/public/btn_edit_table_disable.png);}
+div.table div.body ul li div.delete{background-image: url(../images/public/btn_delete_table.png);margin-left: 4px;}
+div.table div.body ul li div.delete.inactive{background-image: url(../images/public/btn_delete_table_disable.png);margin-left: 4px;}
+div.table div.body ul li div.view{background-image: url(../images/public/view-permit.png);margin-right: 4px;}
+div.table div.body ul li div.icon { width: 10px; height: 10px;  background: transparent url(../images/public/group-expand.gif) no-repeat center center; margin: 8px 0px 0px 0px;}
+div.table div.body ul li div.icon.expand { background-image: url(../images/public/group-collapse.gif)};
+div.view{width:20px; height: 20px;background-image:  url(../images/public/view-permit.png); position: relative;float: left; margin-right: 15px; cursor: pointer;}
+div.view-dispute{width:20px; height: 20px;background-image:  url(../images/public/view-permit.png); cursor: pointer;float: left;}
+div.title-popup{background-color: #F0F0F0; width: 475px; height: 40px; line-height: 40px;padding-left: 15px; -moz-border-radius: 5px; -webkit-border-radius: 10px; border-radius: 10px; font-size: 16px; font-weight: bold; margin-bottom: 20px;}
+
+/*  globals Form styles */
+form { padding: 0px; margin: 0px; }
+dl.form { font-size: 12px; margin-top: 15px;}
+dl.form dt { font-weight: normal;color: #333333;clear:left; width:auto;float: left;line-height: 30px; height: 30px; margin: 0px 5px 5px 5px;}
+dl.form dd { position: relative; font-weight: normal;text-align: left; margin: 0px 0px 10px 90px; height: 30px;}
+dl.form dd input, dl.form dd select {height: 25px;  width: 200px; border: 1px solid #a0a0a0; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
+dl.form dd input{padding-left: 2px;}
+ dl.form dd select{padding: 2px;}
+dl.form dd textarea {width: 95%; padding: 2px; border: 2px solid #a0a0a0; height: 100px; font-size: 12px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;  }
+dl.form dd.radio input{ width: auto; border: 0px; }
+dl.formt dd input {height: 30px; }
+
+dl.form.login { margin: 10px 0px 10px 0px;}
+dl.form.login dt {color: #FFFFFF; float: none; font-size: 20px;height: 20px; line-height: 20px; width:230px;}
+dl.form.login dd { margin-left: 0px; margin-bottom: 15px; float: none; height: 40px; }
+dl.form.login dd input {height: 40px;  width: 95%;font-size: 20px; padding-left: 4px;}
+
+
+dl.form.cars dt{ font-weight:bold; float: none; font-size: 12px;height: 20px; line-height: 20px; width:190px; }
+dl.form.cars dd { margin-left: 0px; margin-bottom: 15px; float: none; height: 20px;}
+dl.form.cars dd input, dl.form dd select{height: 30px;  width:180px;}
+dl.form.cars dd input{padding-left: 2px;}
+dl.form.cars dd.radio input{ width: auto; border: 0px; }
+
+dl.list {font-size:15px; color:#333333;border-bottom:1px solid #CCCCCC; padding: 0px; margin: 0px; min-height: 25px;}
+dl.details {font-size:13px; color:#333333; padding: 0px; margin: 0px; height: 25px;}
+dl.details dt {clear:left; width:80px; float: left;padding-left: 10px; line-height: 25px; height: 25px;}
+dl.details dd {position: relative; margin-left:90px; height: 25px; line-height: 25px;}
+div.title-details {font-weight: bold; font-size:14px; height: 25px; line-height: 25px; margin-left: 10px;}
+dl.list dt {font-weight: bold;  text-align: left; clear:left; width:200px; float: left;padding-left: 10px; line-height: 25px; height: 25px;}
+dl.list dd {font-weight: normal;   position: relative; margin-left:200px; min-height: 25px; line-height: 25px;}
+dl.list.small dt {width: 120px; }
+dl.list.small dd {margin-left:120px; }
+dl.list.view dt {width: 155px;}
+dl.list.view dd {width:280px;}
+dl.list.summary {background-color:#F0F0F0;height: 36px;}
+dl.list.summary dd {font-weight: bold; font-size:22px;color:#CC0000 }
+
+dl.list-accordion {font-size:12px; color:#333333;border-bottom:1px solid #CCCCCC; padding: 0px; margin: 0px; height: 20px;}
+dl.list-accordion dt {font-weight: bold;  text-align: left; clear:left; width:180px; float: left;padding-left: 10px; line-height: 20px; height: 20px;}
+dl.list-accordion dd {font-weight: normal;   position: relative; margin-left:180px; height: 20px; line-height: 20px;}
+
+ul.data {list-style: none; margin:0px,10px 0px 0px; padding: 0px;}
+ul.data li {margin-bottom: 5px;}
+ul.data li.email {color:#395286;}
+
+/* According popoup */
+
+.AccordionTitle {position:relative; width:495px; margin-bottom: 5px; }
+.AccordionContent, .AccordionContainer {position:relative; width:500px; }
+.AccordionTitle  {height:30px; overflow:hidden; cursor:pointer; font-family:Arial; font-size:14px; font-weight:bold; vertical-align:middle; text-align:left; margin-bottom: 12px; display:table-cell;background-color: #F0F0F0; }
+div#AccordionTitle {margin: 0px 10px 0px 10px;}
+.AccordionContent {height:0px; overflow:auto; display:none; width: 485px; margin: 0px 5px 5px 5px;}
+.ui-accordion .ui-accordion-content{height: 200px;}
+
+
+
+
+/* home page */
+
+div#content div.box { width:468px ; height: 350px;background: url(../images/public/box-background.png) left no-repeat;float:left; }
+div#content div.box.right {margin-left: 10px;}
+div#content div#botton-box { width: 120px; height: 100px;clear:both;position: relative; left: 390px; top: 35px;}
+
+/* guest Log In*/
+body.login div#site-frame { width: 260px; overflow: visible; }
+body.login div#header div#logo { left: 15px;}
+body.login div#footer{ background: transparent url(../images/public/line-footer.png) top center no-repeat; margin: 25px auto 0px auto; width: 300px; text-align: center; padding-top: 10px;}
+dl.form.login dt a{ color: #5B6271;text-decoration:none;  font-size: 12px; margin-left: 25px;}
+div#btn-container div#lock {float: left; height: 56px; } 
+div#btn-container a { color: #5B6271;text-decoration:none;  font-size: 14px; display: block; float: left; margin: 20px 0px 0px 5px; }
+
+/* Log In Index*/
+div#content-login{width: 250px; margin-left: 40px;}
+div#content-login p{color: #5B6271; font-size: 14px; text-align: center; font-weight: bold;}
+div#login-frame { background: transparent url(../images/bg-header.png) no-repeat top center; text-align:center; }
+div#login-header { width: 295px; height: 44px; margin: 0px auto 10px auto; padding-top: 30px; }
+div#login-header div { width: 311px; height: 44px; margin: 0px auto; background: transparent url(../images/logo-login.png) no-repeat; }
+div#login-body div#top { width: 334px; height: 40px; background: transparent url(../images/bg-login-top.png) no-repeat; }
+div#login-body div#middle { padding: 1px 0px 15px 0px; width: 334px; background: transparent url(../images/bg-login-middle.png) repeat-y; }
+div#login-body div#bottom { width: 334px; height: 16px; background: transparent url(../images/bg-login-bottom.png) no-repeat; margin-bottom: 10px;}
+div#login-copyright { padding-top: 5px; font-size: 11px; color: #727886; width: 334px; text-align: center; }
+div#login-copyright a { font-size: 11px; color: #FFF; font-weight: bold; margin-top: 5px; text-decoration: none; display: block; }
+dl.form.login-index dt {color: #5B6271; float: none; font-size: 16px;height: 16px; line-height: 16px; width:230px;}
+dl.form.login-index dd { margin-left: 0px; margin-bottom: 15px; float: none; height: 30px; }
+dl.form.login-index dd input {height: 30px;  width: 95%;font-size: 16px; padding-left: 4px;}
+dl.form.login-index dt a{ color: #336699;text-decoration:none;  font-size: 12px; margin-left: 25px; }
+div#login-body div#middle div#btn-container a{ color: #336699;text-decoration:none;  font-size: 14px; }
+
+
+/*Citation Find*/
+body.pay-ticket div#site-frame { width: 260px; overflow: visible; }
+body.pay-ticket div#header div#logo { left: 35px;}
+body.pay-ticket div#footer{ background: transparent url(../images/public/line-footer.png) top center no-repeat; margin: 25px auto 0px auto; width: 300px; text-align: center; padding-top: 15px;}
+dl.form.login.pay-ticket dt a{ color: #5B6271;text-decoration:none;  font-size: 12px; margin-left: 25px;}
+div#btn-container div#lock {float: left; height: 56px; } 
+div#btn-container a { color: #5B6271;text-decoration:none;  font-size: 14px; display: block; float: left; margin: 20px 0px 0px 5px; }
+
+/*Citation Details*/ 
+div#main-content div.box {  width:450px ; height: 300px;float:left;  padding-left:20px;margin-top: 18px;}
+div#main-content div.box.right {  width:450px ; height: 300px;float:right;  padding-left:5px;margin-top: 18px;margin-right: 40px; }
+btn-dispute::-moz-focus-inner { border: 0px; padding: 0px; }
+btn-dispute{  cursor: pointer; width:80px ; height: 32px;background: url(../images/public/btn-dispute.png) no-repeat;float:left;margin-top: 25px;}
+
+/*Citation Billing*/ 
+div#main-content div.box-pay.middle {  width:335px ; height: 250px; margin-top:20px; position: relative;float:left;margin-left:5px;}
+div#main-content div.box-pay.right {  width:240px ; height: 185px; margin-top:54px; margin-right: 15px; float:right;}
+div#main-content div.box-pay.left {  width:320px ; height: auto; margin-top:20px; float:left;clear:left;  padding-left:15px;}
+div#main-content a{ color: #336699;text-decoration:none;  font-size: 12px; float: right; margin: 10px 0px 0px 10px;position: absolute;}
+div#pay-cards{width: 157px; height: 22px;background: url(../images/public/pay-cards.png) center no-repeat;position: relative;float:right;margin-right: 30px;margin-top:10px;  }
+
+/*Citation Review*/ 
+div#box-confirm-midle { float:left; width:250px ; height: 150px; margin-top:20px;font-size:13px; margin-left: 50px;}
+div#main-content div.box-confirm.left {  width:250px ; height: 180px; margin-top:20px; float:left;  padding-left:15px; font-size:13px; margin-right: 50px;}
+div#card-type { float:left; width: 51px; height: 32px;  margin-top: 10px;}
+.visa{background: url(../images/public/cards/visa.png) left center no-repeat;}
+.mastercard{background: url(../images/public/cards/mastercard.png)left center no-repeat;}
+.american{background: url(../images/public/cards/american.png)left center no-repeat;}
+.discover{background: url(../images/public/cards/discover.png)left center no-repeat;}
+.dinersclub{background: url(../images/public/cards/dinersclub.png)left center no-repeat;}
+.jbc{background: url(../images/public/cards/jbc.png)left center no-repeat;}
+
+/*Citation Success*/ 
+div#main-content div.box-complete {  width:410px ; height: 300px;float:left;  padding-left:20px;margin-top: 18px;}
+div#pay-logo {width: 202px; height: 138px; background: url(../images/public/pay-logo.png) center no-repeat;position: absolute;margin: 5px 0px 0px 35px;}
+div#ok-logo {width: 290px; height: 303px; background: url(../images/public/ok-logo.png) no-repeat;position: relative; float:right;margin-top: 50px; margin-right: 20px;}
+div#text-pay{padding-bottom: 25px; color:#333333}
+
+/* Owner Register */
+div#main-content div.box-account.up {width:180px ; height: 140px; padding-top:15px;   padding-left:15px; font-size:13px; margin-right: 50px;}
+div#main-content div.box-account.left {  width:465x ; height: 250px; margin-top:30px;margin-left:0px; float: left; clear: both;}
+div#main-content div.box-account.right {  width:465px ; height: 250px; margin-top:30px; margin-left: 25px;float: left;}
+div#cars-logo {width: 30px; height: 22px; background: url(../images/public/cars-logo.png) no-repeat; margin-left: 5px; margin-top: 0px; float:left;}
+div#permit-logo {width: 32px; height: 22px; background: url(../images/public/permit-logo.png) no-repeat; float:left; margin-left: 5px;}
+dl.form.cars{width: 290px; height: 410px; overflow: auto;}
+div.vehicles-assoc{width: 100px; max-height:200px; height:auto; overflow:auto;}
+div.popup.vehicle{display: none; z-index: 1000; }
+div.popup.permit{display: none; z-index: 1000;}
+
+/*Permit Details*/
+div#main-content div.box-permit.middle {  width:300px ; height: 440px; margin-top:20px; position: relative;float:left;margin-left:40px;}
+div#main-content div.box-permit.right {  width:345px ; height: 200px; margin:20px 0px 0px 20px;float:left;}
+div#main-content div.box-permit.left {  width:300px ; height: 440px; margin:20px 20px 0px 20px; float:left;  padding-left:15px;}
+div#permit-header{font-size: 22px;font-weight:normal;margin:10px 0px 0px 25px;height: 50px; width:300px;}
+div#permit-header a { color: #336699;text-decoration:none;  font-size: 12px; float: left; margin-top:0px;}
+
+/*Permit Billing*/
+div#main-content div.box-complete-pay {  width:480px ; height: 300px;float:left;  margin-left: 30px;margin-top: 18px;}
+div#main-content .box-complete-pay a { color: #336699;text-decoration:none;  font-size: 12px;  float: left; position: relative; margin:0px;}
+div#permit-box {width: auto; height: 68px; background-color:#F0F0F0; float:left; margin-top: 60px; position: absolute; margin-left: 10px; -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; padding: 10px 20px 0px 0px;}
+
+/*Terms Conditions*/
+div#content-file{width:920px; margin:0px; padding: 20px 15px 20px 15px;}
+div#content-file h1 { margin:0px; padding: 0px; font-size: 28px;}
+div#content-file h2 { margin:0px; padding: 5px 0px 5px 0px;}
+div#content-file p { margin:0px; padding: 5px 0px 5px 0px;}

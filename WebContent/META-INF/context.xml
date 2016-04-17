@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+	     	<Resource name="jdbc/CiteWriteDB" auth="Container" type="javax.sql.DataSource"
+            maxActive="100" maxIdle="30" maxWait="10000" removeAbandoned="true"
+            username="root" password="techuso" driverClassName="com.mysql.jdbc.Driver" 
+             url="jdbc:mysql://localhost:3306/landsinlove_server"/> 
+             <!--url="jdbc:mysql://localhost:3306/testlil"/> -->
+           
+            <!--   url="jdbc:mysql://localhost:3306/citewriteserver_pm"/> -->
+              
+			<!--<Resource name="jdbc/CiteWriteDB" auth="Container" type="javax.sql.DataSource"
+            maxActive="100" maxIdle="30" maxWait="10000" removeAbandoned="true"
+            username="CITEWRITE" password="cambio" driverClassName="oracle.jdbc.OracleDriver"
+            url="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>-->
+
+			<!--<Resource name="jdbc/CiteWriteDB" auth="Container" type="javax.sql.DataSource"
+            username="techuso"
+            password="techuso"
+            maxActive="100" maxIdle="30" maxWait="10000" removeAbandoned="true"
+            driverClassName="net.sourceforge.jtds.jdbc.Driver"
+            url="jdbc:jtds:sqlserver://localhost:1433/CiteWriteDB;"/> -->
+</Context>

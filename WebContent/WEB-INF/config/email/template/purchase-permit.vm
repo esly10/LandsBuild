@@ -1,0 +1,108 @@
+**EMAIL-START**
+**EMAIL-META**
+from:Mauricio
+subject:Permit purchase successful
+**EMAIL-HTML**
+<html>
+<head>
+ <style type="text/css">
+ 	body{font-size: 12px;}
+	table { border: 0px; font-size: 12px;}
+	table th {text-align: left; background-color :#333333; color:FFFFFF;}
+	table td, table th { padding: 3px 5px 3px 5px;}
+	table tr.total td {border-top: 1px black solid; font-weight: bold;}
+	table .currency {text-align: right; }
+	div#info-box { width: 200px;float: left; margin-bottom: 20px;}
+	.border { border-top: 1px black solid;text-align: right;}
+	h4 { margin-bottom:5px; padding: 0px; font-size: 13px;}
+</style>
+</head>
+<body>
+<h4>${owner.firstName}  ${owner.lastName}.</h4>
+
+<div >
+   Permit purchase successful
+</div>
+<div style="font-weight: bold; margin: 20px 0px 5px 0px;">
+	Invoice #: ${invoice.invoiceId}.<br/>
+	Date: ${invoice.created}.<br/>
+</div>
+#if( $invoice.requiresBilling )
+<div id="info-box">
+<h4>Billing Information</h4>
+	
+${invoice.billingFirstName}  ${invoice.billingLastName}<br/>
+${invoice.billingEmail}<br/>
+${invoice.billingAddress}<br/>
+${invoice.billingCity}, ${invoice.billingStateID}  ${invoice.billingZip}<br/><br/>
+${invoice.ccNumber}<br/>
+${invoice.ccExpMonth}/${invoice.ccExpYear}<br/>
+</div>
+#end
+#if( ! $invoice.shippingAddress == "" || $invoice.willPickup)
+<div id="info-box">
+<h4>Shipping Information</h4>
+#if( ! $invoice.willPickup)
+${invoice.shippingFirstName}  ${invoice.shippingLastName}<br/>
+${invoice.shippingAddress}<br/>
+${invoice.shippingCity}, ${invoice.shippingStateID}  ${invoice.shippingZip}<br/>
+#else
+<h3>Pick-up in office</h3>
+#end
+</div>
+#end
+<div style="clear: both;">
+<table cellspacing="0" cellpadding="0" border="0">
+ <tr>
+	<th width="400px;" >Description</th><th class="currency">Amount</th>
+</tr>
+#foreach($item in ${invoice.allItems})
+ <tr>
+	<td>$item.description  #if ($item.description == "New Permit") - $permit.permitNumber ( $permit.typeName ) #end</td><td class="currency"> $item.formatAmount</td>
+</tr> 
+#end
+ <tr class="total">
+	<td>Total</td><td>${invoice.formatAmount}</td>
+</tr>
+
+</table> 
+</div>
+</body>
+
+</html>
+**EMAIL-TEXT**
+${owner.firstName}  ${owner.lastName}.
+
+Permit purchase successful.
+
+Invoice #: ${invoice.invoiceId}
+Date: ${invoice.created}
+
+Billing information:
+
+${invoice.billingFirstName}  ${invoice.billingLastName}
+${invoice.billingEmail}
+${invoice.billingAddress}
+${invoice.billingCity}, ${invoice.billingStateID}  ${invoice.billingZip}
+
+${invoice.ccNumber}
+${invoice.ccExpMonth}/${invoice.ccExpYear}
+
+#if( ! $invoice.shippingAddress == "" || $invoice.willPickup)
+Shipping Information:
+#if( ! $invoice.willPickup)
+${invoice.shippingFirstName}  ${invoice.shippingLastName}
+${invoice.shippingAddress}
+${invoice.shippingCity}, ${invoice.shippingStateID}  ${invoice.shippingZip}
+#else
+Pick-up in office
+#end
+#end
+Description												Amount
+#foreach($item in ${invoice.allItems})
+ $item.description  #if ($item.description == "New Permit") - $permit.permitNumber ( $permit.typeName ) #end 				$item.formatAmount
+
+#end
+____________________________________________________________________________________
+total													${invoice.formatAmount}
+**EMAIL-END**

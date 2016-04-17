@@ -1,0 +1,213 @@
+<html>
+<head>
+<script type="text/javascript">
+	function myFunction(){
+		var ua = window.navigator.userAgent; 
+		var msie = ua.indexOf("MSIE "); 
+		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)){
+			 window.document.execCommand("print", false, null);
+		}
+		 else{
+			window.print();
+		}
+	}
+</script>
+<style type="text/css">
+		-webkit-print-color-adjust: exact;
+		
+		.mealplan table {
+			border-collapse: collapse;
+			text-align: left;
+			width: 100%;
+		}
+		
+		.mealplan table {
+			border-collapse: collapse;
+			text-align: left;
+			width: 100%;
+		}
+		
+		.mealplan {
+			font: normal 12px/150% Verdana, Helvetica, sans-serif;
+			background: #fff;
+			overflow: hidden;
+			border: 1px solid #FFFFFC;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			border-radius: 3px;
+		}
+		
+		.mealplan table td,.datagrid table th {
+			padding: 5px 5px;
+		}
+		
+		.mealplan table thead th {
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4F5F6F
+				), color-stop(1, #4F5F6F));
+			background: -moz-linear-gradient(center top, #4F5F6F 5%, #4F5F6F 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4F5F6F',
+				endColorstr='#4F5F6F');
+			background-color: #4F5F6F;
+			color: #FFFFFF;
+			font-size:  16px;
+			font-weight: normal;
+			padding: 5px 3px;
+		}
+		
+		.mealplan table thead th:first-child {
+			border: none;
+		}
+		
+		.mealplan table tbody td {
+			color: #4F5F6F;
+			font-size: 12px;
+			font-weight: normal;
+		}
+		
+		.mealplan table tbody .alt td {
+			background: #E1E1E1;
+			color: #4F5F6F;
+		}
+		
+		.mealplan table tbody td:first-child {
+			border-left: none;
+		}
+		
+		.mealplan table tbody tr:last-child td {
+			border-bottom: none;
+		}
+		
+		.mealplan table tfoot td div {
+			border-top: 1px solid #FFFFFC;
+			background: #E1E1E1;
+		}
+		
+		.mealplan table tfoot td {
+			padding: 0;
+			font-size: 12px
+		}
+		
+		.mealplan table tfoot td div {
+			padding: 2px;
+		}
+		
+		.mealplan table tfoot td ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-align: right;
+		}
+		
+		.mealplan table tfoot  li {
+			display: inline;
+		}
+		
+		.mealplan table tfoot li a {
+			text-decoration: none;
+			display: inline-block;
+			padding: 2px 8px;
+			margin: 1px;
+			color: #FFFFFF;
+			border: 1px solid #999999;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			border-radius: 3px;
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4F5F6F
+				), color-stop(1, #4F5F6F));
+			background: -moz-linear-gradient(center top, #4F5F6F 5%, #4F5F6F 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4F5F6F',
+				endColorstr='#4F5F6F');
+			background-color: #4F5F6F;
+		}
+		
+		.mealplan table tfoot ul.active,.datagrid table tfoot ul a:hover {
+			text-decoration: none;
+			border-color: #999697;
+			color: #FFFFFF;
+			background: none;
+			background-color: #4F5F6F;
+		}
+		dl {}
+		dl.list dt { clear: left; float: left; width: 130px; font-weight: bold; margin-bottom: 2px; white-space: nowrap; color: #0D324C; }
+		dl.list dd { margin-left:105px; /*width: 300px;*/ overflow: inherit;  margin-bottom: 10px; color: #4F5F6F;}
+		dl.list dt.spacer { height: 10px; line-height:0px; width: 275px; margin-bottom: 10px; float: none; }
+		
+		div.dhtmlx_window_active,div.dhx_modal_cover_dv {
+			position: fixed !important;
+		}
+		@page {
+	        size:a4;
+	        margin: 0;
+	    }
+</style>
+
+</head>
+<body onload="myFunction();">
+	
+	<div style="width: 100%; float: left;">
+	<img src="${imgUrl}/static/images/bg-header-report.png" width="673" height="75" alt="header">
+		<div style="width: 100%; float: left;">
+			<dl class="list" style="font-size:14px;">
+				<dt style="background:#FFFFFF; color:#f0359d; text-align:center; padding:5px; font-size:24px;">Expected occupancy Report</dt>	
+				<dd style="background:#FFFFFF; color:#f0359d; text-align:center; padding:5px; font-size:24px;"></dd> 	
+				<dt style="background:#FFFFFF; color:#f03535; text-align:left; padding:5px; font-size:14px;">${now.formatdate} - ${end.formatdate}</dt>	
+				<dd style="background:#FFFFFF; color:#f03535; text-align:center; padding:5px; font-size:14px;"></dd> 	
+				<dt></dt><dd></dd>	
+			</dl>
+		</div>	
+	</div>	
+	
+	<div>	
+	
+	<hr size="2" color="#4f5f6f">
+		
+		 #foreach($item in ${calendar})
+		<div style="width: 100%; float: left;">
+		
+				<div style="width: 33%; float: left;">
+					<dl class="list"; style="font-size:14px;">
+						<dt style="background:#E1E1E1; color:#f0359d; text-align:left; padding:5px; font-size:14px; height: 15px; line-height: 15px;">${item.formatdate}</dt>	
+						<dd style="background:#E1E1E1; color:#f0359d; text-align:center; padding:5px; font-size:14px; height: 15px; line-height: 15px;"></dd> 
+						<hr>	
+						<dt style="text-decoration: underline;  height: 15px; line-height: 15px;">Hotel Guest:</dt><dd style="text-decoration: underline;  height: 15px; line-height: 15px;"></dd>
+						<dt>Morning:</dt><dd>${item.morningOccupancy}   ${item.morningRooms}</dd>
+						<dt>Check-Outs:</dt><dd> ${item.checkoutsRes}   ${item.checkoutsRooms}</dd>
+						<dt>Check-Ins:</dt><dd>${item.checkinsRes}   ${item.checkinsRooms}</dd>
+						<dt>Evening:</dt><dd>${item.eveningOccupancy}  ${item.eveningRooms}</dd>
+						
+						<dt></dt><dd></dd>
+					</dl>
+				</div>
+				
+				<div style="width: 34%; float: left;">
+					<dl class="list"; style="font-size:14px;">
+						<dt style="background:#E1E1E1; color:#f0359d; text-align:left; padding:5px; font-size:14px; height: 15px; line-height: 15px;"></dt>	
+						<dd style="background:#E1E1E1; color:#f0359d; text-align:center; padding:5px; font-size:14px; height: 15px; line-height: 15px;"></dd> 
+						<hr>	
+						<dt style="text-decoration: underline;  height: 15px; line-height: 15px;">Groups:</dt><dd style="text-decoration: underline;  height: 15px; line-height: 15px;"></dd>
+						#foreach($group in ${item.groups})
+							<dt style="width: 50px; font-weight: normal; font-size:10px;">${group}</dt><dd></dd>
+						#end			
+						<dt></dt><dd></dd>
+					</dl>
+				</div>
+				<div style="width: 33%; float: right;">
+					<dl class="list"; style="font-size:14px;">
+						<dt style="background:#E1E1E1; color:#f0359d; text-align:left; padding:5px; font-size:14px; height: 15px; line-height: 15px;"></dt>	
+						<dd style="background:#E1E1E1; color:#f0359d; text-align:center; padding:5px; font-size:14px; height: 15px; line-height: 15px;"></dd> 
+						<hr>		
+						<dt style="text-decoration: underline;  height: 15px; line-height: 15px;">Events:</dt><dd style="text-decoration: underline;  height: 15px; line-height: 15px;"></dd>
+						#foreach($event in ${item.events})
+							<dt style="width: 50px; font-weight: normal; font-size:10px;">${event}</dt><dd></dd>
+						#end
+						<dt></dt><dd></dd>
+					</dl>	
+				</div>
+				</div>
+				
+				<hr size="2" color="#4f5f6f">
+				
+			#end	
+		</div>
+</body>
+</html>

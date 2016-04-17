@@ -1,0 +1,131 @@
+**EMAIL-START**
+**EMAIL-META**
+from:Citewrite
+subject:Citation
+**EMAIL-HTML**
+<html><body><div style="width: 100%;/* margin: 0 auto; */ min-width: 700px; max-width: 800px;">
+	<div style="height:250px;">
+		<div style="position: relative; float: left;width: 35%;">
+			<div style="margin: 40px;">
+				<label>Provo City Justice Court</label><br>
+				<label>75 E 1700 S, Suite 100</label><br>
+				<label>Provo, UT 84606</label>
+			</div>
+
+			<div style="margin: 40px;">
+				<label>LARRY L ANTLEY</label><br>
+				<label>1599 RUGGS BLUFF ROAD</label><br>
+				<label>DOWNSVILLE, LA 71234</label>
+			</div>
+		</div>
+		<div style="position: relative; float: left;width: 65%;">
+			<div style="margin: 0 auto; width: 240px;">
+				<img src="img_notice.png" alt="img" height="154" width="245">
+			</div>
+			<div style="-webkit-border-radius: 5px 10px; -moz-border-radius: 5px 10px;  border: 1px solid #000000; -moz-border-radius: 7px; -webkit-border-radius: 7px; width: 100%; height:80px;">
+				<div style="width: 70%; position:relative; float: left;">
+					<table style="width:100%; margin: 5px; ">
+					  <tbody><tr>
+						<td><b>Citation Number</b></td>
+						<td>${citation.citation_number}</td> 
+					  </tr>
+					  <tr>
+						<td><b>Licence</b></td>
+						<td>${citation.licence}</td> 
+					  </tr>
+					  <tr>
+						<td><b>Vin</b></td>
+						<td>${citation.vin}</td>
+					  </tr>
+					</tbody></table>
+				</div>
+				<div style=" position:relative; float: left; width: 30%;">
+					<table style="width:100%; margin: 15px;">
+					  <tbody><tr>
+						<td><b>Amount Due</b></td>
+					  </tr>			  
+					  <tr>
+						<td style="text-align: center;"><div style="-webkit-border-radius: 5px 10px; -moz-border-radius: 5px 10px;  border: 1px solid #000000; -moz-border-radius: 7px; -webkit-border-radius: 7px; width:85px; height:20px;"><b>$ ${total}</b></div></td>				
+					  </tr>
+					</tbody></table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div align="center" style=" width: 100%; margin: 0 auto;">
+		<label>Violation Detail</label>
+		<div style="-webkit-border-radius: 5px 10px; -moz-border-radius: 5px 10px;  border: 1px solid #000000; -moz-border-radius: 7px; -webkit-border-radius: 7px; width: 100%; height:35px;">
+			<table style="width:100%; margin: 5px; ">
+			  <tbody><tr>
+				<td>${citation.violation_description}</td>
+				<td>${citation.status}</td> 
+				<td>${total}</td> 
+			  </tr>		  
+			</tbody></table>
+		</div>
+		
+		<h1>Immediate Payment Due</h1>
+		<label>Payment is due for the listed parking citation issued to a vehicle registered in your name. Our records
+		indicate this citation remains unpaid. Provo City Ordinances require that the registered owner of a motor
+		vehicle is held liable for parking violations issued to that vehicle.</label><br><br>
+		<div style="-webkit-border-radius: 5px 10px; -moz-border-radius: 5px 10px;  border: 1px solid #000000; -moz-border-radius: 7px; -webkit-border-radius: 7px; width: 75%; height:100px;">
+			<div style="width:100%;">
+				<p align="center"><b>Free Pay Online at www.payprovo.com</b> </p>
+			</div>
+			<table style="width:100%; margin: 5px; ">
+			  <tbody><tr>
+				<td></td>
+				<td></td> 			
+			  </tr>		  
+			  <tr>
+				<td></td>
+				<td></td> 			
+			  </tr>		  
+			</tbody></table>
+		</div>
+	</div>
+	<br>
+	<div style="width: 75%;  margin: 2 auto;">
+		<label><b>BY MAIL:</b></label> <label> Check or money order payments (DO NOT SEND CASH) can be sent to the address below.  </label><label style="font-size:11px;">  Payment by mail is credited on receipt not on postmark</label><br><br>
+		<label><b>IN PERSON:</b></label> <label> Check, cash, money order, and credit card payments are accepted at the address below.</label><br><br>
+		<label><b>BY PHONE:</b></label> <label> Credit card payments are accepted at (801) 852-6878 during business hours</label><br><br>
+		<label><b>APPEAL:</b></label> <label> Appeals may be submitted in person or online at www.payprovo.com.</label><br>
+	</div>
+	<br>
+	<div align="center">
+		<label>Provo City Justice Court</label><br>
+		<label>1599 RUGGS BLUFF ROAD</label><br>
+		<label>DOWNSVILLE, LA 71234</label><br>
+		<label>(801) 852-6878</label><br>
+		<label>M-F 8AM - 5PM</label>
+	</div>
+	<br>
+	<hr>
+	<label>
+	If this violation remains unpaid you may be subject to further penalties and/or collection actions including actions by a third party
+	agency and/or reporting of delinquency to a credit reporting agency. Any such actions may have adverse effects on your personal
+	credit. It is a class B misdemeanor to allow this matter to go into default and your vehicle may be towed from public streets.
+	</label>
+</div></body></html>
+**EMAIL-TEXT**
+Appeal Information:
+
+
+Name ${invoice.name}.
+
+Phone ${invoice.phone}.
+
+Address ${invoice.address}.
+
+City ${invoice.city}.
+
+State ${invoice.state_id}.
+
+Status ${invoice.status}.
+
+Zip ${invoice.zip}.
+
+Reason ${invoice.reason}.
+
+Decision Reason ${invoice.decision_reason}.
+**EMAIL-END**

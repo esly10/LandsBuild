@@ -1,0 +1,70 @@
+@charset "utf-8";
+body{font-family: 'helvetica',tahoma,helvetica,sans-serif;}
+
+/* globals */
+div#header{height:60px; position: relative;margin-left:0px;}
+div#header div#logo {width: 200px; height: 50px; background: url(../images/public/logouniversity.png) top center no-repeat; margin: 5px auto 0px auto;}
+div#body-frame{ background: transparent url(../images/public/body-background.png) top center no-repeat;}
+div#card-type { width: 40px; height: 32px; margin-top: 10px;}
+div.view-dispute{width:20px; height: 20px;background-image:  url(../images/public/view-permit.png); cursor: pointer;float: left; margin-left: 10px;}
+
+div#site-frame{width: auto; margin:0px auto; overflow: visibile;}
+div#footer { padding-top: 45px; font-size: 11px; color: #5B6271;margin-left: 400px;}
+div#footer .ui-link { font-size: 11px; color: #FFFDEE; margin-top: 5px; text-decoration: none; }
+
+/*  globals Form styles */
+dl.form dt { font-weight: normal; text-align: left;color: #333333; margin-bottom: 5px;clear:left; width:auto;float: left;}
+dl.form dd { position: relative; font-weight: normal;text-align: left;}
+dl.form.login dt {color: #FFFFFF; float: none; width:auto;}
+dl.form.login dd { margin-left: 0px; margin-bottom: 15px; float: none; height: 40px; }
+dl.form.details dt {color: #333333; float: none; width:auto;}
+dl.form.details dd { margin-left: 0px; margin-bottom: 15px; float: none; height: 40px; }
+
+dl.list dt{font-weight: normal; font-size:12px; text-align: left; clear:left; width:100px; float: left;padding-left: 5px; line-height: 15px; height: 15px;}
+dl.list dd{font-weight: normal; font-size:12px; position: relative; margin-left:110px; height: 15px; line-height: 15px;}
+div#site-preference{clear:both; padding-top: 45px; font-size: 11px; color: #5B6271;margin: 10px auto 15px auto; width: 273px; text-align: center; padding-top: 10px;}
+div#site-preference a{font-size: 11px; color: #FFFDEE; margin-top: 5px; text-decoration: none;}
+
+dl.list.small dt{ width: 120px; }
+dl.list.small dd{ margin-left:120px; }
+dl.list.view dt{ width: 155px;}
+dl.list.view dd{ width:280px;}
+dl.list.summary{background-color:#F0F0F0;height: 25px;}
+dl.list.summary dt{height: 25px; line-height: 25px;}
+dl.list.summary dd{font-weight: bold; font-size:18px; color:#CC0000; height: 25px; line-height: 25px;}
+
+/* index*/
+div#lock {width: 19px; height: 26px; background: url(../images/public/lock.png) left center no-repeat; margin: 6px 10px 0px 0px;}
+body.pay-ticket div#site-frame { width: auto; overflow: visible; padding: 10px; 0px; 10px; 0px;}
+body.pay-ticket div#footer{ background: transparent url(../images/public/line-footer.png) top center no-repeat; margin: 25px auto 0px auto; width: 200px; text-align: center; padding-top: 15px;}
+dl.form.login.pay-ticket dt a{ color: #5B6271;text-decoration:none;  font-size: 12px; margin-left: 25px;}
+div#btn-container div#lock {float: left;} 
+div#btn-container a { color: #5B6271;text-decoration:none;  font-size: 14px; margin: 20px 0px 0px 5px; }
+.ui-body-a,.ui-overlay-a {background-image: none; background: #151F33 url(../images/public/gradient-body.png) top left repeat-x;  color: #333333}
+.ui-body-a input{background: #FFFFFF;}
+.ui-body-a textarea{background: #FFFFFF;}
+ .ui-page div#btn-container .ui-btn-left .ui-btn-inner {background:#BC5600;}​
+.ui-body-a .ui-link{font-weight: normal;}
+
+/*Citations details*/
+.ui-page .ui-btn-right .ui-btn-inner {background:#E2E2E2;color:#333333;text-shadow: none;font-size: 12px;}
+.ui-page .ui-btn-left .ui-btn-inner {background:#BC5600;text-shadow: none;font-size: 12px;}
+.ui-page div#citation-details .ui-btn-inner{background:#F0F0F0;color:#333333;font-weight: normal;}
+.ui-collapsible-content{border: 1px solid transparent;}
+.ui-collapsible-heading {height: 38px; }
+
+/*credit card types*/
+.visa{background: url(../images/public/cards/visa.png) left center no-repeat;}
+.mastercard{background: url(../images/public/cards/mastercard.png)left center no-repeat;}
+.american{background: url(../images/public/cards/american.png)left center no-repeat;}
+.discover{background: url(../images/public/cards/discover.png)left center no-repeat;}
+.dinersclub{background: url(../images/public/cards/dinersclub.png)left center no-repeat;}
+.jbc{background: url(../images/public/cards/jbc.png)left center no-repeat;}
+
+
+/*Citations details Photo*/
+.gallery  {height: 110px; margin: 0px 6px 6px 0px; padding: 0; margin: 0;}
+.gallery content { width:95px; float:left;display:block;}
+.gallery a { position:relative; margin: 0px; float: left;  width: 95px; margin: 0px 6px 6px 0px;}
+.gallery img { display: block;  border:0px;}
+.ui-content { width: auto; overflow: auto; }

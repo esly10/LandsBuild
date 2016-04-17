@@ -1,0 +1,79 @@
+**EMAIL-START**
+**EMAIL-META**
+from:CiteWrite
+subject:${note.subject}
+**EMAIL-HTML**
+<html>
+<head>
+<style type="text/css">
+	dl.list dt {clear: left;float: left;width: 125px;font-weight: bold;height: 15px;line-height: 15px;margin-bottom: 2px;white-space: nowrap;}
+	dl.list dt {clear: left;float: left;width: 125px;font-weight: bold;height: 15px;line-height: 15px;margin-bottom: 2px;white-space: nowrap;}
+	dl.list dd {margin-left: 105px;width: 175px;overflow: hidden;height: 15px;line-height: 15px;margin-bottom: 2px;}
+</style>
+</head>
+<body>
+<div>
+	<h4>Message</h4>
+	${note.note}
+</div>
+<br/>
+<h4>Citation Details</h4>
+<div>
+   <dl class="list">
+		<dt>Citation Number</dt>
+		<dd>${citation.citationNumber}</dd>
+		
+		<dt>License</dt>
+		<dd>${citation.license}</dd>
+		
+		<dt>Vin</dt>
+		<dd>${citation.vin}</dd>
+	</dl>
+</div>
+<br/>
+<h4>Appeal Details</h4>
+<div>
+   <dl class="list">
+	
+		<dt>Name</dt>
+		<dd>${appeal.name}</dd>
+		
+		<dt>Email</dt>
+		<dd>${appeal.email}</dd>
+		
+		<dt>Phone</dt>
+		<dd>${appeal.phone}</dd>
+		
+		<dt>Address</dt>
+		<dd>${appeal.address}</dd>
+		
+		<dt>City</dt>
+		<dd>${appeal.city}</dd>
+		
+		<dt>State</dt>
+		<dd>${appeal.stateId}</dd>
+		
+		<dt>Reason</dt>
+		<dd>${appeal.reason}</dd>
+		
+	</dl>
+</div>
+</body>
+</html>
+**EMAIL-TEXT**
+	Message:  ${note.note}
+	
+	Citation Details:
+	Citation Number: ${citation.citationNumber}
+	License: ${citation.license}
+	PIN: ${citation.pin}
+	
+	Appeal Details:
+	Name: ${appeal.name}
+	Email: ${appeal.email}
+	Phone: ${appeal.phone}
+	Address: ${appeal.address}
+	City: ${appeal.city}		
+	State: ${appeal.stateId}
+	Reason: ${appeal.reason}
+**EMAIL-END**

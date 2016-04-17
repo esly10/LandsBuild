@@ -1,0 +1,63 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+ <style type="text/css">
+ 	body{font-size: 12px;}
+	table { border: 0px; font-size: 12px;}
+	table th {text-align: left; background-color :#333333; color:FFFFFF;}
+	table td, table th { padding: 3px 5px 3px 5px;}
+	table tr.total td {border-top: 1px black solid; font-weight: bold;}
+	table .currency {text-align: right; }
+	div#info-box { width: 200px;float: left; margin-bottom: 20px;}
+	.border { border-top: 1px black solid;text-align: right;}
+	h4 { margin-bottom:5px; padding: 0px; font-size: 13px;}
+</style>
+
+<h4>${invoice.billingFirstName}  ${invoice.billingLastName}.</h4>
+
+<div >
+   Citation payment successfull
+</div>
+<div style="font-weight: bold; margin: 20px 0px 5px 0px;">
+	Invoice #: ${invoice.invoiceId}.<br/>
+	Date: ${invoice.created}.<br/>
+</div>
+
+<div id="info-box">
+<h4>Billing Information</h4>
+	
+${invoice.billingFirstName}  ${invoice.billingLastName}<br/>
+${invoice.billingEmail}<br/>
+${invoice.billingAddress}<br/>
+${invoice.billingCity}, ${invoice.billingStateID}  ${invoice.billingZip}<br/><br/>
+${invoice.ccNumber}<br/>
+${invoice.ccExpMonth}/${invoice.ccExpYear}<br/>
+</div>
+<c:if test="${fn:length(invoice.shippingAddress) > 0 || invoice.willPickup}">
+	<div id="info-box">
+	<h4>Shipping Information</h4>
+	<c:if test="${! invoice.willPickup}">
+		${invoice.shippingFirstName}  ${invoice.shippingLastName}<br/>
+		${invoice.shippingAddress}<br/>
+		${invoice.shippingCity}, ${invoice.shippingStateID}  ${invoice.shippingZip}<br/>
+	</c:if>
+	<c:if test="${invoice.willPickup}">
+		<h5>Pick-up in office</h5>
+	</c:if>
+	</div>
+</c:if>
+<div style="clear: both;">
+<table cellspacing="0" cellpadding="0" border="0">
+ <tr>
+	<th width="400px;" >Description</th><th class="currency">Amount</th>
+</tr>
+<c:forEach items="${invoice.allItems}" var="item" >
+ <tr>
+	<td><c:out value="${item.description}"></c:out> <c:if test="${item.description eq 'Citation Payment'}">-<c:out value="${citation.citationNumber}"></c:out> </c:if></td><td class="currency"> <c:out value="${item.formatAmount}"></c:out></td>
+</tr>
+</c:forEach>
+ <tr class="total">
+	<td>Total</td><td>${invoice.formatAmount}</td>
+</tr>
+
+</table> 
+</div>

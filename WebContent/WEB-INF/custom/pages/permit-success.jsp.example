@@ -1,0 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="ok-logo"></div>
+<div class="box-complete-pay">
+	<h1>You're good to go!</h1>
+	<a href="<c:url value="/owner/account" />">>> Return to My Account</a>
+	<div id="permit-box">
+		<h2><label id="permit-pay">Your <c:out value="${typePermit.description}" /> Permit</label></h2>
+		<a style="margin:5px 0px 0px 15px">Review Terms & Conditions</a>
+	</div>
+			
+</div>

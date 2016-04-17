@@ -1,0 +1,48 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="ok-logo"></div>
+<div class="box-complete" style="margin-left: 15px;">
+	<h1>Your citation is paid!</h1>
+	
+	<div id="pay-logo"></div>
+	<dl class="list" >
+		<dt>Citation</dt>
+		<dd ><c:out value="${citation.citationNumber}" /></dd>
+	</dl>
+	
+	<dl class="list" >
+		<dt>Date</dt>
+		<dd ><c:out value="${citation.citationDate}" /></dd>
+	</dl>
+	<dl class="list" >
+		<dt>Vehicle</dt>
+		<dd ><c:out value="${citation.makeDescription}" />( <c:out value="${citation.license}" />)</dd>
+	</dl>
+	
+	<dl class="list" >
+		<dt>Violation</dt>
+		<dd ><c:out value="${citation.violationDescription}" /></dd>
+	</dl>
+	
+	<dl class="list " >
+		<dt>Violation Amount</dt>
+		<dd ><c:out value="${citation.formatAmount}" /></dd>
+	</dl>
+	
+	<c:choose>
+	 	<c:when test="${citation.lateFee != null }">
+			<dl class="list " >
+				<dt> Late Fee</dt>
+				<dd ><c:out value="${citation.lateFee.formatFeeAmount}" /></dd>
+			</dl>
+		</c:when>
+	</c:choose>
+	
+	<dl class="list summary" >
+		<dt>Amount Due</dt>
+		<dd style="color:#999999;"><c:out value="${citation.formatAmountDue}" /></dd>
+	</dl>
+	<c:if test = "${owner != null}"><a href="<c:url value="/owner/account" />"> Return to My Account</a></c:if>
+	<c:if test = "${owner == null}"><a href="/cws/guest/login"> Return to Citation Find</a></c:if>
+	
+</div>
+<div style="clear:both;"></div>

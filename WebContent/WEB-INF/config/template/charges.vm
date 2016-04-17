@@ -1,0 +1,322 @@
+<html>
+<head>
+<script type="text/javascript">
+	function myFunction(){
+		var ua = window.navigator.userAgent; 
+		var msie = ua.indexOf("MSIE "); 
+		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)){
+			 window.document.execCommand("print", false, null);
+		}
+		 else{
+			window.print();
+		}
+	}
+</script>
+<style type="text/css">
+		.tableCharge {
+			margin:0px;padding:0px;
+			width:100%;
+			border:0px solid #898484;
+			
+			-moz-border-radius-bottomleft:0px;
+			-webkit-border-bottom-left-radius:0px;
+			border-bottom-left-radius:0px;
+			
+			-moz-border-radius-bottomright:0px;
+			-webkit-border-bottom-right-radius:0px;
+			border-bottom-right-radius:0px;
+			
+			-moz-border-radius-topright:0px;
+			-webkit-border-top-right-radius:0px;
+			border-top-right-radius:0px;
+			
+			-moz-border-radius-topleft:0px;
+			-webkit-border-top-left-radius:0px;
+			border-top-left-radius:0px;
+		}.tableCharge table{
+		    border-collapse: collapse;
+		        border-spacing: 0;
+			width:100%;
+			height:100%;
+			margin:0px;padding:0px;
+		}.tableCharge tr:last-child td:last-child {
+			-moz-border-radius-bottomright:0px;
+			-webkit-border-bottom-right-radius:0px;
+			border-bottom-right-radius:0px;
+		}
+		.tableCharge table tr:first-child td:first-child {
+			-moz-border-radius-topleft:0px;
+			-webkit-border-top-left-radius:0px;
+			border-top-left-radius:0px;
+		}
+		.tableCharge table tr:first-child td:last-child {
+			-moz-border-radius-topright:0px;
+			-webkit-border-top-right-radius:0px;
+			border-top-right-radius:0px;
+		}.tableCharge tr:last-child td:first-child{
+			-moz-border-radius-bottomleft:0px;
+			-webkit-border-bottom-left-radius:0px;
+			border-bottom-left-radius:0px;
+		}.tableCharge tr:hover td{
+			
+		}
+		.tableCharge tr:nth-child(odd){ background-color:#eaeae8; }
+		.tableCharge tr:nth-child(even)    { background-color:#ffffff; }.tableCharge td{
+			vertical-align:middle;
+			
+			
+			border:0px solid #898484;
+			border-width:0px 1px 1px 0px;
+			text-align:center;
+			padding:3px;
+			font-size:12px;
+			font-family:Verdana;
+			font-weight:normal;
+			color:#332e2e;
+		}.tableCharge tr:last-child td{
+			border-width:0px 1px 0px 0px;
+		}.tableCharge tr td:last-child{
+			border-width:0px 0px 1px 0px;
+		}.tableCharge tr:last-child td:last-child{
+			border-width:0px 0px 0px 0px;
+		}
+		.tableCharge {
+			margin:0px;padding:0px;
+			width:100%;
+			border:0px solid #ffffff;
+			
+			-moz-border-radius-bottomleft:0px;
+			-webkit-border-bottom-left-radius:0px;
+			border-bottom-left-radius:0px;
+			
+			-moz-border-radius-bottomright:0px;
+			-webkit-border-bottom-right-radius:0px;
+			border-bottom-right-radius:0px;
+			
+			-moz-border-radius-topright:0px;
+			-webkit-border-top-right-radius:0px;
+			border-top-right-radius:0px;
+			
+			-moz-border-radius-topleft:0px;
+			-webkit-border-top-left-radius:0px;
+			border-top-left-radius:0px;
+		}.tableCharge table{
+		    border-collapse: collapse;
+		        border-spacing: 0;
+			width:100%;
+			height:100%;
+			margin:0px;padding:0px;
+		}.tableCharge tr:last-child td:last-child {
+			-moz-border-radius-bottomright:0px;
+			-webkit-border-bottom-right-radius:0px;
+			border-bottom-right-radius:0px;
+		}
+		.tableCharge table tr:first-child td:first-child {
+			-moz-border-radius-topleft:0px;
+			-webkit-border-top-left-radius:0px;
+			border-top-left-radius:0px;
+		}
+		.tableCharge table tr:first-child td:last-child {
+			-moz-border-radius-topright:0px;
+			-webkit-border-top-right-radius:0px;
+			border-top-right-radius:0px;
+		}.tableCharge tr:last-child td:first-child{
+			-moz-border-radius-bottomleft:0px;
+			-webkit-border-bottom-left-radius:0px;
+			border-bottom-left-radius:0px;
+		}.tableCharge tr:hover td{
+			
+		}
+		.tableCharge tr:nth-child(odd){ background-color:#eaeae8; }
+		.tableCharge tr:nth-child(even)    { background-color:#ffffff; }.tableCharge td{
+			vertical-align:middle;
+			
+			
+			border:0px solid #ffffff;
+			border-width:0px 1px 1px 0px;
+			text-align:center;
+			padding:3px;
+			font-size:12px;
+			font-family:Verdana;
+			font-weight:normal;
+			color:#332e2e;
+		}.tableCharge tr:last-child td{
+			border-width:0px 1px 0px 0px;
+		}.tableCharge tr td:last-child{
+			border-width:0px 0px 1px 0px;
+		}.tableCharge tr:last-child td:last-child{
+			border-width:0px 0px 0px 0px;
+		}
+		.tableCharge tr:first-child td{
+				background:-o-linear-gradient(bottom, #00bbff 5%, #00bbff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #00bbff), color-stop(1, #00bbff) );
+			background:-moz-linear-gradient( center top, #00bbff 5%, #00bbff 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#00bbff", endColorstr="#00bbff");	background: -o-linear-gradient(top,#00bbff,00bbff);
+		
+			background-color:#00bbff;
+			border:0px solid #ffffff;
+			text-align:center;
+			border-width:0px 0px 1px 1px;
+			font-size:14px;
+			font-family:Verdana;
+			font-weight:bold;
+			color:#ffffff;
+		}
+		.tableCharge tr:first-child:hover td{
+			background:-o-linear-gradient(bottom, #00bbff 5%, #00bbff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #00bbff), color-stop(1, #00bbff) );
+			background:-moz-linear-gradient( center top, #00bbff 5%, #00bbff 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#00bbff", endColorstr="#00bbff");	background: -o-linear-gradient(top,#00bbff,00bbff);
+		
+			background-color:#00bbff;
+		}
+		.tableCharge tr:first-child td:first-child{
+			border-width:0px 0px 1px 0px;
+		}
+		.tableCharge tr:first-child td:last-child{
+			border-width:0px 0px 1px 1px;
+		}
+		dl {}
+		dl.list dt { clear: left; float: left; width: 130px; font-weight: bold;  height: 15px; line-height: 15px; margin-bottom: 2px; white-space: nowrap; color: #0D324C; }
+		dl.list dd { margin-left:105px; /*width: 300px;*/ overflow: hidden; height: 15px; line-height: 15px; margin-bottom: 10px; color: #4F5F6F;}
+		dl.list dt.spacer { height: 10px; line-height:0px; width: 275px; margin-bottom: 0px; float: none; }
+		
+		div.dhtmlx_window_active,div.dhx_modal_cover_dv {
+			position: fixed !important;
+		}
+		
+		@page {
+	        size:a4;
+	        margin: 0;
+	    }
+</style>
+
+</head>
+<body onload="myFunction();">
+	<div style="width: 100%; float: left;">
+	<img src="${imgUrl}/static/images/bg-header-report.png" width="673" height="75" alt="header">
+	<div style="width: 100%; float: left;">
+		<div style="width: 50%; float: left;">
+			<dl class="list"; style="font-size:14px;">
+				<dt style="background:#FFFFFF; color:#003d99; text-align:center; padding:5px; font-size:24px;">Detail of Charges</dt>	
+				<dd style="background:#FFFFFF; color:#003d99; text-align:center; padding:5px; font-size:24px;"></dd> 	
+				<dt style="background:#FFFFFF; color:#00bbff; text-align:left; padding:5px; font-size:14px;">Reservation ${reservation.reservation_number} - ${reservation.typeName}</dt>	
+				<dd style="background:#FFFFFF; color:#00bbff; text-align:center; padding:5px; font-size:14px;"></dd> 	 	
+				<hr>	 
+				<dt>Check in:</dt><dd>${reservation.reservation_check_in_format}</dd>
+				<dt>Check out:</dt><dd>${reservation.reservation_check_out_format} (${reservation.reservation_nights} Nights)</dd>
+				<dt>Occupancy:</dt><dd>${reservation.reservation_adults} ( ${reservation.reservation_adults} Adults, ${reservation.reservation_children} Children, ${reservation.reservation_guides} Guides.)</dd>
+				
+				<dt>Room #:</dt><dd>${room.ROOM_NO}</dd>
+				<dt>Status:</dt><dd>${reservation.statusName}</dd>
+			</dl>
+		</div>
+		
+		<div style="width: 49%; float: left;">
+			<dl class="list"; style="font-size:14px;">
+				<dt style="background:#FFFFFF; color:#003d99; text-align:center; padding:5px; font-size:24px;"></dt>	
+				<dd style="background:#FFFFFF; color:#003d99; text-align:center; padding:5px; font-size:24px;"></dd> 	
+				<dt style="background:#FFFFFF; color:#00bbff; text-align:left; padding:5px; font-size:14px;"></dt>	
+				<dd style="background:#FFFFFF; color:#00bbff; text-align:center; padding:5px; font-size:14px;"></dd> 	 	
+				<hr>	
+				<dt>Guest:</dt><dd>${guest.name}</dd>
+				<dt>Contact:</dt><dd>${guest.phone} || ${guest.email}</dd>		
+				<dt>Agency:</dt><dd>${agency.agency_name}</dd>
+				<dt>Contact:</dt><dd>${agency.agency_phone} || ${agency.agency_email}</dd>	
+				<dt>Meal Plan:</dt><dd>${reservation.mealPlanName}</dd>
+				
+			</dl>
+		</div>
+		
+	</div>
+	<div style="width: 100%; float: left;">
+		<div style="width: 100%; font-size:14px;">
+			<dl class="list">
+				<dt style="background:#FFFFFF; color:#00bbff; text-align:left; padding:5px; font-size:14px;">Rooms Related</dt>	
+				<dd style="background:#FFFFFF; color:#00bbff; text-align:center; padding:5px; font-size:14px;"></dd> 	
+			</dl>
+				<hr>
+			<ul>
+				
+				<dl><dt></dt><dd></dd></dl>	
+				
+				  #foreach($rooms in ${roomsrelated})	
+				  			<li>Room #: ${rooms.ROOM_NO}</li>
+				  #end
+			</ul>
+			<hr>
+		</div>
+	</div>
+	<div style="width: 100%; float: left;">
+		#if ($agencySize > 0)
+			<table  class="tableCharge"  style="width:100%; float: right;";>
+				 <tr><td colspan=6>Agency Charges: </td></tr>
+				  <tr>
+				    <th>Item</th><th>Description</th><th>Qty</th><th>Rate</th> <th>Total</th>
+				  </tr>
+				#foreach($item in ${agencyCharges})
+				 <tr>
+						<td>${item.charge_item_name}</td> 
+						<td>${item.charge_item_desc}</td>
+						<td>${item.charge_qty}</td>
+						<td>$ ${item.charge_rate}</td>
+						
+						<td>$ ${item.charge_total}</td>								
+				 </tr>		
+				#end
+				
+				<tr><td colspan=4 style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2 style="border-top: 1px solid #000;">$ ${reservation.agencyCharges}</td></tr>
+				<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.agencyFormatTax}</td></tr>
+				
+				<tr><td colspan=4>Paid:</td><td colspan=2;  style="color:red;">$ ${reservation.agencyPaid}</td></tr>		
+				<tr><td colspan=4>Total:</td><td colspan=2> ${reservation.totalAgency}</td></tr>
+			
+			</table>
+		#end
+		<hr>
+		#if ($guestSize > 0)
+			<table class="tableCharge" style="width:100%;  float: right;";>
+			<tr><td colspan=6>Guest Charges: </td></tr>
+				  <tr>
+				    <th>Item</th><th>Description</th><th>Qty</th><th>Rate</th><th>Total</th>
+				  </tr>
+				#foreach($item in ${guestCharges})
+				 <tr>
+						<td>${item.charge_item_name}</td> 
+						<td>${item.charge_item_desc}</td>
+						<td>${item.charge_qty}</td>
+						<td>$ ${item.charge_rate}</td>
+						
+						<td>$ ${item.charge_total}</td>							
+				 </tr>		
+				#end
+				
+				<tr><td colspan=4  style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2  style="border-top: 1px solid #000;">$ ${reservation.guestCharges}</td></tr>
+				<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.guestFormatTax}</td></tr>
+				
+				<tr><td colspan=4>Paid:</td><td colspan=2  style="color:red;">$ ${reservation.guestPaid}</td></tr>	
+				<tr><td colspan=4>Total:</td><td colspan=2> ${reservation.totalGuest}</td></tr>
+			</table>
+		#end
+		<hr>
+		<table class="tableCharge" style="width:100%;";>
+		<tr><td colspan=6>Totals: </td></tr>
+			  <tr>
+			    <th>Folio</th><th>Amount</th>
+			  </tr>
+			
+			 <tr>
+					<td>Agency</td> 
+					<td> ${reservation.totalAgency}</td>
+			 </tr>	
+			  <tr>
+					<td>Guest</td> 
+					<td> ${reservation.totalGuest}</td>
+			 </tr>	
+			 <tr >
+					<td style="font-size:18px;">Balance</td> 
+					<td style="font-size:18px;"> ${reservation.totalCharges}</td>
+			 </tr>		
+		</table>
+	<hr>
+</div>
+</body>
+</html>

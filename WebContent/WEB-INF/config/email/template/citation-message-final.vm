@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<body>
+		<div style="width: 100%;">
+			<div style="height:210px;">
+				<div style="position: relative; float: left; width: 50%;">
+					<div style="margin: 40px;">
+						<label>Provo City Justice Court</label><br/>
+						<label>75 E 1700 S, Suite 100</label><br/>
+						<label>Provo, UT 84606</label>
+					</div><br/>
+					<div style="margin: 40px;">
+						<label>LARRY L ANTLEY</label><br/>
+						<label>1599 RUGGS BLUFF ROAD</label><br/>
+						<label>DOWNSVILLE, LA 71234</label>
+					</div>
+				</div>
+				<div style="position: relative; float: left;width: 100%; margin-left:220px;">
+					<div style="width: 100%;">
+						<img ALIGN=RIGHT src="${path}" alt="img" height="130" width="240"/>
+					</div>
+				</div>					
+				<div  style="width: 100%;">				
+					<table style="width:100%; margin: 5px; border:1px solid gray; padding-top:5px; height:150px;">
+						  <tbody>
+							<tr>
+								<td><b>Citation Number</b></td>
+								<td>${citation.citationNumber}</td> 
+								<td></td> 
+							</tr>
+							<tr>
+								<td><b>License</b></td>
+								<td>${citation.license}</td> 
+								<td><b>Citation Amount:</b>${total}</td> 
+							</tr>
+							<tr>
+								<td><b>Vin</b></td>
+								<td>${citation.vin}</td>
+								<td></td> 
+							</tr>
+						</tbody>
+					</table>
+				</div>			
+			</div>
+
+			<div align="center" style=" width: 100%; margin: 0 auto;">		
+				<h3>FINAL NOTIFICATION</h3>
+				<div align="left">
+					<label  align="left"  style="text-align: left; align: left;">You are hereby notified that a parking citation for a vehicule registered in your name remains unpaid in the Provo City Justice Court. You are required to resolve this ticket or you will be subject to further penalties which include, but are not limited to, the following:</label><br/>
+				</div>
+					<ul align="left">
+						<li> Reporting of this delinquency to a credit reporting agency which has an adverse. Impact on your personal credit. </li>
+						<li> You may be served with a civil summons to appear in small claims court to answer an action brougth against you to recover the unpaid balance. </li>
+						<li> Your vehicle may be towed from public streets and you will ve required to pay the unpaid balance and any towing feed before your car will be released. </li>
+						<li> You may be served with a criminal summons for failure to respond and resolve this parking citation in accordance with Provo City Code 9.17.100. </li>
+					</ul>
+				
+			</div>
+			<div align="left">
+					<label  align="left"  style="text-align: left; align: left;"> You can avoid the penalties listed above by paying the ticket within 10 days of this notice in the following ways:</label><br/>
+			</div>
+
+			<br/>
+			<div style="width: 75%;  margin: 2 auto;">
+				<label><b>ONLINE:</b></label>
+				<label> <a href="www.payprovo.com" style="color: black;">www.payprovo.com</a> </label>
+				<br/><br/>
+				
+				<label><b>BY MAIL:</b></label>
+				<label> Check or money order payments (DO NOT SEND CASH) can be sent to the address below. </label>
+				<br/><br/>
+				<label><b>IN PERSON:</b></label>
+				<label> Check, cash, money order, and credit card payments are accepted at the address below.</label>
+				<br/><br/>
+				<label><b>BY PHONE:</b></label>
+				<label> Credit card payments are accepted at (801) 852-6878 during business hours</label>
+				<br/>
+			</div>
+			<br/>
+			<div align="center" style="text-align: center; width: 100%; margin:0 auto;">
+				<label style="text-align: center;" align="center">Provo City Justice Court</label><br/>
+				<label style="text-align: center;" align="center">1599 RUGGS BLUFF ROAD</label><br/>
+				<label style="text-align: center;" align="center">DOWNSVILLE, LA 71234</label><br/>
+				<label style="text-align: center;" align="center">(801) 852-6878</label><br/>
+				<label style="text-align: center;" align="center">M-F 8AM - 5PM</label>
+			</div>
+			<br/>
+		
+			
+			Violation Detail:
+			<div style=" width: 100%; height:30px;">
+				<table style="height:50px; width:100%; margin: 1px; border:1px solid gray;">
+					<tbody>							
+						<tr>
+							<td>${citation.violationDescription}</td>
+							<td>${citation.status}</td> 
+							<td>${total}</td> 
+						</tr>	 
+					</tbody>
+				</table>
+			</div>	
+			
+			
+		</div>
+	</body>
+</html>

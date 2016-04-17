@@ -1,0 +1,39 @@
+
+/** Multi-select combo box **/
+.ux-multicombo-icon-checked {
+    background: url("../images/default/menu/checked.gif") repeat scroll 0 0 transparent;
+}
+.ux-multicombo-icon-unchecked {
+    background: url("../images/default/menu/unchecked.gif") repeat scroll 0 0 transparent;
+}
+
+.x-combo-list-item {
+    text-align: left;
+}
+body.ext-ie6.x-body-masked select {
+    visibility: inherit;
+}
+body.ext-ie6.x-body-masked .x-window select {
+    visibility: inherit;
+}
+div.x-checkboxcombo-list-inner {
+    text-align: left;
+}
+.ux-multicombo-icon {
+    background-position: -1px -1px !important;
+    background-repeat: no-repeat !important;
+    float: left;
+    height: 16px;
+    width: 16px;
+}
+.ext-ie .ux-multicombo-item-text {
+    left: 16px;
+    position: absolute;
+    top: 3px;
+}
+.ext-ie .ux-multicombo-icon {
+    float: none;
+}
+.ext-ie .x-combo-list-item {
+    position: relative;
+}

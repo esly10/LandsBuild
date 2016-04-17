@@ -1,0 +1,60 @@
+**EMAIL-START**
+**EMAIL-META**
+from:Citewrite
+subject:Appeal update
+**EMAIL-HTML**
+<html>
+<body>
+<h3>Appeal Information:</h3>
+
+<div>
+   Name ${invoice.name}.
+</div>
+<div>
+   Phone ${invoice.phone}.
+</div>
+<div>
+   Address ${invoice.address}.
+</div>
+<div>
+   City ${invoice.city}.
+</div>
+<div>
+   State ${invoice.state_id}.
+</div>
+<div>
+  <b>Status ${invoice.status}.</b>
+</div>
+<div>
+   Zip ${invoice.zip}.
+</div>
+<div>
+   Reason ${invoice.reason}.
+</div>
+<div>
+   Decision Reason ${invoice.decision_reason}.
+</div>
+</body>
+</html>
+**EMAIL-TEXT**
+Appeal Information:
+
+
+Name ${invoice.name}.
+
+Phone ${invoice.phone}.
+
+Address ${invoice.address}.
+
+City ${invoice.city}.
+
+State ${invoice.state_id}.
+
+Status ${invoice.status}.
+
+Zip ${invoice.zip}.
+
+Reason ${invoice.reason}.
+
+Decision Reason ${invoice.decision_reason}.
+**EMAIL-END**
