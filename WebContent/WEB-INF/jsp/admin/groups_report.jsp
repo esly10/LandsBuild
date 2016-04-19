@@ -32,7 +32,7 @@
 						<hr style="color:#00cc00;"/>
 						<dt></dt><dd></dd>	
 						
-						<dt><c:out value="${item.checkInFormated}" /></dt> <dd></dd>
+						<dt><c:out value="${item.eventDateFormated}" /></dt> <dd></dd>
 						<dt><c:out value="${item.statusName}" /></dt>
 						<dd><c:out value="${item.mealPlanName}" /></dd>
 						<dt>Agency:</dt><dd><c:out value="${item.agencyName}"/></dd>

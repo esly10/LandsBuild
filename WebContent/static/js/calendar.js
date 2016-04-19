@@ -4,11 +4,13 @@ Ext.onReady(function(){
 	{
 		
 		invoice.on('click',function(){
+			
 			var content = Ext.getCmp('content-panel');
 			content.removeAll(true);			
 			content.add(new CalendarPanel());
 			content.doLayout();
-			return;
+			return false;
 		});//end onclick 
 	}
+
 });

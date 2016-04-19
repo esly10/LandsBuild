@@ -136,6 +136,9 @@ var TimeScheduler = {
             // function (item) { }
             ItemClicked: null,
 
+            // function (item) { }
+            ItemDblClick: null,
+
             // function (item, sectionID, start, end) { }
             ItemDropped: null,
 
@@ -704,6 +707,13 @@ var TimeScheduler = {
             itemElem.click(function (event) {
                 event.preventDefault();
                 TimeScheduler.Options.Events.ItemClicked.call(this, $jQuery(this).data('item'));
+            });
+        }
+
+        if (TimeScheduler.Options.Events.ItemDblClick) {
+            itemElem.dblclick(function (event) {
+                event.preventDefault();
+                TimeScheduler.Options.Events.ItemDblClick.call(this, $jQuery(this).data('item'));
             });
         }
 

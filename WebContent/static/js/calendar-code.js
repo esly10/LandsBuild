@@ -64,6 +64,8 @@
 	var arrayRoomsCalendar = new Array();
 	var arrayCalendar = new Array();
     
+	var today = moment().startOf('day');
+
 	roomsStoreCalendar.load({
 		params:{start:0, limit: 1000},
 		callback: function () {
@@ -75,69 +77,7 @@
 			});	    			
         }
      });
-	
-	calendarStore.load({
-		params:{start:0, limit: 1000},
-		callback: function () {
-			calendarStore.each(function(record,id){    				
-				
-				if(record.data.reservation_type != 3){ // no show events
-				var type = "";
-				var title = "";
-				if(record.data.reservation_type == 1){
-					 type = "Fit";
-				}else if(record.data.reservation_type == 2){
-					 type = "Group";
-				} else if(record.data.reservation_type == 3){
-					 type = "Event";
-				}
-				//"Original Value: "+rec.value+"&#10;";
-				title +=  "Reservation Number: "+record.data.reservation_number+"&#10;";
-				title += "Guest Name: "+record.data.guest_name+"&#10;";
-				title += "Agency Name: "+record.data.agency_name+"&#10;";
-				title += "Room No: "+record.data.room_no+"&#10;";
-				title += "Status: "+getStatus(record.data.reservation_status)+"&#10;";
-					title += "Type: "+type+"&#10;";
-					title += "Check In: "+ moment(record.data.rr_reservation_in).add('hours', -12).toLocaleString()+"&#10;";
-					title += "Check Out: "+ moment(record.data.rr_reservation_out).add('hours', -12).toLocaleString()+"&#10;";
-							
-				
-				if( record.data.reservation_type == 3){
-						/*arrayCalendar.push(
-    						{
-    	    				    id: 'res_'+id,
-    	    				    name: '<div title="'+title+'"><div>'+record.data.guest_name+'</div><div>'+type+', '+record.data.reservation_number+'</div></div>',
-    	    				    sectionID: record.data.rr_room_id,
-    	    				    start: moment(record.data.reservation_event_date).add('hours', -12),
-    	    				    end: moment(record.data.reservation_event_date).add('hours', 12),
-    	    				    classes: 'item-status-'+record.data.reservation_status,
-    				            data:record.data
-    	    				         
-    	    				}
-	    				);*/
-				} else {
-					arrayCalendar.push(
-							{
-    	    				    id: 'res_'+id,
-	    	    				    //name: '<div title="'+title+'"><div>'+record.data.guest_name+'</div><div>'+type+', '+record.data.reservation_number+'</div></div>',
-	    	    				    name: '<div title="'+title+'"><div style="height:20px;line-height: 12px;">'+record.data.guest_name+'</div></div>',
-    	    				    sectionID: record.data.rr_room_id,
-    	    				    start: moment(record.data.rr_reservation_in).add('hours', -12),
-    	    				    end: moment(record.data.rr_reservation_out).add('hours', 12),
-    	    				    classes: 'item-status-'+record.data.reservation_status,
-    	    				    data:record.data
-    	    				}
-    				);
-				}
-				}				
-					    				
-			});
-			
-        }
-     });
-	
-	var today = moment().startOf('day');
-
+	function fireCalendarInit(){
 	var Calendar = {
 	    Periods: [
 	        {
@@ -190,6 +130,7 @@
 	        TimeScheduler.Options.AllowResizing = false;
 
 	        TimeScheduler.Options.Events.ItemClicked = Calendar.Item_Clicked;
+			        TimeScheduler.Options.Events.ItemDblClick = Calendar.Item_Dbl_Clicked;
 	        TimeScheduler.Options.Events.ItemDropped = Calendar.Item_Dragged;
 	        TimeScheduler.Options.Events.ItemResized = Calendar.Item_Resized;
 
@@ -214,8 +155,8 @@
 	         });
 	        
 	        
-	        var w =$jQuery( ".time-sch-table.time-sch-table-header" ).width();		
-    		$jQuery( ".time-sch-table-header tbody" ).width(w-8);
+			        //var w =$jQuery( ".time-sch-table.time-sch-table-header" ).width();		
+		    		//$jQuery( ".time-sch-table-header tbody" ).width(w-8);
     		
     		if(document.getElementById("print_buton_calendar") === null){
             	$jQuery( ".time-sch-period-container" ).append( '<a id="print_buton_calendar" onclick="printContent()" class="time-sch-period-button time-sch-button" href="#">Print</a>' ); //$( "h2" )
@@ -242,8 +183,57 @@
 
 	    Item_Clicked: function (item) {
 	        console.log(item);
-	    },
+			      
+			    },
+			    Item_Dbl_Clicked: function (item) {
+			        console.log(item);
 
+			        /*
+			        $jQuery.ajax({
+			        	method: "POST",
+			        	url: _contextPath + '/reservation/reservationList',
+			        	data: { reservation_id: item.rr_reservation_id}
+		        	}).done(function( msg ) {
+		        	    alert( "Data Saved: " + msg );
+		        	});*/
+			        
+			        Ext.Ajax.request({
+			        	   url: _contextPath + '/reservation/reservationList',
+						   params: { reservation_id: item.data.rr_reservation_id},
+						   success: function(p1, p2)
+						   {
+							   var response = Ext.decode(p1.responseText);
+							   if(response.success)
+							   {
+								   var data = response.reservations[0];
+								   
+								   var content = Ext.getCmp('content-panel');
+				        		   content.removeAll(true);			
+				        		   content.add(new ReservationPanel({'reservationInfo' : data}));
+				        		   content.doLayout();
+				        		   return; 
+							   }
+							   else
+							   {
+								   Ext.Msg.show({
+									   title:'Failure',
+									   msg:  response.msg,
+									   buttons: Ext.Msg.OK,
+									   icon: Ext.MessageBox.ERROR
+									});
+							   }
+	    },
+						   failure: function(){ 
+							   Ext.Msg.show({
+								   title:'Failure',
+								   msg:  'Error getting data.',
+								   buttons: Ext.Msg.OK,
+								   icon: Ext.MessageBox.ERROR
+								});
+						   }
+						}); 
+
+			    },
 	    Item_Dragged: function (item, sectionID, start, end) {
 	        var foundItem;
 
@@ -312,6 +302,63 @@
 	    }
 	};
 
+		Calendar.Init();
+	}
+	function LoadCalendar(){
+		arrayCalendar = new Array();
+		calendarStore.load({
+			params:{start:0, limit: 1000},
+			callback: function () {
+				calendarStore.each(function(record,id){    				
+					
+					if(record.data.reservation_type != 3){ // no show events
+						var type = "";
+						var title = "";
+						if(record.data.reservation_type == 1){
+							 type = "Fit";
+						}else if(record.data.reservation_type == 2){
+							 type = "Group";
+						} else if(record.data.reservation_type == 3){
+							 type = "Event";
+						}
+						//"Original Value: "+rec.value+"&#10;";
+						title +=  "Reservation Number: "+record.data.reservation_number+"&#10;";
+						title += "Guest Name: "+record.data.guest_name+"&#10;";
+						title += "Agency Name: "+record.data.agency_name+"&#10;";
+						title += "Room No: "+record.data.room_no+"&#10;";
+						title += "Status: "+getStatus(record.data.reservation_status)+"&#10;";
+						title += "Type: "+type+"&#10;";
+						title += "Check In: "+ moment(record.data.rr_reservation_in).add('hours', -12).toLocaleString()+"&#10;";
+						title += "Check Out: "+ moment(record.data.rr_reservation_out).add('hours', -12).toLocaleString()+"&#10;";
+									
+						
+						if(record.data.reservation_status != 2){ // canceled "2" not show
+							arrayCalendar.push(
+									{
+		    	    				    id: 'res_'+id,
+			    	    				//name: '<div title="'+title+'"><div>'+record.data.guest_name+'</div><div>'+type+', '+record.data.reservation_number+'</div></div>',
+			    	    				name: '<div title="'+title+'"><div style="height:20px;line-height: 12px;">'+record.data.guest_name+'</div></div>',
+		    	    				    sectionID: record.data.rr_room_id,
+		    	    				    start: moment(record.data.rr_reservation_in).add('hours', -12),
+		    	    				    end: moment(record.data.rr_reservation_out).add('hours', -12),
+		    	    				    classes: 'item-status-'+record.data.reservation_status,
+		    	    				    data:record.data
+		    	    				}
+		    				);
+						}
+							
+						
+					}				
+						    				
+				});
+				
+				fireCalendarInit();
+	        }
+	     });
+		
+	}
+	
+
 	function mouseX(evt) {
 	    if (evt.pageX) {
 	        return evt.pageX;
@@ -327,8 +374,8 @@
 
 		var panel = this;
 		
-		var formPanelRes = new Ext.Panel({			    	
-    		id: 'addResPanel',
+		var formPanelResCalendar = new Ext.Panel({			    	
+    		id: 'addResPanelCalendar',
     		padding: '0px',			    		
 			bodyStyle:'padding: 0px; margin: 0px;',
 			border: false,				
@@ -342,7 +389,7 @@
     		items: [	    		        
 					{
 						xtype: 'form',
-						id:"res-form",
+						id:"res-form-calendar",
 						padding: '10px',		
 						bodyBorder: false,
 						border: false,
@@ -356,7 +403,7 @@
 						items: [
 						        {
 								    xtype: 'datefield',
-								    id: 'add-reservation_check_in',
+								    id: 'calendar-reservation_check_in',
 								    name: 'reservation_check_in',
 								    fieldLabel: 'Check In',
 									format: 'd/m/Y',
@@ -370,7 +417,7 @@
 								},
 								{
 								    xtype: 'datefield',
-								    id: 'add-reservation_check_out',
+								    id: 'calendar-reservation_check_out',
 								    name: 'reservation_check_out',
 								    fieldLabel: 'Check Out',
 									format: 'd/m/Y',
@@ -388,7 +435,7 @@
     		]
     	});
 		
-		var addResWindow = new Ext.Window({
+		var addResWindowCalendar = new Ext.Window({
 	        renderTo: document.body,
 	        title:"Reservation",
 	        width:260,
@@ -399,7 +446,7 @@
 	        autoScroll: true,
 	        modal: true,
 	        closeAction: 'close',
-	        items:formPanelRes,
+	        items:formPanelResCalendar,
 	        autoDestroy: true,
 	        /*items: [{
 	        	xtype: 'panel',
@@ -412,13 +459,13 @@
                 handler: function()
                 {
                 	
-                	if(Ext.getCmp("res-form").getForm().isValid()){
+                	if(Ext.getCmp("res-form-calendar").getForm().isValid()){
                 		var content = Ext.getCmp('content-panel');
             			content.removeAll(true);			
             			content.add(new ReservationPanel({'reservationInfo' : 
             				{
-            				reservation_check_in: Ext.getCmp("add-reservation_check_in").getValue(),
-            				reservation_check_out:Ext.getCmp("add-reservation_check_out").getValue(),
+            				reservation_check_in: Ext.getCmp("calendar-reservation_check_in").getValue(),
+            				reservation_check_out:Ext.getCmp("calendar-reservation_check_out").getValue(),
             				from_calendar: true
             				}
             			}));
@@ -437,8 +484,8 @@
 	    });
 		
 		$jQuery('#rmenu').hide();
-		addResWindow.show();
-		addResWindow.center();
+		addResWindowCalendar.show();
+		addResWindowCalendar.center();
 	
 	}
 	function addContextMenu(){
@@ -503,8 +550,8 @@
 		
 	function resizeTable(){
 		$jQuery( ".time-sch-table" ).resize(function() {		
-    		var w =$jQuery( ".time-sch-table.time-sch-table-header" ).width();		
-    		$jQuery( ".time-sch-table-header tbody" ).width(w-8);
+    		//var w =$jQuery( ".time-sch-table.time-sch-table-header" ).width();		
+    		//$jQuery( ".time-sch-table-header tbody" ).width(w-8);
     		
     	});	
 	} 

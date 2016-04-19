@@ -1,18 +1,18 @@
 CalendarPanel = Ext.extend(Ext.Panel, {
-		appeal: null,
 		initComponent: function()
 	    {
 			var panel = this;
+			calendarStore.reload();
 			var config = 
 			{
 				xtype: 'panel',
 			    //title: 'Calendar',
 			    id: 'calendar-main',
-			    padding: 5,
+			    padding: 2,
 			    bodyCssClass: 'x-citewrite-panel-body',
 			    autoScroll: true,
 			    buttonAlign: 'left',
-			    autoLoad : { url : _contextPath + '/calendar/panel', scripts : true, params: {citation_appeal_id: this.citation_appeal_id} },
+			    autoLoad : { url : _contextPath + '/calendar/panel', scripts : true, params: {} },
 			    buttons:  []
 			};
 			

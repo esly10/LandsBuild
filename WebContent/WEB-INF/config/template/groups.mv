@@ -170,7 +170,7 @@
 						<dd style="background:#FFFFFF; color:#00cc00; text-align:left; padding:2px; font-size:18px;"></dd>	
 						<hr style="color:#00cc00;"/>
 						<dt></dt><dd></dd>	
-						<dt>${item.checkInFormated}</dt> <dd></dd>
+						<dt>${item.eventDateFormated}</dt> <dd></dd>
 						
 						<dt>${item.statusName}</dt>
 						<dd>${item.mealPlanName}</dd>

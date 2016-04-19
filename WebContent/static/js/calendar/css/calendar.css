@@ -47,8 +47,8 @@ body {
  
  /*'4', 'Check out' */
 .time-sch-item.item-status-4 {
-  	border-color: #E1E1E1; 
-  	background-color: #F0359D; 
+  	border-color: #9F191A; 
+  	background-color: #9F191A; 
 }
 .time-sch-item.item-status-4:hover {
 	background-color: #ff5555; 

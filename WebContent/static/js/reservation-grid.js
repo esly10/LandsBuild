@@ -2462,6 +2462,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    					 //Ext.getCmp(prop).setValue(Ext.util.Format.date(panel.reservationInfo[prop], 'Y-m-d H:i:s')); //2015-11-11 00:00:00 
 	    					 Ext.getCmp(prop).setValue(Ext.util.Format.date(panel.reservationInfo[prop], 'd/m/Y')); 
 	    				 }else if(prop == "reservation_agency_id"){
+	    					 if(panel.reservationInfo[prop] != "0"){
 	    					agencyStore.load({
 	 	    					params:{'reservation_agency_id': panel.reservationInfo[prop]},
 	 	    					callback: function () {	 	 
@@ -2475,8 +2476,10 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	 		    	        		Ext.getCmp('agency-info').show();
 	 	    			        }
 	 	    			     });	    					
+	    					 }		    					
 	    	        		   
 	    				 }else if(prop == "reservation_guest_id"){
+	    					 if(panel.reservationInfo[prop] != "0"){
 	    					 guestsStore.load({
 		 	    					params:{'reservation_guest_id': panel.reservationInfo[prop]},
 		 	    					callback: function () {	 			 	    			
@@ -2491,6 +2494,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 									   Ext.getCmp('guests-info').show();
 		 	    			        }
 		 	    			     });	 
+		    				}
 	    				 }else {
 	    					 Ext.getCmp(prop).setValue(panel.reservationInfo[prop]);
 	    					
@@ -2594,7 +2598,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		 
 	    },
 	    isValid: function(){
-	    	if(Ext.getCmp("reservation_agency_id").getValue() <= 0){
+	    	/*if(Ext.getCmp("reservation_agency_id").getValue() <= 0){ //Agency is not required
 	   			 Ext.Msg.show({
 						   title:'Error!',
 						   msg: 'Acengy information are required.',
@@ -2602,7 +2606,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 						   icon: Ext.MessageBox.ERROR
 					});
 	   			 return false;
-	   		}
+	   		}*/
 
     		if(Ext.getCmp("reservation_guest_id").getValue() <= 0){
    			 Ext.Msg.show({
@@ -2661,9 +2665,31 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    },
 	    submitReservaion: function(type){
 	    	
-	    	
-	    	
 	    	var panel = this;
+	    	if(Ext.getCmp("reservation_type").getValue() == 3){
+	    		if(Ext.getCmp("reservation_event_date").getValue() == "")
+	    		{
+	    			Ext.Msg.show({
+  					   title:'Error!',
+  					   msg: 'Eevent Date is required.',
+  					   buttons: Ext.Msg.OK,
+  					   icon: Ext.MessageBox.ERROR
+	    			});
+	    			return false;
+	    		}
+	    	} else{
+	    		if(Ext.getCmp("reservation_check_in").getValue() == "" || Ext.getCmp("reservation_check_out").getValue() == "")
+	    		{
+	    			Ext.Msg.show({
+	  					   title:'Error!',
+	  					   msg: 'Check In or Check Out are required.',
+	  					   buttons: Ext.Msg.OK,
+	  					   icon: Ext.MessageBox.ERROR
+		    		});
+		    		return false;
+	    		}	    		
+	    	}	    	
+	    	
 	    	if(type == "done"){
 	    		if(Ext.getCmp("reservation_type").getValue() != 3){
 	    			if(multiRomms.getValue() == "" && Ext.getCmp("reservation_type").getValue() != 3){
@@ -2925,6 +2951,35 @@ ReservationPanel = Ext.extend(Ext.Panel, {
         
         showPaymentWindow : function (data){
         	var panel = this;
+        	var back_account_store = null;
+        	if(Ext.getCmp('reservation_type').getValue() == 3){
+        		back_account_store = new Ext.data.ArrayStore({
+    		        id: 0,
+    		        fields: [
+    		            'TittleValue',
+    		            'TittleDisplay'
+    		        ],
+    		        data: [
+    		               ['100-01-013-005132-7', 'Banco Nacional # 100-01-013-005132-7 (CRC) # 100-02-013-600411-3 (USD)'],
+    		               ['906486436', 'Banco Bac San José # 906486436 (CRC) # 906,490,388 (USD)'],
+    		               ['CANOPY SAN LORENZO S.A', 'Beneficiary: CANOPY SAN LORENZO S.A.'],
+    		              ]
+    		    });
+        	}else {
+        		back_account_store = new Ext.data.ArrayStore({
+    		        id: 0,
+    		        fields: [
+    		            'TittleValue',
+    		            'TittleDisplay'
+    		        ],
+    		        data: [
+    		               ['100-01-013-005188-2', 'Banco Nacional #(CRC)100-01-013-005188-2 (USD) / #100-02-013-600429-6 )'],
+    		               ['CRC)909516734', 'Banco Bac San Jose# (CRC)909516734 (USD) / #909517005 )'],
+    		               ['Pretty Days Development S.A.', 'Beneficiary: Pretty Days Development S.A.'],
+    		               ]
+    		    });
+        	}
+        	
         	
 	    	var formPanel = new Ext.form.FormPanel({
 	    		bodyBorder: false,
@@ -3045,26 +3100,15 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 										    lazyRender:true,
 										    mode: 'local',
 										    id: 'back_account',
-										   
 										    width: 135,	
 										    hiddenName: 'back_account',
 										    //labelStyle: 'width:125px',
 										    autoload: true,
-										    store: new Ext.data.ArrayStore({
-										        id: 0,
-										        fields: [
-										            'TittleValue',
-										            'TittleDisplay'
-										        ],
-										        data: [
-										               [1, 'back_account 1'],
-										               [2, 'back_account 2'],
-										               [3, 'back_account 3'],
-										               ]
-										    }),
+										    listWidth : 420,
+										    store: back_account_store,
 										    valueField: 'TittleValue',
 										    displayField: 'TittleDisplay',
-										    fieldLabel: 'Back Account',											   
+										    fieldLabel: 'Bank Account',											   
 										    tabIndex: 1,
 										    allowBlank: false,
 										    forceSelection: true
