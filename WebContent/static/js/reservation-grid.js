@@ -299,7 +299,50 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																		    fieldLabel: 'Agency Email'													    
 																		}
 															          ],
-															          buttons:[]
+															          buttons:[{
+																        	xtype:'button',																	        	
+																        	text: 'Update',
+																            handler: function(){
+																            	Ext.getCmp('agency-info').getForm().submit({
+															                	    url: _contextPath + '/agency/save',
+															                	    scope: this,
+															                	    params: {'reservation_id': panel.reservation_id, agency_id: Ext.getCmp("reservation_agency_id").getValue() }, 
+															                	    success: function(form, action) {
+
+															                	    	Ext.growl.message('Success', 'Agency has been updated.');
+															                	  	
+															                	    },
+															                	    failure: function(form, action) {
+															                	        switch (action.failureType) {
+															                	            case Ext.form.Action.CLIENT_INVALID:
+															                	                Ext.Msg.show({
+														                	                	   title:'Error',
+														                	                	   msg: 'Please enter all information.',
+														                	                	   buttons: Ext.Msg.OK,
+														                	                	   icon: Ext.MessageBox.ERROR
+														                	                	});
+															                	                break;
+															                	            case Ext.form.Action.CONNECT_FAILURE:
+															                	                Ext.Msg.show({
+														                	                	   title:'Failure',
+														                	                	   msg: 'Ajax communication failed.',
+														                	                	   buttons: Ext.Msg.OK,
+														                	                	   icon: Ext.MessageBox.ERROR
+														                	                	});
+															                	                break;
+															                	            case Ext.form.Action.SERVER_INVALID:
+															                	               Ext.Msg.show({
+														                	                	   title:'Failure',
+														                	                	   msg: action.result.msg,
+														                	                	   buttons: Ext.Msg.OK,
+														                	                	   icon: Ext.MessageBox.ERROR
+														                	                	});
+															                	                break;
+															                	       }
+															                	    }
+															                	});
+																            }																            
+																        }]
 													    	}
 												    ],
 												    buttons:  
@@ -469,7 +512,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																		    fieldLabel: 'Name'													    
 																		},
 																		{
-																		    xtype: 'numberfield',
+																		    xtype: 'textfield',
 																		    id: 'guest_phone',
 																		    name: 'guest_phone',
 																		    labelStyle: 'width:125px',
@@ -522,7 +565,51 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																		
 															          ],
 															          buttons:  
-																		    []
+																		    [{
+																	        	xtype:'button',																	        	
+																	        	text: 'Update',
+																	            handler: function(){
+																	            	Ext.getCmp('guests-info').getForm().submit({
+																                	    url: _contextPath + '/guests/save',
+																                	    scope: this,
+																                	    params: {'reservation_id': panel.reservation_id, guest_id: Ext.getCmp("reservation_guest_id").getValue() }, 
+																                	    success: function(form, action) {
+
+																                	    	Ext.growl.message('Success', 'Guest has been updated.');
+																                	  	
+																                	    },
+																                	    failure: function(form, action) {
+																                	        switch (action.failureType) {
+																                	            case Ext.form.Action.CLIENT_INVALID:
+																                	                Ext.Msg.show({
+															                	                	   title:'Error',
+															                	                	   msg: 'Please enter all information.',
+															                	                	   buttons: Ext.Msg.OK,
+															                	                	   icon: Ext.MessageBox.ERROR
+															                	                	});
+																                	                break;
+																                	            case Ext.form.Action.CONNECT_FAILURE:
+																                	                Ext.Msg.show({
+															                	                	   title:'Failure',
+															                	                	   msg: 'Ajax communication failed.',
+															                	                	   buttons: Ext.Msg.OK,
+															                	                	   icon: Ext.MessageBox.ERROR
+															                	                	});
+																                	                break;
+																                	            case Ext.form.Action.SERVER_INVALID:
+																                	               Ext.Msg.show({
+															                	                	   title:'Failure',
+															                	                	   msg: action.result.msg,
+															                	                	   buttons: Ext.Msg.OK,
+															                	                	   icon: Ext.MessageBox.ERROR
+															                	                	});
+																                	                break;
+																                	       }
+																                	    }
+																                	});
+																	            }																            
+																	        }
+																		    ]
 													    	}
 												    ],
 												    buttons:  
@@ -2960,6 +3047,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		            'TittleDisplay'
     		        ],
     		        data: [
+    		               ['none', 'none'],
     		               ['100-01-013-005132-7', 'Banco Nacional # 100-01-013-005132-7 (CRC) # 100-02-013-600411-3 (USD)'],
     		               ['906486436', 'Banco Bac San José # 906486436 (CRC) # 906,490,388 (USD)'],
     		               ['CANOPY SAN LORENZO S.A', 'Beneficiary: CANOPY SAN LORENZO S.A.'],
@@ -2973,6 +3061,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		            'TittleDisplay'
     		        ],
     		        data: [
+    		               ['none', 'none'],
     		               ['100-01-013-005188-2', 'Banco Nacional #(CRC)100-01-013-005188-2 (USD) / #100-02-013-600429-6 )'],
     		               ['CRC)909516734', 'Banco Bac San Jose# (CRC)909516734 (USD) / #909517005 )'],
     		               ['Pretty Days Development S.A.', 'Beneficiary: Pretty Days Development S.A.'],
@@ -3019,28 +3108,28 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 											    id: 'payment_date',
 											    name: 'payment_date',
 											    fieldLabel: 'Payment Date',
-												format: 'd/m/Y',
+												format: 'Y-m-d',
 												submitFormat: 'Y-m-dTH:i:s',
 												submitValue : true,
 												width: 135,			
 												labelStyle: 'width:120px',
 												allowBlank: false,
-												listeners:{}
-												//value: Ext.util.Format.date(data.date, 'Y-m-d')
+												listeners:{},
+												value: Ext.util.Format.date(new Date(), 'Y-m-d')
 											},
 											{
 											    xtype: 'datefield',
 											    id: 'receive_date',
 											    name: 'receive_date',
 											    fieldLabel: 'Receive Date',
-												format: 'd/m/Y',
+												format: 'Y-m-d',
 												submitFormat: 'Y-m-dTH:i:s',
 												submitValue : true,
 												width: 135,		
 												labelStyle: 'width:120px',
 												allowBlank: false,
-												listeners:{}
-												//value: Ext.util.Format.date(data.date, 'Y-m-d')
+												listeners:{},
+												value: Ext.util.Format.date(new Date(), 'Y-m-d')
 											},
 											{
 												xtype: 'combo',
@@ -3067,7 +3156,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 											    id: 'transaction_no',
 											    name: 'transaction_no',
 											    width: 135,
-											    allowBlank: false,
+											    allowBlank: true,
 											    labelStyle: 'width:120px',
 											    fieldLabel: 'Transaction No'													    
 											},
@@ -3110,7 +3199,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 										    displayField: 'TittleDisplay',
 										    fieldLabel: 'Bank Account',											   
 										    tabIndex: 1,
-										    allowBlank: false,
+										    allowBlank: true,
 										    forceSelection: true
 										},
 										{
@@ -3290,9 +3379,19 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			       columns:[
 			                   {header: 'ID', sortable: true, dataIndex: 'payment_id', autoSizeColumn : true},
 					           {header: 'Reservation ID', sortable: true, dataIndex: 'reservation_id', autoSizeColumn : true},	
-					           {header: 'Payment Date', sortable: true, dataIndex: 'payment_date', autoSizeColumn : true},
+					           {
+					        	header: 'Payment Date', sortable: true, dataIndex: 'payment_date', autoSizeColumn : true,
+					        		renderer: function(value) { 
+						            	return value.substring(0, 10); 
+					        		}	
+					           },
 					           {header: 'Payment Method', sortable: true, dataIndex: 'payment_method_description',  autoSizeColumn : true},
-					           {header: 'Receive Date', sortable: true, dataIndex: 'receive_date',  autoSizeColumn : true},
+					           {
+					            header: 'Receive Date', sortable: true, dataIndex: 'receive_date',  autoSizeColumn : true,
+					        		renderer: function(value) { 
+						            	return value.substring(0, 10); 
+					        		}	
+					           },
 					           {header: 'Transaction No', sortable: true, dataIndex: 'transaction_no',  autoSizeColumn : true},
 					           {header: 'Amount', sortable: true, dataIndex: 'amount',  autoSizeColumn : true},
 					           {header: 'Folio', sortable: true, dataIndex: 'bill_to',  autoSizeColumn : true}
@@ -3822,7 +3921,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    addGuest: function(){
 	    	  guestDialogAdd.setTitle('New Guest');
 			  guestFormPanelAdd.getForm().reset();
-			  guestTittleCombo.setValue(1);
+			  guestTittleCombo.setValue("");
 			  guestMarketCombo.setValue(1);
 			  guestCountryCombo.setValue(1);
 			  guestTypeCombo.setValue(1);
@@ -3857,14 +3956,14 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			            'TittleValue',
 			            'TittleDisplay'
 			        ],
-			        data: [[1, 'Mr'],[2, 'Mrs'],[3, 'Miss'],[4, 'Ms'],[5, 'Master'],[6, 'Family'],[7, 'Other']]
+				        data: [['', ''],[1, ''],[2, 'Mrs'],[3, 'Miss'],[4, 'Ms'],[5, 'Master'],[6, 'Family'],[7, 'Other']]
 			    }),
 			    valueField: 'TittleValue',
 			    displayField: 'TittleDisplay',
 			    fieldLabel: 'Tittle',
 		    	anchor:'95%',
                 tabIndex: 1,
-                allowBlank: false,
+	                allowBlank: true,
                 forceSelection: true
 			});
 			
@@ -3999,8 +4098,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 							    	   id: 'guest_phone_add',
 							    	   fieldLabel: 'Phone',
 							    	   name: 'guest_phone',
-							    	   allowBlank: false,
-							    	   maskRe: /^[0-9]*$/,
+									    	   //maskRe: /^[0-9]*$/,
 							    	   anchor:'95%',
 					                   tabIndex: 7 
 							       },
@@ -4011,7 +4109,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 							    	   regex: /^([\w\-\'\-]+)(\.[\w-\'\-]+)*@([\w\-]+\.){1,5}([A-Za-z]){2,4}$/,
 							    	   regexText:'This field should be an e-mail address in the format "user@example.com"',
 							    	   anchor:'95%',
-							    	   allowBlank: false,
+									    	   allowBlank: true,
 					                   tabIndex: 9 
 							       }, 
 							       guestMarketCombo,
@@ -4262,7 +4360,6 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 								    	   id: 'agency_phone_add',
 								    	   name:"agency_phone",
 								    	   fieldLabel: 'Phone',
-								    	   allowBlank: false,
 								    	   anchor:'95%',
 						                   tabIndex: 6 
 								       },

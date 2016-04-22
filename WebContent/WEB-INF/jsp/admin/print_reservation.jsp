@@ -61,7 +61,15 @@
 		<br><br>
 		<div id="content">
 			<div id="title" style="width:900px; text-align:center">
+				
+				<c:if test="${reservation.reservation_type == 3}">
+					<span style="font-size:20px">Canopy San Lorenzo </span><br>
+				</c:if>
+				
+				<c:if test="${reservation.reservation_type != 3}">
 				<span style="font-size:20px">Lands in love - Tierras Enamoradas </span><br>
+				</c:if>
+				
 				<span style="font-size:20px">HOTEL & RESORT</span><br>
 				<span style="font-size:23px"><b><u>RESERVATION CONFIRMATION</u></b></span><br>
 			</div>
@@ -164,7 +172,8 @@
 			<table class="demo">
 				<thead>
 					<tr>
-						<th style="width:480px; text-align:left;">ITEM</th>
+						<th style="width:100px; text-align:left;">ITEM</th>
+						<th style="width:400px; text-align:left;">DESCRIPTION</th>
 						<th style="">QTY</th>
 						<th style="">RATE</th>
 						<th style="">TOTAL</th>
@@ -175,6 +184,7 @@
 					<c:forEach items="${reservation.charges}" var="charge">
 						<tr>
 							<td><c:out value="${charge.charge_item_name}" /></td>
+							<td style="text-align: center;"><c:out value="${charge.charge_item_desc}" /></td>
 							<td style="text-align: center;"><c:out value="${charge.charge_qty}" /></td>
 							<td style="text-align: center;"><c:out value="${charge.charge_rate}" /></td>
 							<td style="text-align: center;"><c:out value="${charge.charge_total_format}" /></td>
@@ -230,7 +240,7 @@
 				<label><b>Payment Terms: </b><c:out value="${reservation.reservation_payment_terms_name}" /></label><br>
 				<label><b>For Hotel Reception Usage: </b>Payment confirm Yes / No</label><br>
 			</div>
-			<br><br><br><br><br><br><br>
+			<br><br><br>
 			<table style="width:900px;">
 				<tr>
 					<td style="font-size:16px"><b><u>Confirmation is subject to payment </b></u></td>

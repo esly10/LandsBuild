@@ -41,7 +41,8 @@ Ext.onReady(function(){
 		            'room_id',
 		            'room_type',
 		            'rr_id',
-		            'rr_reservation_id'
+		            'rr_reservation_id',
+		            'reservation_id'
 		        ],
 				sortInfo: {
 					field: 'room_no',
@@ -65,7 +66,7 @@ Ext.onReady(function(){
 			               {header: '', sortable: true, dataIndex: 'room_no', width: 20, 
 					            	renderer : function(value, meta, chargeStore) {
 					            		meta.style = "background-color:#4f5f6f; color: #FFFFFF; height:24px; font-size: 12px; width: 20px; ";
-					            		 if(chargeStore.data.rr_id != "") {
+					            		 if(chargeStore.data.reservation_id != "") {
 						            	        meta.style = "background-color:#33cc33; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 20px;";
 						            	       
 						            	    }
@@ -75,7 +76,7 @@ Ext.onReady(function(){
 				            {header: 'Room Status', sortable: false, dataIndex: 'room_no', width: 110, 
 				            	renderer : function(value, meta, chargeStore) {
 				            		meta.style = "background-color:#E1E1E1; height:24px; width: 110px;";
-				            		if(chargeStore.data.rr_id != "") {
+				            		if(chargeStore.data.reservation_id != "") {
 					            	        meta.style = "background-color:#ccff99; height:24px; font-weight: bold; width: 110px;";
 					            	        return "Used";
 					            	    }
@@ -132,7 +133,7 @@ Ext.onReady(function(){
 			    	}
 			    },tbar: {
 			    	xtype: 'toolbar',
-			    	items: ['Date: ', 
+			    	items: [/*'Date: ', 
 			    	       {
 			    				xtype: 'datefield',
 					            fieldLabel: 'Date',
@@ -161,7 +162,7 @@ Ext.onReady(function(){
 								    }
 								}
 			    	        }
-			    	        ]
+			    	       */ ]
 			    }
 			});
 			//myDateField.setValue(new Date());
@@ -210,56 +211,92 @@ Ext.onReady(function(){
 					bodyBorder: false,
 					border: false,
 					frame: false,
-					defaultType:'textfield',
-					labelAlign: 'top',
-					buttonAlign:'center',
-					bodyStyle: 'padding: 10px; ',
+					//defaultType:'textfield',
+					//labelAlign: 'top',
+					//buttonAlign:'center',
+					 buttonAlign: 'right',
+					bodyStyle: 'padding-top: 10px; ',
 					autoWidth: true,
+					defaults: { width: '30%' },
 					bodyCssClass: 'x-citewrite-panel-body',
-					items:[
-					       {
-							   xtype: 'datefield',
-							   id: 'reservation_check_in',
-							   name: 'reservation_check_in',
-							   fieldLabel: 'Check In',
-							   format: 'd/m/Y',
-							   submitFormat: 'Y-m-d H:i:s',
-							   submitValue : true,
-							   altFormats: 'Y-m-d',
-							   anchor: "99.2%",	
-							   allowBlank: false,
-							   //value: now,
-							   listeners:{
-							   	change : function(val){
-							   	var now = val.getValue();
-							   	var days = Ext.getCmp("reservation_nights").getValue();
-							   	if(days != ""){
-							   	now.setDate(now.getDate() + parseInt(days));
-							    Ext.getCmp("reservation_check_out").setValue(now.toISOString().substring(0, 10));
-							   		}
-							   	   	
-							   		}
-							   }
-							//value: Ext.util.Format.date(data.date, 'Y-m-d')
-							}
-					       ],
-			       buttons: [{
-			            text: 'Apply',
-			            width: 60,
-			            handler: function(){
-			               var params = filterForm.getForm().getFieldValues();
-			               store.baseParams = params;
-			              store.load({params: {start: 0, limit: pageLimit}});
-			            }
-			        },{
-			            text: 'Reset',
-			            width: 60,
-			            handler: function(){
-			            	filterForm.getForm().reset();					
-			            	store.baseParams = {};
-			            	store.load({params: {start: 0, limit: pageLimit}});
-			            }
-			        }]
+					items: [
+		                    {
+		                        layout:'column',
+		                        items:[
+		                        {   // column #1
+		                            columnWidth: .3,
+		                            layout: 'form',
+		                            items: [
+		                                {  	xtype: 'radiogroup',
+								            fieldLabel: 'Search Method',
+								            id: 'filter_type',
+								            itemCls: 'x-check-group-alt',
+								            value:1,
+								            columns: 2,
+								            items: [
+								                {boxLabel: 'Staying Only', name: 'rb', inputValue: 1},
+								                {boxLabel: 'All', name: 'rb', inputValue: 2}
+								            ],
+								            listeners: {
+								            	change: function(field, newValue, oldValue, eOpts){
+								            		if(newValue.inputValue == 1 ){
+								            			Ext.getCmp("filter_date").hide();
+								            		}else{
+								            			Ext.getCmp("filter_date").show();
+								            		}
+								            		Ext.getCmp("selected_grupbox").setValue(newValue.inputValue);
+								            		var date = Ext.getCmp("filter_date").getValue();
+	        								    	chargeStore.baseParams = {date: date, check:newValue.inputValue};
+	        								    	chargeStore.load({params: {start: 0, limit: pageLimit}});
+								            		//console.log('change:' + field.fieldLabel + ' ' + newValue.rb);
+								                }
+								            }
+		                                }
+		                            ] // close items for first column
+		                        },{   // column #1
+		                            columnWidth: '350px',
+		                            layout: 'form',
+		                            items: [
+		                                    {   
+		                                   
+		                                    	xtype: 'datefield',
+		        					            emptyText:"Now",
+		        					            fieldLabel: 'Select Date',
+		        					            value: '',
+		        					            enableKeyEvents: true,
+		        					            format: 'Y-m-d H:i:s',
+		        								submitFormat: 'Y-m-d H:i:s',
+		        								submitValue : true,
+		        								altFormats: 'Y-m-d',
+		        								id: 'filter_date',
+		        								width: 200,
+		        								hidden: true,
+		        								name: 'filter_date',
+		        								listeners : {
+		        									
+		        									select: function (t,n,o) {
+		        										var check = Ext.getCmp("selected_grupbox").getValue();
+		        								    	chargeStore.baseParams = {date: t.value, check:check};
+		        								    	chargeStore.load({params: {start: 0, limit: pageLimit}});
+		        						            },
+		        						            change: function (t,n,o) {
+		        						            	var check = Ext.getCmp("selected_grupbox").getValue();
+		        								    	chargeStore.baseParams = {date: t.value, check:check};
+		        								    	chargeStore.load({params: {start: 0, limit: pageLimit}});
+		        						            },
+		        								   render : function(datefield) {
+		        								       datefield.setValue(new Date());
+		        								    }
+		        								}
+		                                }
+		                            ] // close items for first column
+		                        }],
+		                    },{
+		                    	xtype: 'hidden',
+		    					id: 'selected_grupbox',
+		    					name: 'selected_grupbox',
+		    					value: 0
+		                    }],
 			});
 			 
 			 
@@ -295,7 +332,7 @@ Ext.onReady(function(){
 			    {
 			        Ext.apply(this, 
 			        {
-			        	title: 'Manage Charges',
+			        	title: '',
 			            layout: 'border',
 			            border: false,
 			            frame: false,
@@ -322,8 +359,18 @@ Ext.onReady(function(){
 			                	 id: 'chargetabs',
 			                	 frame: false,
 			                	 closable: true
-			                 },filterForm]	
-			            }]
+			                 }]	
+			            },{
+			            	title: 'Manage Charges',
+							collapsible: true,
+							collapsed:false,
+							collapseMode: 'mini',
+							region:'north',
+							margins: '0 0 0 0',
+							//width: '100%',
+							height:80,
+							items: [filterForm]
+						}]
 			        });
 			        ChargeManager.superclass.initComponent.apply(this, arguments);
 			    }
