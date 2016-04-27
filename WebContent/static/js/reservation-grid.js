@@ -56,7 +56,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    					   record.data.charge_item_name == "Room NS" ||
 	    					   record.data.charge_item_name == "Restaurant" ||
 	    					   record.data.charge_item_name == "Rest/Bar"){
-	    						taxSum += (record.data.charge_qty*record.data.charge_rate);
+	    						taxSum += ( (record.data.charge_qty*record.data.charge_rate)* record.data.charge_nights);
 	    					}
 	    					/*if(record.data.charge_item_name == "Restaurant" || record.data.charge_item_name == "Rest/Bar"){
 	    						servSum += (record.data.charge_qty*record.data.charge_rate);
@@ -1535,7 +1535,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 					    			[
 					    				{
 											xtype: 'fieldset',
-											title: '',
+											title: 'General Information',
 											border: false,
 											width:'100%',
 											anchor:'100%',
@@ -1675,8 +1675,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 											]
 										},
 										{
-											xtype: 'panel',
-										    title: '',
+											xtype: 'fieldset',
+										    title: 'Credit Card Information',
 										    id: 'card-panel',
 										    padding: 5,
 										    style:'padding:5px; border-left: 0px;border-right: 0px;',
@@ -1702,19 +1702,80 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																    name: 'card_name',
 																    anchor: "90%",
 																    labelStyle: 'width:115px',
-																    allowBlank: false,
+																    allowBlank: true,
 																    fieldLabel: 'Name'													    
 																},{
 																    xtype: 'box',
 																    height: 15										    
 																},
 																{
+																			    xtype: 'checkbox',
+																			    id: 'show_credit_card',
+																			    name: 'show_credit_card',
+																			    labelStyle: 'width:115px',
+																			    fieldLabel: 'Show Credit Card',
+																			    listeners:{
+																	        		check: function(self, newVal, oldVal) {
+																	        			//var oriValue = Ext.getCmp("card_no").getValue();
+																        				if(newVal){
+																        					Ext.MessageBox.prompt("Credentials", "Enter a password:", function(p1, p2){
+																        	    				if(p1 == 'ok')
+																        	    				{	
+																        	    					if(p2.trim() == "" || p2.trim().length == 0){
+																        							   Ext.Msg.show({
+																        	    	   	            	   title:'Error!',
+																        	    	   	            	   msg:  "Invalid Password.",
+																        	    	   	            	   buttons: Ext.Msg.OK,
+																        	    	   	            	   icon: Ext.MessageBox.ERROR
+																        	    	   	            	});
+																        	    						return false;
+																        	    					}
+																        	    					
+																        	    					Ext.Ajax.request({
+																			     			        	   url: _contextPath + '/reservation/getCreditCard',
+																			     						   params: { reservation_id: panel.reservation_id, password: p2.trim()},
+																			     						   success: function(response, opts)
+																			     						   {
+																			     							  var data = Ext.decode(response.responseText);
+																			    	    					   if(data.success){																			    	    						   
+																			    	    						   Ext.getCmp("card_no").setValue(data.credit_number);
+																			    	    					   }else {
+																			    	    						   Ext.Msg.show({
+																				     								   title:'Failure',
+																				     								   msg:  data.msg,
+																				     								   buttons: Ext.Msg.OK,
+																				     								   icon: Ext.MessageBox.ERROR
+																				     								});
+																			    	    					   }
+																			     						   },
+																			     						   failure: function(){ 
+																			     							   Ext.Msg.show({
+																			     								   title:'Failure',
+																			     								   msg:  'Error getting data.',
+																			     								   buttons: Ext.Msg.OK,
+																			     								   icon: Ext.MessageBox.ERROR
+																			     								});
+																			     						   }
+																			     						});
+																        	    				}
+																        	    	    	}, this, false, "");
+																        					
+																        				}else{
+																        					if(panel.reservationInfo !== undefined){
+																        						Ext.getCmp("card_no").setValue( panel.reservationInfo.card_no );
+																        					}
+																        					
+																        				}																	        			 
+																	        		}
+																	        	}
+																			},
+																			{
 																    xtype: 'textfield',
 																    id: 'card_no',
 																    name: 'card_no',
 																    labelStyle: 'width:115px',
 																    anchor: "90%",
-																    allowBlank: false,
+																    allowBlank: true,
 																    fieldLabel: 'No'													    
 																},{
 																    xtype: 'box',
@@ -1726,7 +1787,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																    name: 'card_exp',
 																    labelStyle: 'width:115px',
 																    width:100,
-																    allowBlank: false,
+																    allowBlank: true,
 																    fieldLabel: 'Exp'													    
 																},{
 																    xtype: 'box',
@@ -1741,7 +1802,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	  labelStyle: 'width:115px',
 																	  submitValue: true,
 																	  width:100,
-																	  allowBlank: false,
+																	  allowBlank: true,
 																	  lazyRender: false,
 																	  store:ccTypeStore,
 																	    displayField: 'cc_type_description',
@@ -1758,8 +1819,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 										    ]
 										},
 										{
-											xtype: 'panel',
-										    title: '',
+											xtype: 'fieldset',
+										    title: 'Status',
 										    id: 'radio-panel',
 										    padding: 5,
 										    style:'padding:5px; border-left: 0px;border-right: 0px;',
@@ -2695,7 +2756,9 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	   			 return false;
 	   		}*/
 
-    		if(Ext.getCmp("reservation_guest_id").getValue() <= 0){
+	    	
+	    	
+    		if(Ext.getCmp("reservation_guest_id").getValue() <= 0 || typeof Ext.getCmp("reservation_guest_id").getValue() == "undefined"){
    			 Ext.Msg.show({
 					   title:'Error!',
 					   msg: 'Guests information are required.',
@@ -2727,15 +2790,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     			 return false;
      		}
     		
-    		if(!Ext.getCmp("card-info").getForm().isValid()){
-   			 Ext.Msg.show({
-					   title:'Error!',
-					   msg: 'Card information are required.',
-					   buttons: Ext.Msg.OK,
-					   icon: Ext.MessageBox.ERROR
-				});
-   			 return false;
-    		}
+    		
     		
     		if(!Ext.getCmp("payment-terms-form").getForm().isValid()){
       			 Ext.Msg.show({
@@ -2801,12 +2856,17 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    				
 	    			}
 	    			
+	    			if(!panel.isValid()){
+		    			return false;
+		    		}
 		    	} else {
 		    		if(!panel.isValid()){
 		    			return false;
 	    		}    		
+		    			
 	    	}
 	    	}
+	    	
 	    	
 	    	
 	    	var res_number = document.getElementById("res_number").innerHTML;
@@ -3114,7 +3174,10 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 												width: 135,			
 												labelStyle: 'width:120px',
 												allowBlank: false,
-												listeners:{},
+												listeners:{
+													select: function (t,n,o) {
+													  Ext.getCmp('receive_date').setValue(t.value);
+												   }},
 												value: Ext.util.Format.date(new Date(), 'Y-m-d')
 											},
 											{
@@ -3581,6 +3644,17 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    maxValue: 10000
 	                })
 	            },{
+	                id: 'charge_nights',
+	                header: 'Nights',
+	                dataIndex: 'charge_nights',
+	                anchor: "11%",
+	                // use shorthand alias defined above
+	                editor: new fm.NumberField({
+	                    allowBlank: false,
+	                    allowNegative: false,
+	                    maxValue: 10000
+	                })
+	            },{
 	            	id:'charge_rate',
 	                header: 'Rate',
 	                dataIndex: 'charge_rate',
@@ -3674,11 +3748,11 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		        		var taxSum = 0.00;
 		        		var servSum = 0.00;
 		        		chargesStore.each(function(record,id){				    					
-	    					record.set('charge_total',(record.data.charge_qty*record.data.charge_rate));	
-	    					sum += (record.data.charge_qty*record.data.charge_rate);
+	    					record.set('charge_total',((record.data.charge_qty*record.data.charge_rate)*record.data.charge_nights));	
+	    					sum += ((record.data.charge_qty*record.data.charge_rate)*record.data.charge_nights);
 	    					if(record.data.charge_item_name == "Room" || record.data.charge_item_name == "Room NS" || 
 	    					   record.data.charge_item_name == "Restaurant" ||record.data.charge_item_name == "Rest/Bar"){
-	    						taxSum += (record.data.charge_qty*record.data.charge_rate);
+	    						taxSum += ((record.data.charge_qty*record.data.charge_rate)*record.data.charge_nights);
 	    					}
 	    					/*if(record.data.charge_item_name == "Restaurant" || record.data.charge_item_name == "Rest/Bar"){
 	    						servSum += (record.data.charge_qty*record.data.charge_rate);
@@ -3726,6 +3800,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                                   {name: 'charge_item_name', mapping : "charge_item_name", type: 'string'},
 	                                   {name: 'charge_item_desc',  mapping : "charge_item_desc",  type: 'string'},
 	                                   {name: 'charge_qty',  mapping : "charge_qty",  type: 'int'},
+	                                   {name: 'charge_nights',  mapping : "charge_nights",  type: 'int'},
 	                                   {name: 'charge_rate',  mapping : "charge_rate",  type: 'float'},
 	                                   {name: 'charge_total',  mapping : "charge_total",  type: 'float'},
 	                                   {name: 'charge_folio',  mapping : "charge_folio"},
@@ -3737,6 +3812,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    	charge_item_name: 	'',
 	                    	charge_item_desc: 	'',
 	                    	charge_qty: 		0,
+	                    	charge_nights:		0, 	
 	                    	charge_rate: 		0,
 	                    	charge_total: 		0,
 	                    	charge_folio: 		'Guest',

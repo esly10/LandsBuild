@@ -114,6 +114,8 @@
 		    	<li id="nav-payment">Charges
 		    		<script type="text/javascript" src="<c:url value="/static/js/charges.js" />"></script>
 		    		<script type="text/javascript" src="<c:url value="/static/js/charge-general.js" />"></script>
+		    		<script type="text/javascript" src="<c:url value="/static/js/charge-agency.js" />"></script>
+		    		<script type="text/javascript" src="<c:url value="/static/js/charge-guest.js" />"></script>
 		    	</li>
 		  
 		    <% } if(cwUser.hasPermission(User.PL_GUEST_MANAGE)){ %>

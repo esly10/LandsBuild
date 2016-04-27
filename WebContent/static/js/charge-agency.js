@@ -1,4 +1,4 @@
-ChargeGeneralPanel = Ext.extend(Ext.Panel, {
+ChargeAgencyPanel = Ext.extend(Ext.Panel, {
 		charge: null,
 		initComponent: function()
 	    {
@@ -40,7 +40,7 @@ ChargeGeneralPanel = Ext.extend(Ext.Panel, {
 						
 		            	var room_id = panel.charge.room_id;
 		            	var date = panel.date.value;
-		            	var selector=1;
+		            	var selector=2;
 		    			var body = Ext.getBody();
 		    			var frame = Ext.get('hiddenform-iframe');
 		    			if(frame != undefined)
@@ -56,7 +56,7 @@ ChargeGeneralPanel = Ext.extend(Ext.Panel, {
 		    		        name: 'hidden-iframe',
 		    		       
 		    				scripts : true, 
-		    		        src: _contextPath + "/rooms/exportPDF?room_id="+ room_id + "&date=" + date+ "&selector=" + selector
+		    		        src: _contextPath + "/rooms/exportPDF?room_id="+ room_id + "&date=" + date + "&selector=" + selector
 		    		      });    		
 		    		
 		            },text: 'Export'});
@@ -100,13 +100,13 @@ ChargeGeneralPanel = Ext.extend(Ext.Panel, {
 			var config = 
 			{
 				xtype: 'panel',
-			    title: 'All Charges',
-			    id: 'chargetab-general-' + panel.charge.room_id,
+			    title: 'Agency Charges',
+			    id: 'chargetab-agency-' + panel.charge.room_id,
 			    padding: 5,
 			    bodyCssClass: 'x-citewrite-panel-body',
 			    autoScroll: true,
 			    buttonAlign: 'left',
-			    autoLoad : { url : _contextPath + '/rooms/details', scripts : true, params: {room_id: panel.charge.room_id, date: panel.date.value, selector: 1} },
+			    autoLoad : { url : _contextPath + '/rooms/details', scripts : true, params: {room_id: panel.charge.room_id, date: panel.date.value, selector: 2  } },
 			    buttons:  buttons
 			};
 			Ext.apply(this, Ext.apply(this.initialConfig, config));

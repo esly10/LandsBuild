@@ -69,8 +69,14 @@
 				<c:if test="${reservation.reservation_type != 3}">
 				<span style="font-size:20px">Lands in love - Tierras Enamoradas </span><br>
 				</c:if>
+				<c:if test="${reservation.reservation_type == 3}">
+					<span style="font-size:20px">ADVENTURE CENTER</span><br>
+				</c:if>
 				
-				<span style="font-size:20px">HOTEL & RESORT</span><br>
+				<c:if test="${reservation.reservation_type != 3}">
+					<span style="font-size:20px">HOTEL & RESORT</span><br>
+				</c:if>
+				
 				<span style="font-size:23px"><b><u>RESERVATION CONFIRMATION</u></b></span><br>
 			</div>
 			<br><br>
@@ -208,13 +214,23 @@
 					<td style="border-bottom: 1px #000000;border-bottom-style: solid; text-align: right;"><b><c:out value="${total}" /></b></td>
 				</tr>
 			</table>
-			<br><br>
+			<br>
 			<div style="width:900px; height:80px; position:relative;">
 				<div style="float:left; width:425px">
 					<span style="font-size:18px"><b><u>PAYMENT DETAILS:</u></b></span>	<br>
-						<label><c:out value="${lastPeyment.back_account}" /> </label>	<br>
-						<label>Cuenta #: <c:out value="${lastPeyment.transaction_no}" /> </label>	<br>
-						<label>Beneficiry: HOTELERA LA GRAN VISTA S.A. </label>	<br>
+					<c:if test="${reservation.reservation_type == 3}">
+						<label><b>Banco Nacional<b> # 100-01-013-005132-7 (CRC) </label>	<br>
+						<label><b>Banco Nacional<b> # 100-02-013-600411-3 (USD) </label>	<br>
+						<label><b>Bac San José<b> #906486436 (CRC) #906,490,388 (USD)	<br>
+						<label><b>Beneficiary:<b> CANOPY SAN LORENZO S.A. </label>	<br>
+					</c:if>
+					<c:if test="${reservation.reservation_type != 3}">
+						<label><b>Banco Nacional<b> # 100-01-013-005188-2 (CRC)  </label>	<br>
+						<label><b>Banco Nacional<b> # 100-02-013-600429-6 (USD) </label>	<br>
+						<label><b>Bac San José<b> #909516734 (CRC) #909517005 (USD)	<br>
+						<label><b>Beneficiary:<b> Pretty Days Development S.A.</label>	<br>
+					</c:if>
+					
 				</div>
 				<div style="float: left;   width: 425px;    border-left-style: solid;    border-left-color: #000000;    border-left-width: 2px;    padding-left: 10px;">
 					<span style="font-size:18px"><b><u>CREDIT CARD DETAILS:</u></b></span>	

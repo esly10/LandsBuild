@@ -412,7 +412,14 @@
 									altFormats: 'Y-m-d',
 									anchor: "80%",																		
 									allowBlank: false,
-									listeners:{}
+									listeners:{
+										 render : function(datefield) {
+										        datefield.setValue(new Date());
+										  },
+										select: function (t,n,o) {
+											  Ext.getCmp('calendar-reservation_check_out').setValue(t.value);
+										   }
+									}
 									//value: Ext.util.Format.date(data.date, 'Y-m-d')
 								},
 								{
@@ -426,7 +433,11 @@
 									altFormats: 'Y-m-d',
 									anchor: "80%",																		
 									allowBlank: false,
-									listeners:{}
+									listeners:{
+										 render : function(datefield) {
+										        datefield.setValue(new Date());
+										  }
+									}
 									//value: Ext.util.Format.date(data.date, 'Y-m-d')
 								}
 							]

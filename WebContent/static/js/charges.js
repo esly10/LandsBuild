@@ -315,7 +315,9 @@ Ext.onReady(function(){
 							autoDestroy: true,
 							enableTabScroll: true,
 						    items: [
-						            new ChargeGeneralPanel({charge: this.charge, date: this.date})						           
+						            new ChargeGeneralPanel({charge: this.charge, date: this.date}),
+						            new ChargeAgencyPanel({charge: this.charge, date: this.date}),
+						            new ChargeGuestPanel({charge: this.charge, date: this.date})
 								   ]
 						        };
 					

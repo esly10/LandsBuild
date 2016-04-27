@@ -196,10 +196,10 @@
 	<div style="width: 100%; float: left;">
 		<div style="width: 50%; float: left;">
 			<dl class="list"; style="font-size:14px;">
-				<dt style="background:#FFFFFF; color:#001a66; text-align:center; padding:5px; font-size:24px;">Detail of Charges</dt>	
-				<dd style="background:#FFFFFF; color:#001a66; text-align:center; padding:5px; font-size:24px;"></dd> 	
-				<dt style="background:#FFFFFF; color:#4d79ff; text-align:left; padding:5px; font-size:14px;"><c:out value="${reservation.reservation_number}" /></dt>	
-				<dd style="background:#FFFFFF; color:#4d79ff; text-align:center; padding:5px; font-size:14px;"></dd> 	 	
+					<dt style="background:#FFFFFF; color:#330066; text-align:center; padding:5px; font-size:24px;">Agency Charges</dt>	
+				<dd style="background:#FFFFFF; color:#330066; text-align:center; padding:5px; font-size:24px;"></dd> 	
+				<dt style="background:#FFFFFF; color:#a64dff; text-align:left; padding:5px; font-size:14px;">${reservation.reservation_number}</dt>	
+				<dd style="background:#FFFFFF; color:#a64dff; text-align:center; padding:5px; font-size:14px;"></dd> 	 	
 				<hr>	 
 				<dt>Check in:</dt><dd>${reservation.reservation_check_in_format}</dd>
 				<dt>Check out:</dt><dd>${reservation.reservation_check_out_format} (${reservation.reservation_nights} Nights)</dd>
@@ -230,8 +230,8 @@
 	<div style="width: 100%; float: left;">
 		<div style="width: 100%; font-size:14px;">
 			<dl class="list">
-				<dt style="background:#FFFFFF; color:#4d79ff; text-align:left; padding:5px; font-size:14px;">Rooms Related</dt>	
-				<dd style="background:#FFFFFF; color:#4d79ff; text-align:center; padding:5px; font-size:14px;"></dd> 	
+				<dt style="background:#FFFFFF; color:#a64dff; text-align:left; padding:5px; font-size:14px;">Rooms Related</dt>	
+				<dd style="background:#FFFFFF; color:#a64dff; text-align:center; padding:5px; font-size:14px;"></dd> 	
 			</dl>
 				<hr>
 			<ul>
@@ -248,7 +248,7 @@
 	<div style="width: 100%; float: left;">
 		#if ($agencySize > 0)
 			<table  class="tableCharge"  style="width:100%; float: right;";>
-				 <tr><td colspan=6 style="background:#037dcf;">Agency Charges: </td></tr>
+				 <tr><td colspan=6 style="background:#6666cc;">Agency Charges: </td></tr>
 				  <tr>
 				    <th>Item</th><th>Description</th><th>Qty</th><th>Rate</th> <th>Total</th>
 				  </tr>
@@ -270,52 +270,24 @@
 				<tr><td colspan=4>Total:</td><td colspan=2> ${reservation.totalAgency}</td></tr>
 			
 			</table>
-		#end
-		<hr>
-		#if ($guestSize > 0)
-			<table class="tableCharge" style="width:100%;  float: right;";>
-			<tr><td colspan=6 style="background:#037dcf;">Guest Charges: </td></tr>
-				  <tr>
-				    <th>Item</th><th>Description</th><th>Qty</th><th>Rate</th><th>Total</th>
-				  </tr>
-				#foreach($item in ${guestCharges})
-				 <tr>
-						<td>${item.charge_item_name}</td> 
-						<td>${item.charge_item_desc}</td>
-						<td>${item.charge_qty}</td>
-						<td>$ ${item.charge_rate}</td>
-						
-						<td>$ ${item.charge_total}</td>							
-				 </tr>		
-				#end
-				
-				<tr><td colspan=4  style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2  style="border-top: 1px solid #000;">$ ${reservation.guestCharges}</td></tr>
-				<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.guestFormatTax}</td></tr>
-				
-				<tr><td colspan=4>Paid:</td><td colspan=2  style="color:red;">$ ${reservation.guestPaid}</td></tr>	
-				<tr><td colspan=4>Total:</td><td colspan=2> ${reservation.totalGuest}</td></tr>
-			</table>
-		#end
+		
+		
 		<hr>
 		<table class="tableCharge" style="width:100%;";>
-		<tr><td colspan=6 style="background:#037dcf;">Totals: </td></tr>
-			  <tr>
-			    <th>Folio</th><th>Amount</th>
-			  </tr>
+		<tr><td colspan=6 style="background:#6666cc;">Totals: </td></tr>
 			
-			 <tr>
-					<td>Agency</td> 
-					<td> ${reservation.totalAgency}</td>
-			 </tr>	
-			  <tr>
-					<td>Guest</td> 
-					<td> ${reservation.totalGuest}</td>
-			 </tr>	
 			 <tr >
 					<td style="font-size:18px;">Balance</td> 
-					<td style="font-size:18px;"> ${reservation.totalCharges}</td>
+					<td style="font-size:18px;"> ${reservation.totalAgency}</td>
 			 </tr>		
 		</table>
+		#end
+	#if ($agencySize < 1)
+			<dl class="list"; style="font-size:14px;">
+				<dt style="background:#FFFFFF; color:#330066; text-align:center; padding:5px; font-size:24px;">There are no associated charges to Agency</dt>	
+				<dd style="background:#FFFFFF; color:#330066; text-align:center; padding:5px; font-size:24px;"></dd> 	
+			</dl>
+	#end
 	<hr>
 </div>
 </body>
