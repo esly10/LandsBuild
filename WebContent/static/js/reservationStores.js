@@ -201,6 +201,7 @@ agencyStore= new Ext.data.JsonStore({
                  'charge_item_name',
                  'charge_item_desc',
                  'charge_qty',
+                 'charge_nights',
                  'charge_rate',
                  'charge_total',
                  'charge_folio',

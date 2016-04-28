@@ -1195,7 +1195,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 														    		border: false,
 														    		id: 'colum1charges',
 														    		bodyStyle: 'padding-bottom: 0px; background-color: #fff;',
-																	items: panel.loadChargesGrid()
+																	items: panel.loadChargesGrid(1)
 																},
 																{
 																	columnWidth: .25, 
@@ -1585,13 +1585,48 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																}
 																res_number = val+res_number.slice(1);
 																document.getElementById("res_number").innerHTML = res_number; 
+																var grid = Ext.getCmp( 'charge_grid_reservation' );
 																
 																if(self.getValue() == 3){																	
 																	Ext.getCmp("event-info").show();
 																	Ext.getCmp("rooms-info").hide();
+																	/*var col=grid.colModel.getColumnById('charge_nights');
+																	col.hidden= true;*/
+																	/*if(panel.reservation_id > 0){
+												                		panel.loadCharges();
+												                		grid.fireEvent("click");
+												                	}else {
+												                		grid.fireEvent("click");
+												                	}*/
+																	
+																	
 																} else {
 																	Ext.getCmp("rooms-info").show();
 																	Ext.getCmp("event-info").hide();
+																	/*var col=grid.colModel.getColumnById('charge_nights');
+																	col.hidden= false;*/
+																	
+																	
+																	/*if(panel.reservation_id > 0){
+												                		panel.loadCharges();
+												                		grid.fireEvent("click");
+												                	}else {
+												                		grid.fireEvent("click");
+												                	}*/
+																	
+																	//panel.loadChargesGrid(1);
+																	//grid.charge_nights.hide();
+																	// Ext.getCmp('charge_grid_reservation').columns[4].setVisible(false);
+																/*	
+																	var col = grid.columns[5];
+																	col.setVisible( false );*/
+																	/*( function( col ) {
+																	   if(  col.text == "Foo"  ) {
+																	      col.setVisible( true );
+																	   } else if( col.text == "Baz" ) {
+																	      col.setVisible( false );
+																	   }
+																	});*/
 																}
 															}
 														}
@@ -3053,6 +3088,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		    	   data.charge_item_name = record.get("charge_item_name");
 		    	   data.charge_item_desc =  record.get("charge_item_desc");
 		    	   data.charge_qty		 =  record.get("charge_qty");
+		    	   data.charge_nights		 =  record.get("charge_nights");
 		    	   data.charge_rate		 =  record.get("charge_rate");
 		    	   data.charge_total	 =  record.get("charge_total");
 		    	   data.charge_folio 	 = record.get("charge_folio");
@@ -3556,9 +3592,10 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     			autoDestroy: true
     		}).showAt(event.xy);
     	},
-	    loadChargesGrid: function(){
+	    loadChargesGrid: function(type){
 	    	
 	    	var panel = this;
+	    	
 	        /**
 	         * Handler specified for the 'Available' column renderer
 	         * @param {Object} value
@@ -3648,6 +3685,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                header: 'Nights',
 	                dataIndex: 'charge_nights',
 	                anchor: "11%",
+	                //hidden:columHideEvent,
 	                // use shorthand alias defined above
 	                editor: new fm.NumberField({
 	                    allowBlank: false,
@@ -3715,6 +3753,15 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                })
 	            }]
 	        });
+	        
+	       
+	        
+	       if(type == 3){
+	    	//   cm[6].hide();
+    		}else{
+    			//Ext.getCmp('charge_nights').show();
+    		}
+	        
 
 	        // create the editor grid
 	        ChargeGrid = new Ext.grid.EditorGridPanel({
@@ -3726,6 +3773,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	            autoExpandColumn: 'item_name', // column with this id will be expanded
 	            title: '',
 	            frame: true,
+	            id: 'charge_grid_reservation',
 	            bodyBorder: false,
 	    		border: false,
 	            clicksToEdit: 1,
@@ -3811,8 +3859,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    	charge_reservation_id: 	panel.reservation_id,
 	                    	charge_item_name: 	'',
 	                    	charge_item_desc: 	'',
-	                    	charge_qty: 		0,
-	                    	charge_nights:		0, 	
+	                    	charge_qty: 		1,
+	                    	charge_nights:		1, 	
 	                    	charge_rate: 		0,
 	                    	charge_total: 		0,
 	                    	charge_folio: 		'Guest',
@@ -3833,6 +3881,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                		ChargeGrid.fireEvent("click");
 	                		Ext.growl.message('Success', 'Refreshed!');
 	                	}else {
+	                		//ChargeGrid.fireEvent("click");
 	                		Ext.growl.message('Error!', 'You must save the reservation information before save a charges.');
 	        	    		return false;
 	                	}

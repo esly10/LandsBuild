@@ -54,6 +54,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 	            'reservation_service_notes',
 	            'reservation_transport_notes',
 	            'reservation_internal_notes',
+	            'reservation_bar_notes',
 	            'reservation_update_data',
 	            'reservation_creation_date',
 	            'agency_name',
@@ -377,10 +378,11 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 										            'StatusValue',
 										            'StatusDisplay'
 										        ],
-										        data: [[1, 'Confirmed'],[2, 'Canceled'],[3, 'Check In'],[4, 'Check Out'],[6, 'No Show']]  
+										        data: [[1, 'Confirmed'],[2, 'Canceled'],[3, 'Check In'],[4, 'Check Out'],[6, 'No Show'],[7, 'Confirm & Checkin'],[8, 'All']]  
 										    }),
 										    valueField: 'StatusValue',
 											displayField: 'StatusDisplay',
+											value:7,
 									    	anchor:'95%',
 							            	tabIndex: 6,
 							            	allowBlank: true,
@@ -464,7 +466,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
         			               var params = panel.filter.getForm().getFieldValues();
         			               panel.store.baseParams = params;
         			               panel.store.load({params: {start: 0, limit: panel.pageLimit}});
-        			            }
+        			            },
         			        },{
 								xtype: 'box',
 								height: 10
@@ -2689,6 +2691,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 	  
 
 });
+
 function setOwnerMutex(){
 	_ownerMutex = false;
 }
