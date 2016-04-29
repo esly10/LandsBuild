@@ -342,11 +342,11 @@ Ext.onReady(function(){
 				            'TittleValue',
 				            'TittleDisplay'
 				        ],
-				        data: [[1, 'Mr'],[2, 'Mrs'],[3, 'Miss'],[4, 'Ms'],[5, 'Master'],[6, 'Family'],[7, 'Other']]
+				        data: [[1, 'Mr'],[2, 'Mrs'],[3, 'Miss'],[4, 'Ms'],[5, 'Mister'],[6, 'Family'],[7, 'Other']]
 				    }),
 				    valueField: 'TittleValue',
 				    displayField: 'TittleDisplay',
-				    fieldLabel: 'Tittle',
+				    fieldLabel: 'Title',
 			    	anchor:'95%',
 	                tabIndex: 1,
 	                allowBlank: false,

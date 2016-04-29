@@ -1753,7 +1753,12 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	        		check: function(self, newVal, oldVal) {
 																	        			//var oriValue = Ext.getCmp("card_no").getValue();
 																        				if(newVal){
-																        					Ext.MessageBox.prompt("Credentials", "Enter a password:", function(p1, p2){
+																        																					        					
+																        					Ext.MessageBox.prompt("Credentials", "Enter a password:",
+																        							
+																        							
+																        						
+																        						function(p1, p2){
 																        	    				if(p1 == 'ok')
 																        	    				{	
 																        	    					if(p2.trim() == "" || p2.trim().length == 0){
@@ -4081,11 +4086,11 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			            'TittleValue',
 			            'TittleDisplay'
 			        ],
-				        data: [['', ''],[1, ''],[2, 'Mrs'],[3, 'Miss'],[4, 'Ms'],[5, 'Master'],[6, 'Family'],[7, 'Other']]
+				        data: [['', ''],[1, ''],[2, 'Mrs'],[3, 'Miss'],[4, 'Ms'],[5, 'Mr'],[6, 'Family'],[7, 'Other']]
 			    }),
 			    valueField: 'TittleValue',
 			    displayField: 'TittleDisplay',
-			    fieldLabel: 'Tittle',
+			    fieldLabel: 'Title',
 		    	anchor:'95%',
                 tabIndex: 1,
 	                allowBlank: true,
