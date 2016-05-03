@@ -198,7 +198,7 @@
 		        	});*/
 			        
 			        Ext.Ajax.request({
-			        	   url: _contextPath + '/reservation/reservationCalendarList',
+			        	   url: _contextPath + '/reservation/reservationList',
 						   params: { reservation_id: item.data.rr_reservation_id},
 						   success: function(p1, p2)
 						   {
