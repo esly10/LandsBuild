@@ -58,7 +58,19 @@ body {
  /*'6', 'No Show   n/a' */
 .time-sch-item.item-status-6 {
   	border-color: #E1E1E1; 
-  	background-color: #4F5F6F;
+  	background-color: #FFFF00;
+  	color:#000000;
+}
+.time-sch-item.item-status-6:hover {
+	background-color: #ff5555; 
+}
+
+
+/*'6', 'No Show   n/a' */
+.time-sch-item.item-status-0 {
+  	border-color: #E1E1E1; 
+  	background-color: #FFFF00;
+  	color:#000000;
 }
 .time-sch-item.item-status-6:hover {
 	background-color: #ff5555; 

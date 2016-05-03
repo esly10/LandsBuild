@@ -20,6 +20,17 @@ ReservationPanel = Ext.extend(Ext.Panel, {
              })},
 			 */
 			user = document.getElementById("header-user-text").innerHTML.split('&nbsp;')[0];
+			update = '-';
+			create = '-';
+			if(panel.reservationInfo !== undefined){
+				if(panel.reservationInfo.user_name !== undefined){
+					user = panel.reservationInfo.user_name;
+					update= panel.reservationInfo.reservation_update_date;
+					update = update.replace("T", " ");
+					create= panel.reservationInfo.reservation_creation_date;
+					create = create.replace("T", " ");
+				}
+			}
 			
 			currentdate = new Date();
 			string_number = "";
@@ -38,6 +49,10 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			    htmlInfo.push('<dd style="width: 145px;"><label id="res_number">'+string_number+'</label></dd>'); // Res Number													   
 			    htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Status:</label></dt>');
 			    htmlInfo.push('<dd style="width: 145px;"><label id="status">Confirmmed</label></dd>'); // Status
+			    htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Created date:</label></dt>');
+				htmlInfo.push('<dd style="width: 145px;"><label id="user">'+create+'</label></dd>'); // user name		
+				htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Updated date:</label></dt>');
+				htmlInfo.push('<dd style="width: 145px;"><label id="user">'+update+'</label></dd>'); // user name		
 			    htmlInfo.push('</dl>','</div>');													
 			    '<dt class="spacer"></dt>';
 			   
@@ -690,7 +705,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	    name: 'reservation_guides',
 																	    width: 30,																	    
 																	    fieldLabel: 'Guides',
-																	    allowBlank: false,
+																	    allowBlank: true,
 																	    listeners:{
 																	    	change : function (val){
 																	    		var sum = 0;
@@ -800,7 +815,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	    name: 'reservation_children',
 																	    width: 30,																	    
 																	    fieldLabel: 'Children',
-																	    allowBlank: false,
+																	    allowBlank: true,
 																	    listeners:{
 																	    	change : function (val){
 																	    		var sum = 0;
@@ -965,6 +980,23 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	  listeners:{
 																	
 																		  select :  function(self,newValue,oldValue){
+																			  if(Ext.getCmp("reservation_check_in").getValue() == "" && Ext.getCmp("reservation_check_in").getValue() == "" &&  Ext.getCmp("reservation_nights").getValue() == ""){
+																				  arrayRoomsStore = new Array();
+																    			    roomsStore.load({
+																    					params:{'reservation_id': panel.reservation_id, 'reservation_check_out': Ext.getCmp("reservation_check_out").getValue(), 'reservation_check_in': Ext.getCmp("reservation_check_in").getValue()},
+																    					callback: function () {
+																    						roomsStore.each(function(record,id){
+																    							 var dataRoom = new Array(record.data.ROOM_ID.toString(), record.data.ROOM_NO.toString(), record.data.ROOM_TYPE.toString());
+																    							arrayRoomsStore.push(dataRoom);
+																    						});
+																    						
+																    						multiRomms.getStore().loadData(arrayRoomsStore);
+																    			        }
+																    			  });
+																				  alert("Please, select Check in and Check Out dates.");
+																				  self.deselectAll();
+																				  return false;
+																			  }
 																			  if(self.getValue().split(";").size() > Ext.getCmp("reservation_rooms_qty").getValue()){
 																				  
 																				  var val = self.getValue().slice(0, self.getValue().lastIndexOf(";"));
@@ -1753,52 +1785,123 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	        		check: function(self, newVal, oldVal) {
 																	        			//var oriValue = Ext.getCmp("card_no").getValue();
 																        				if(newVal){
-																        																					        					
-																        					Ext.MessageBox.prompt("Credentials", "Enter a password:",
-																        							
-																        							
-																        						
-																        						function(p1, p2){
-																        	    				if(p1 == 'ok')
-																        	    				{	
-																        	    					if(p2.trim() == "" || p2.trim().length == 0){
-																        							   Ext.Msg.show({
-																        	    	   	            	   title:'Error!',
-																        	    	   	            	   msg:  "Invalid Password.",
-																        	    	   	            	   buttons: Ext.Msg.OK,
-																        	    	   	            	   icon: Ext.MessageBox.ERROR
-																        	    	   	            	});
-																        	    						return false;
-																        	    					}
-																        	    					
-																        	    					Ext.Ajax.request({
-																			     			        	   url: _contextPath + '/reservation/getCreditCard',
-																			     						   params: { reservation_id: panel.reservation_id, password: p2.trim()},
-																			     						   success: function(response, opts)
-																			     						   {
-																			     							  var data = Ext.decode(response.responseText);
-																			    	    					   if(data.success){																			    	    						   
-																			    	    						   Ext.getCmp("card_no").setValue(data.credit_number);
-																			    	    					   }else {
-																			    	    						   Ext.Msg.show({
+																        				/*	 Ext.MessageBox.prompt({
+																                                 title:'Credentials',
+																                                 inputType :'password',
+																                                 msg:'Please enter password:',
+																                                 fn:function(p1, p2){
+
+																		        	    				if(p1 == 'ok')
+																		        	    				{	
+																		        	    					if(p2.trim() == "" || p2.trim().length == 0){
+																		        							   Ext.Msg.show({
+																		        	    	   	            	   title:'Error!',
+																		        	    	   	            	   msg:  "Invalid Password.",
+																		        	    	   	            	   buttons: Ext.Msg.OK,
+																		        	    	   	            	   icon: Ext.MessageBox.ERROR
+																		        	    	   	            	});
+																		        	    						return false;
+																		        	    					}
+																		        	    					
+																		        	    					Ext.Ajax.request({
+																					     			        	   url: _contextPath + '/reservation/getCreditCard',
+																					     						   params: { reservation_id: panel.reservation_id, password: p2.trim()},
+																					     						   success: function(response, opts)
+																					     						   {
+																					     							  var data = Ext.decode(response.responseText);
+																					    	    					   if(data.success){																			    	    						   
+																					    	    						   Ext.getCmp("card_no").setValue(data.credit_number);
+																					    	    					   }else {
+																					    	    						   Ext.Msg.show({
+																						     								   title:'Failure',
+																						     								   msg:  data.msg,
+																						     								   buttons: Ext.Msg.OK,
+																						     								   icon: Ext.MessageBox.ERROR
+																						     								});
+																					    	    					   }
+																					     						   },
+																					     						   failure: function(){ 
+																					     							   Ext.Msg.show({
+																					     								   title:'Failure',
+																					     								   msg:  'Error getting data.',
+																					     								   buttons: Ext.Msg.OK,
+																					     								   icon: Ext.MessageBox.ERROR
+																					     								});
+																					     						   }
+																					     						}, this, false, "");
+																		        	    				}
+																		        	    	      }
+																                                 });*/
+																        					
+																        					/*var myMsgBox = new Ext.MessageBox.prompt({
+																        					    cls: 'msgbox',
+																        					    bodyCls: 'popWindow'
+																        					});
+																        					myMsgBox.textField.inputType = 'password';
+																        					myMsgBox.textField.width = 240;
+																        					myMsgBox.textField.center();
+																        					myMsgBox.prompt(title, msg, myCallback);*/
+																        					
+																        					//var myMsgBox = new Ext.MessageBox();
+																        					//myMsgBox.textField.inputType = 'password';
+																        					/*myMsgBox.prompt('Title','Label',function(btn,result) {
+																        						  if(btn=='ok') {
+																        						    if(result!=null) { //handles cancel being hit on the prompt
+																        						      //use string the user input (stored in result) here in an appropriate manner
+																        						    }
+																        						  }
+																        						});*/
+																        					//var myMsgBox = new Ext.MessageBox.prompt();
+																        					//var msgbox = Ext.Msg.prompt('Password Prompt', 'Please enter a pasword');
+																        					//msgbox.textField.inputEl.dom.type = 'password';
+																        					//var myMsgBox = new Ext.window.MessageBox();
+																        					var myMsgBox = Ext.MessageBox.prompt ("Credentials","Enter a password:",
+																        						/*title: 'Credentials',
+																        					    msg: '',
+																        						inputType = 'password',*/
+																	        					function(p1, p2){
+																	        	    				if(p1 == 'ok')
+																	        	    				{	
+																	        	    					if(p2.trim() == "" || p2.trim().length == 0){
+																	        							   Ext.Msg.show({
+																	        	    	   	            	   title:'Error!',
+																	        	    	   	            	   msg:  "Invalid Password.",
+																	        	    	   	            	   buttons: Ext.Msg.OK,
+																	        	    	   	            	   icon: Ext.MessageBox.ERROR
+																	        	    	   	            	});
+																	        	    						return false;
+																	        	    					}
+																	        	    					
+																	        	    					Ext.Ajax.request({
+																				     			        	   url: _contextPath + '/reservation/getCreditCard',
+																				     						   params: { reservation_id: panel.reservation_id, password: p2.trim()},
+																				     						   success: function(response, opts)
+																				     						   {
+																				     							  var data = Ext.decode(response.responseText);
+																				    	    					   if(data.success){																			    	    						   
+																				    	    						   Ext.getCmp("card_no").setValue(data.credit_number);
+																				    	    					   }else {
+																				    	    						   Ext.Msg.show({
+																					     								   title:'Failure',
+																					     								   msg:  data.msg,
+																					     								   buttons: Ext.Msg.OK,
+																					     								   icon: Ext.MessageBox.ERROR
+																					     								});
+																				    	    					   }
+																				     						   },
+																				     						   failure: function(){ 
+																				     							   Ext.Msg.show({
 																				     								   title:'Failure',
-																				     								   msg:  data.msg,
+																				     								   msg:  'Error getting data.',
 																				     								   buttons: Ext.Msg.OK,
 																				     								   icon: Ext.MessageBox.ERROR
 																				     								});
-																			    	    					   }
-																			     						   },
-																			     						   failure: function(){ 
-																			     							   Ext.Msg.show({
-																			     								   title:'Failure',
-																			     								   msg:  'Error getting data.',
-																			     								   buttons: Ext.Msg.OK,
-																			     								   icon: Ext.MessageBox.ERROR
-																			     								});
-																			     						   }
-																			     						});
-																        	    				}
-																        	    	    	}, this, false, "");
+																				     						   }
+																				     						});
+																	        	    				}
+																	        	    	    	}, this, false, "");
+																        					
+																        					myMsgBox.textField.inputType = 'password';
 																        					
 																        				}else{
 																        					if(panel.reservationInfo !== undefined){
@@ -4228,7 +4331,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 							    	   id: 'guest_phone_add',
 							    	   fieldLabel: 'Phone',
 							    	   name: 'guest_phone',
-									    	   //maskRe: /^[0-9]*$/,
+									   //maskRe: /^[0-9]*$/,
 							    	   anchor:'95%',
 					                   tabIndex: 7 
 							       },
@@ -4239,7 +4342,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 							    	   regex: /^([\w\-\'\-]+)(\.[\w-\'\-]+)*@([\w\-]+\.){1,5}([A-Za-z]){2,4}$/,
 							    	   regexText:'This field should be an e-mail address in the format "user@example.com"',
 							    	   anchor:'95%',
-									    	   allowBlank: true,
+									    allowBlank: true,
 					                   tabIndex: 9 
 							       }, 
 							       guestMarketCombo,
@@ -4506,7 +4609,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 								    	   regex: /^([\w\-\'\-]+)(\.[\w-\'\-]+)*@([\w\-]+\.){1,5}([A-Za-z]){2,4}$/,
 								    	   regexText:'This field should be an e-mail address in the format "user@example.com"',
 								    	   anchor:'95%',
-								    	   allowBlank: false,
+								    	   allowBlank: true,
 						                   tabIndex: 8 
 								       },
 								       agencyTypeCombo

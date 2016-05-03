@@ -250,13 +250,18 @@
 			<table  class="tableCharge"  style="width:100%; float: right;";>
 				 <tr><td colspan=6 style="background:#037dcf;">Agency Charges: </td></tr>
 				  <tr>
-				    <th>Item</th><th>Description</th><th>Qty</th><th>Rate</th> <th>Total</th>
+				    <th>Item</th><th>Description</th><th>Qty</th>
+				    #if ($reservation.reservation_type != 3)<th>Nights</th>#end
+				    <th>Rate</th> <th>Total</th>
 				  </tr>
 				#foreach($item in ${agencyCharges})
 				 <tr>
 						<td>${item.charge_item_name}</td> 
 						<td>${item.charge_item_desc}</td>
 						<td>${item.charge_qty}</td>
+						#if ($reservation.reservation_type != 3)
+							<td>${item.charge_nights}</td>
+						#end
 						<td>$ ${item.charge_rate}</td>
 						
 						<td>$ ${item.charge_total}</td>								
@@ -276,13 +281,18 @@
 			<table class="tableCharge" style="width:100%;  float: right;";>
 			<tr><td colspan=6 style="background:#037dcf;">Guest Charges: </td></tr>
 				  <tr>
-				    <th>Item</th><th>Description</th><th>Qty</th><th>Rate</th><th>Total</th>
+				    <th>Item</th><th>Description</th><th>Qty</th>
+				    #if ($reservation.reservation_type != 3)<th>Nights</th>#end
+				    <th>Rate</th><th>Total</th>
 				  </tr>
 				#foreach($item in ${guestCharges})
 				 <tr>
 						<td>${item.charge_item_name}</td> 
 						<td>${item.charge_item_desc}</td>
 						<td>${item.charge_qty}</td>
+						#if ($reservation.reservation_type != 3)
+							<td>${item.charge_nights}</td>
+						#end
 						<td>$ ${item.charge_rate}</td>
 						
 						<td>$ ${item.charge_total}</td>							

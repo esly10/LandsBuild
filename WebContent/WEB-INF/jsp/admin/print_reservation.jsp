@@ -181,6 +181,9 @@
 						<th style="width:100px; text-align:left;">ITEM</th>
 						<th style="width:400px; text-align:left;">DESCRIPTION</th>
 						<th style="">QTY</th>
+						<c:if test="${reservation.reservation_type != 3}">
+						<th style="">NIGHTS</th>
+						</c:if>
 						<th style="">RATE</th>
 						<th style="">TOTAL</th>
 					</tr>
@@ -192,6 +195,9 @@
 							<td><c:out value="${charge.charge_item_name}" /></td>
 							<td style="text-align: center;"><c:out value="${charge.charge_item_desc}" /></td>
 							<td style="text-align: center;"><c:out value="${charge.charge_qty}" /></td>
+							<c:if test="${reservation.reservation_type != 3}">
+							<td style="text-align: center;"><c:out value="${charge.charge_nights}" /></td>
+							</c:if>
 							<td style="text-align: center;"><c:out value="${charge.charge_rate}" /></td>
 							<td style="text-align: center;"><c:out value="${charge.charge_total_format}" /></td>
 						</tr>

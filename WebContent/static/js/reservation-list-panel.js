@@ -55,7 +55,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 	            'reservation_transport_notes',
 	            'reservation_internal_notes',
 	            'reservation_bar_notes',
-	            'reservation_update_data',
+	            'reservation_update_date',
 	            'reservation_creation_date',
 	            'agency_name',
 	            'card_name',
@@ -67,7 +67,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 	            'reservation_event_participants',
 	            'reservation_ignore_service',
 	            'reservation_ignore_tax',
-	            'name' ,'checkin','checkout'		          
+	            'name' ,'checkin','checkout','user_name'	          
 	        ],
 			sortInfo: {
 				field: 'reservation_check_in',
@@ -75,6 +75,9 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 			},
 			autoLoad: {params:{start:0, limit: panel.pageLimit}}
 	    });
+	    
+	    //var params = panel.filter.getForm().getFieldValues();
+	    this.store.baseParams ={filter_status: 7};
 	    
 	   /* 
 		Ext.Ajax.request({
@@ -190,6 +193,24 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 	            dataIndex: 'reservation_event_date',
 	            width: 70,
 	            hidden: true,
+	        	renderer: function(value)
+	        	   { 
+	        		   return Ext.util.Format.date(value, 'Y-m-d'); 
+	        		   //return value;
+	        	   }
+	        },{
+	            header: "Creation Date",
+	            dataIndex: 'reservation_creation_date',
+	            width: 90,
+	        	renderer: function(value)
+	        	   { 
+	        		   return Ext.util.Format.date(value, 'Y-m-d'); 
+	        		   //return value;
+	        	   }
+	        },{
+	            header: "Update date",
+	            dataIndex: 'reservation_update_date',
+	            width: 70,
 	        	renderer: function(value)
 	        	   { 
 	        		   return Ext.util.Format.date(value, 'Y-m-d'); 
@@ -415,7 +436,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
                             items: [
                                     {
 							    	   name: 'filter_checkIn',
-							    	   fieldLabel: 'Check In',
+							    	   fieldLabel: 'CheckIn Start',
 							    	   anchor:'95%',
 							    	   xtype: 'datefield'
 							       },{
@@ -424,7 +445,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 							       },
 							       {
 							    	   name: 'filter_checkOut',
-							    	   fieldLabel: 'Check Out',
+							    	   fieldLabel: 'CheckIn End',
 							    	   anchor:'95%',
 							    	   xtype: 'datefield'
 							       }
@@ -435,18 +456,18 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
                             items: [
                                 {
 						            xtype: 'radiogroup',
-						            fieldLabel: 'Period Selector',
+						            fieldLabel: 'Created and Updated',
 						            id: 'filter_type',
 						            itemCls: 'x-check-group-alt',
 						            //columnHeigth: 15,
 						            columns: 3,
 						            items: [
-						                {boxLabel: 'Today', name: 'rb', inputValue: 1, height: 32},
-						                {boxLabel: 'This Week', name: 'rb', inputValue: 5, height: 32},
-						                {boxLabel: 'Fllw Week', name: 'rb', inputValue: 2, height: 32},
-						                {boxLabel: 'This Year', name: 'rb', inputValue: 4, height: 32},
-						                {boxLabel: 'This Month', name: 'rb', inputValue: 6, height: 32},
-						                {boxLabel: 'Fllw Month', name: 'rb', inputValue: 3, height: 32}           
+						                    {boxLabel: 'Crtd Today', name: 'rb', inputValue: 1, height: 32},
+							                {boxLabel: 'Uptd Today', name: 'rb', inputValue: 5, height: 32},
+							                {boxLabel: 'Crtd Week', name: 'rb', inputValue: 2, height: 32},
+							                {boxLabel: 'Uptd Week', name: 'rb', inputValue: 4, height: 32},
+							                {boxLabel: 'Crtd Month', name: 'rb', inputValue: 6, height: 32},
+							                {boxLabel: 'Uptd Month', name: 'rb', inputValue: 3, height: 32}                 
 						               
 						            ],
 						            listeners: {
@@ -477,7 +498,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
         			            //height:30,
         			            handler: function(){
         			            	panel.filter.getForm().reset();				
-        			            	panel.store.baseParams = {};
+        			            	panel.store.baseParams = {filter_status: 7};
         			            	panel.store.load({params: {start: 0, limit: panel.pageLimit}});
         			            }
         			      }

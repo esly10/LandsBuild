@@ -71,13 +71,18 @@
 			<table  class="tableCharge"  style="width:100%; float: right;";>
 				 <tr><td colspan=6 style="background:#6666cc;">Agency Charges: </td></tr>
 				  <tr>
-				    <th>Item</th><th>Description</th><th>Qty</th><th>Rate</th> <th>Total</th>
+				   <th>Item</th><th>Description</th><th>Qty</th>
+				    <c:if test="${reservation.reservation_type != 3}"><th style="">Nights</th></c:if>
+				    <th>Rate</th><th>Total</th>
 				  </tr>
 				<c:forEach items="${agencyCharges}" var="item">	
 				 <tr>
 						<td><c:out value="${item.charge_item_name}" /></td> 
 						<td><c:out value="${item.charge_item_desc}" /></td>
 						<td><c:out value="${item.charge_qty}" /></td>
+						<c:if test="${reservation.reservation_type != 3}">
+							<td style="text-align: center;"><c:out value="${item.charge_nights}" /></td>
+						</c:if>
 						<td>$ <c:out value="${item.charge_rate}" /></td>
 						
 						<td>$ <c:out  value="${item.charge_total}" /></td>								
