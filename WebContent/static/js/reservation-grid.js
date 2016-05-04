@@ -48,7 +48,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			    htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Res Number:</label></dt>');
 			    htmlInfo.push('<dd style="width: 145px;"><label id="res_number">'+string_number+'</label></dd>'); // Res Number													   
 			    htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Status:</label></dt>');
-			    htmlInfo.push('<dd style="width: 145px;"><label id="status">Confirmmed</label></dd>'); // Status
+			    htmlInfo.push('<dd style="width: 145px;"><label id="status">No Show</label></dd>'); // Status
 			    htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Created date:</label></dt>');
 				htmlInfo.push('<dd style="width: 145px;"><label id="user">'+create+'</label></dd>'); // user name		
 				htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Updated date:</label></dt>');

@@ -81,9 +81,10 @@
 			</div>
 			<br><br>
 			<div style="width:900px; text-align:left;">
-				<c:if test="${reservation.reservation_type == 2}">
+				<c:if test="${agency.agency_name != null}">
 	    			<span><b>To: </b></span><c:out value="${agency.agency_name}" /> <br>
 					<table style="width:900px;">
+						
 						<tr>
 							<td><b>Address: </b><c:out value="${agency.address}" /></td>
 							<td><b>Tel: </b><c:out value="${agency.agency_phone}" /></td>
@@ -107,7 +108,7 @@
 					</table>
 				</c:if>
 				
-				<c:if test="${reservation.reservation_type != 2}">
+				<c:if test="${agency.agency_name == null}">
 				<span><b>To: </b></span><c:out value="${guest.name}" /> <br>
 				<table style="width:900px;">
 					<tr>
