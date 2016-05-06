@@ -1089,7 +1089,8 @@ var TimeScheduler = {
                     $jQuery(this).remove();
                 },
                 onSelect: function (date) {
-                    TimeScheduler.Options.Start = moment(date);
+                	//TimeScheduler.Options.Start = moment(date); Erick
+                	TimeScheduler.Options.Start = moment(date).add(-4, 'days');
                     TimeScheduler.Init();
                 },
                 defaultDate: TimeScheduler.Options.Start.toDate()
@@ -1104,7 +1105,8 @@ var TimeScheduler = {
         period = TimeScheduler.GetSelectedPeriod();
 
         if ($jQuery(this).is('.time-sch-time-button-today')) {
-            TimeScheduler.Options.Start = moment().startOf('day');
+            TimeScheduler.Options.Start = moment().startOf('day').add(-4, 'days'); 
+            //TimeScheduler.Options.Start = moment().startOf('day'); Erick
         }
         else if ($jQuery(this).is('.time-sch-time-button-prev')) {
             TimeScheduler.Options.Start.tsAdd('minutes', period.TimeframeOverall * -1);

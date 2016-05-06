@@ -4,10 +4,14 @@
 <%! private int Contador = 0; %>
 <meta charset="utf-8">
 
+<link href="<c:url value="/static/js/calendar/css/jquery-ui.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/static/js/calendar/css/jquery.ui.theme.css" />" rel="stylesheet" type="text/css" />
+
 <link href="<c:url value="/static/js/calendar/css/timelineScheduler.css" />" rel="stylesheet" type="text/css" />
 <link href="<c:url value="/static/js/calendar/css/timelineScheduler.styling.css" />" rel="stylesheet" type="text/css" />
 <link href="<c:url value="/static/js/calendar/css/calendar.css" />" rel="stylesheet" type="text/css" />
         
+
 <div class="calendar" id="calendar-div"  style="width: 98.8%; margin-left: 3px;"></div>
 <div class="realtime-info"  style="width: 99.1%;"></div>
 

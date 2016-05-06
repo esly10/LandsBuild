@@ -102,7 +102,7 @@
 							<td><b>Email: </b><c:out value="${agency.agency_email}" /></td>
 						</tr>
 						<tr>
-							<td><b>Reservation Coordinator: </b><c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></td>
+							<td><b>Reservation Coordinator: </b><c:out value="${currentUser.firstName}" /> <c:out value="${currentUser.lastName}" /></td>
 							<td><b>Reservation ID: </b><c:out value="${reservation.reservation_number}" /></td>
 						</tr>
 					</table>
@@ -128,7 +128,7 @@
 						<td><b>Email: </b><c:out value="${guest.email}" /></td>
 					</tr>
 					<tr>
-						<td><b>Reservation Coordinator: </b><c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></td>
+						<td><b>Reservation Coordinator: </b><c:out value="${currentUser.firstName}" /> <c:out value="${currentUser.lastName}" /></td>
 						<td><b>Reservation ID: </b><c:out value="${reservation.reservation_number}" /></td>
 					</tr>
 				</table>

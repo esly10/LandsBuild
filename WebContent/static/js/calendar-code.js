@@ -64,7 +64,8 @@
 	var arrayRoomsCalendar = new Array();
 	var arrayCalendar = new Array();
     
-	var today = moment().startOf('day');
+	//var today = moment().startOf('day');
+	var today = moment().startOf('day').add(-4, 'days');
 
 	roomsStoreCalendar.load({
 		params:{start:0, limit: 1000},
@@ -342,7 +343,7 @@
 		    	    				    start: moment(record.data.rr_reservation_in).add('hours', -12),
 		    	    				    end: moment(record.data.rr_reservation_out).add('hours', -12),
 		    	    				    classes: 'item-status-'+record.data.reservation_status,
-		    	    				    data:record.data
+		    	    				    data:record.data //#FFFF00
 		    	    				}
 		    				);
 						}

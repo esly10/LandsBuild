@@ -43,9 +43,10 @@
 				<hr>
 				<dt>Guest:</dt><dd><c:out value="${guest.name}"/></dd>
 				<dt>Contact:</dt><dd><c:out value="${guest.phone} || ${guest.email}"/></dd>		
-				<dt>Agency:</dt><dd><c:out value="${agency.agency_name}"/></dd>
-				<dt>Contact:</dt><dd><c:out value="${agency.agency_phone} || ${agency.agency_email}"/></dd>	
-				
+				<c:if test="${agency.agency_name != null}">
+					<dt>Agency:</dt><dd><c:out value="${agency.agency_name}"/></dd>
+					<dt>Contact:</dt><dd><c:out value="${agency.agency_phone} || ${agency.agency_email}"/></dd>	
+				</c:if>
 			</dl>	
 		</div>	
 	</div>
@@ -90,9 +91,9 @@
 				</c:forEach>
 				
 				<tr><td colspan=4 style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2 style="border-top: 1px solid #000;">$ <c:out value="${reservation.agencyCharges}" /></td></tr>
-				<tr><td colspan=4>Tax:</td><td colspan=2> <c:out value="${reservation.agencyFormatTax}" /></td></tr>
+				<tr><td colspan=4>Tax:</td><td colspan=2>$ <c:out value="${reservation.agencyFormatTax}" /></td></tr>
 				<tr><td colspan=4>Paid:</td><td colspan=2;  style="color:red;">$ <c:out value="${reservation.agencyPaid}" /></td></tr>		
-				<tr><td colspan=4>Total:</td><td colspan=2> <c:out value="${reservation.totalAgency}" /></td></tr>
+				<tr><td colspan=4>Total:</td><td colspan=2>$ <c:out value="${reservation.totalAgency}" /></td></tr>
 			
 			</table>
 		</c:if>
@@ -119,9 +120,9 @@
 				</c:forEach>
 				
 				<tr><td colspan=4  style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2  style="border-top: 1px solid #000;">$ <c:out value="${reservation.guestCharges}" /></td></tr>
-				<tr><td colspan=4>Tax:</td><td colspan=2> <c:out value="${reservation.guestFormatTax}" /></td></tr>
+				<tr><td colspan=4>Tax:</td><td colspan=2>$ <c:out value="${reservation.guestFormatTax}" /></td></tr>
 				<tr><td colspan=4>Paid:</td><td colspan=2  style="color:red;">$ <c:out value="${reservation.guestPaid}" /></td></tr>	
-				<tr><td colspan=4>Total:</td><td colspan=2> <c:out value="${reservation.totalGuest}" /></td></tr>
+				<tr><td colspan=4>Total:</td><td colspan=2>$ <c:out value="${reservation.totalGuest}" /></td></tr>
 			</table>
 		</c:if>
 		<table class="tableCharge" style="width:100%;";>
@@ -132,15 +133,15 @@
 			
 			 <tr>
 					<td>Agency Balance</td> 
-					<td> <c:out value="${reservation.totalAgency}" /></td>
+					<td>$ <c:out value="${reservation.totalAgency}" /></td>
 			 </tr>	
 			  <tr>
 					<td>Guest Balance</td> 
-					<td> <c:out value="${reservation.totalGuest}" /></td>
+					<td>$ <c:out value="${reservation.totalGuest}" /></td>
 			 </tr>	
 			 <tr >
 					<td style="font-size:18px;">Balance</td> 
-					<td style="font-size:18px;"> <c:out value="${reservation.totalCharges}" /></td>
+					<td style="font-size:18px;">$ <c:out value="${reservation.totalCharges}" /></td>
 			 </tr>		
 		</table>
 	<hr>

@@ -71,7 +71,19 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    					   record.data.charge_item_name == "Room NS" ||
 	    					   record.data.charge_item_name == "Restaurant" ||
 	    					   record.data.charge_item_name == "Rest/Bar"){
-	    						taxSum += ( (record.data.charge_qty*record.data.charge_rate)* record.data.charge_nights);
+	    						var charge_nits;
+	    						if(!/^-?[\d.]+(?:e-?\d+)?$/.test(record.data.charge_nights)){
+	    							charge_nits = 1;
+	    							if(record.data.charge_item_name == "Other"){
+	    								record.data.charge_nights = 1;
+	    							}else {
+	    								record.data.charge_nights = "X";
+	    							}
+	    						} else {
+	    							charge_nits = parseInt(record.data.charge_nights);
+	    						}
+	    						
+	    						taxSum += ( (record.data.charge_qty*record.data.charge_rate)* parseInt(charge_nits));
 	    					}
 	    					/*if(record.data.charge_item_name == "Restaurant" || record.data.charge_item_name == "Rest/Bar"){
 	    						servSum += (record.data.charge_qty*record.data.charge_rate);
@@ -3131,12 +3143,25 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 							return;
 						}
 					
+					}else{
+						 Ext.Msg.show({
+							   title:'Error!',
+							   msg: 'First you need to pay the reservation before switching to CheckOut',
+							   buttons: Ext.Msg.OK,
+							   icon: Ext.MessageBox.ERROR
+							});
 					}
 			        
 			    },
 			    failure : function(response) {
-			        var respObj = Ext.JSON.decode(response.responseText);
-			        Ext.Msg.alert("Error", respObj.status.statusMessage);
+			    	 Ext.Msg.show({
+						   title:'Error!',
+						   msg: 'First you need to pay the reservation before switching to CheckOut',
+						   buttons: Ext.Msg.OK,
+						   icon: Ext.MessageBox.ERROR
+						});
+			        /*var respObj = Ext.JSON.decode(response.responseText);
+			        Ext.Msg.alert("Error", respObj.status.statusMessage);*/
 			    }
 			});
 
@@ -3793,12 +3818,19 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                header: 'Nights',
 	                dataIndex: 'charge_nights',
 	                anchor: "11%",
-	                //hidden:columHideEvent,
-	                // use shorthand alias defined above
-	                editor: new fm.NumberField({
-	                    allowBlank: false,
-	                    allowNegative: false,
-	                    maxValue: 10000
+	                renderer: function(a,val,data) {
+	                	if(data.data.charge_nights == 1){
+	                		if(data.data.charge_item_name == "Other"){
+	                			return 1;
+	                		} else {
+	                			return "X";
+	                		}	                		
+	                	} else {
+	                		return data.data.charge_nights;
+	                	}		            	 
+	        		},
+	                editor: new fm.TextField({
+	                    allowBlank: false
 	                })
 	            },{
 	            	id:'charge_rate',
@@ -3892,7 +3924,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		        	change : function(){
 		        		alert("change");
 		        	},
-		        	click : function(){
+		        	'click' : function(){
+		        		
 		        		// update row charge_total of grid 
 		        		var calculate_tax = 0;
 		        		if(Ext.getCmp("reservation_ignore_tax").getValue() == "0"){
@@ -3904,11 +3937,23 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		        		var taxSum = 0.00;
 		        		var servSum = 0.00;
 		        		chargesStore.each(function(record,id){				    					
-	    					record.set('charge_total',((record.data.charge_qty*record.data.charge_rate)*record.data.charge_nights));	
-	    					sum += ((record.data.charge_qty*record.data.charge_rate)*record.data.charge_nights);
+		        			var charge_nits;
+    						if(!/^-?[\d.]+(?:e-?\d+)?$/.test(record.data.charge_nights)){
+    							charge_nits = 1;
+    							if(record.data.charge_item_name == "Other"){
+    								record.set('charge_nights',1);	
+    							}else {
+    								record.set('charge_nights',"X");	
+    							}
+    							
+    						} else {
+    							charge_nits = parseInt(record.data.charge_nights);
+    						}
+	    					record.set('charge_total',((record.data.charge_qty*record.data.charge_rate)* parseInt(charge_nits)));	
+	    					sum += ((record.data.charge_qty*record.data.charge_rate)*charge_nits);
 	    					if(record.data.charge_item_name == "Room" || record.data.charge_item_name == "Room NS" || 
 	    					   record.data.charge_item_name == "Restaurant" ||record.data.charge_item_name == "Rest/Bar"){
-	    						taxSum += ((record.data.charge_qty*record.data.charge_rate)*record.data.charge_nights);
+	    						taxSum += ((record.data.charge_qty*record.data.charge_rate)* charge_nits);
 	    					}
 	    					/*if(record.data.charge_item_name == "Restaurant" || record.data.charge_item_name == "Rest/Bar"){
 	    						servSum += (record.data.charge_qty*record.data.charge_rate);
@@ -3956,7 +4001,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                                   {name: 'charge_item_name', mapping : "charge_item_name", type: 'string'},
 	                                   {name: 'charge_item_desc',  mapping : "charge_item_desc",  type: 'string'},
 	                                   {name: 'charge_qty',  mapping : "charge_qty",  type: 'int'},
-	                                   {name: 'charge_nights',  mapping : "charge_nights",  type: 'int'},
+	                                   {name: 'charge_nights',  mapping : "charge_nights",  type: 'string'},
 	                                   {name: 'charge_rate',  mapping : "charge_rate",  type: 'float'},
 	                                   {name: 'charge_total',  mapping : "charge_total",  type: 'float'},
 	                                   {name: 'charge_folio',  mapping : "charge_folio"},
@@ -3968,7 +4013,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    	charge_item_name: 	'',
 	                    	charge_item_desc: 	'',
 	                    	charge_qty: 		1,
-	                    	charge_nights:		1, 	
+	                    	charge_nights:		'X', 	
 	                    	charge_rate: 		0,
 	                    	charge_total: 		0,
 	                    	charge_folio: 		'Guest',

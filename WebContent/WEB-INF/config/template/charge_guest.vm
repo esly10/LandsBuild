@@ -272,14 +272,14 @@
 				<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.guestFormatTax}</td></tr>
 				
 				<tr><td colspan=4>Paid:</td><td colspan=2  style="color:red;">$ ${reservation.guestPaid}</td></tr>	
-				<tr><td colspan=4>Total:</td><td colspan=2> ${reservation.totalGuest}</td></tr>
+				<tr><td colspan=4>Total:</td><td colspan=2>$ ${reservation.totalGuest}</td></tr>
 			</table>
 			<hr>
 		<table class="tableCharge" style="width:100%;";>
 		<tr><td colspan=6 style="background:#339966;">Totals: </td></tr>
 			 <tr >
 					<td style="font-size:18px;">Balance</td> 
-					<td style="font-size:18px;"> ${reservation.totalGuest}</td>
+					<td style="font-size:18px;">$ ${reservation.totalGuest}</td>
 			 </tr>		
 		</table>
 		#end

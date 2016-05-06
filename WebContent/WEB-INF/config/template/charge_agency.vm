@@ -272,7 +272,7 @@
 				<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.agencyFormatTax}</td></tr>
 				
 				<tr><td colspan=4>Paid:</td><td colspan=2;  style="color:red;">$ ${reservation.agencyPaid}</td></tr>		
-				<tr><td colspan=4>Total:</td><td colspan=2> ${reservation.totalAgency}</td></tr>
+				<tr><td colspan=4>Total:</td><td colspan=2>$ ${reservation.totalAgency}</td></tr>
 			
 			</table>
 		
@@ -283,7 +283,7 @@
 			
 			 <tr >
 					<td style="font-size:18px;">Balance</td> 
-					<td style="font-size:18px;"> ${reservation.totalAgency}</td>
+					<td style="font-size:18px;">$ ${reservation.totalAgency}</td>
 			 </tr>		
 		</table>
 		#end

@@ -147,8 +147,8 @@ body {
   background-color: #F0F0F0; }
 
 .time-sch-wrapper .time-sch-header-1-current-time {
-  background-color: #999999;
-  border-color: #888888; }
+ 	background-color: #DFFFC1;
+    border-color: #DADADA; }
 .time-sch-wrapper .time-sch-header-0-date-start {
   border-left-color: #444444; }
 .time-sch-wrapper .time-sch-header-0-date-end {
