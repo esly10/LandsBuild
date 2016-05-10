@@ -2986,6 +2986,15 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		    		return false;
 	    		}	    		
 	    	}	    	
+	    	if(Ext.getCmp("reservation_guest_id").getValue() <= 0 || typeof Ext.getCmp("reservation_guest_id").getValue() == "undefined"){
+	   			 Ext.Msg.show({
+						   title:'Error!',
+						   msg: 'Guests information are required.',
+						   buttons: Ext.Msg.OK,
+						   icon: Ext.MessageBox.ERROR
+					});
+	   			 return false;
+	    	}
 	    	
 	    	if(type == "done"){
 	    		if(Ext.getCmp("reservation_type").getValue() != 3){
@@ -3277,9 +3286,10 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		        ],
     		        data: [
     		               ['none', 'none'],
-    		               ['100-01-013-005132-7', 'Banco Nacional # 100-01-013-005132-7 (CRC) # 100-02-013-600411-3 (USD)'],
-    		               ['906486436', 'Banco Bac San José # 906486436 (CRC) # 906,490,388 (USD)'],
-    		               ['CANOPY SAN LORENZO S.A', 'Beneficiary: CANOPY SAN LORENZO S.A.'],
+    		               ['BN CRC #100­01­013­005188­2'],
+    		               ['BN USD #100­02­013­600429­6'],
+    		               ['BAC CRC #909516734'],
+    		               ['BAC USD #909517005']
     		              ]
     		    });
         	}else {
@@ -3291,9 +3301,10 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		        ],
     		        data: [
     		               ['none', 'none'],
-    		               ['100-01-013-005188-2', 'Banco Nacional #(CRC)100-01-013-005188-2 (USD) / #100-02-013-600429-6 )'],
-    		               ['CRC)909516734', 'Banco Bac San Jose# (CRC)909516734 (USD) / #909517005 )'],
-    		               ['Pretty Days Development S.A.', 'Beneficiary: Pretty Days Development S.A.'],
+    		               ['BN CRC #100­01­013­005132­7'],
+    		               ['BN USD #100­02­013­600411­3'],
+    		               ['BAC CRC #906486436'],
+    		               ['BAC USD #906490388']
     		               ]
     		    });
         	}
@@ -3820,7 +3831,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                anchor: "11%",
 	                renderer: function(a,val,data) {
 	                	if(data.data.charge_nights == 1){
-	                		if(data.data.charge_item_name == "Other"){
+	                		if(data.data.charge_item_name == "Room"){
 	                			return 1;
 	                		} else {
 	                			return "X";

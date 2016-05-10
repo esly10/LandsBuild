@@ -219,10 +219,11 @@
 				<hr>	
 				<dt>Guest:</dt><dd>${guest.name}</dd>
 				<dt>Contact:</dt><dd>${guest.phone} || ${guest.email}</dd>		
-				<dt>Agency:</dt><dd>${agency.agency_name}</dd>
-				<dt>Contact:</dt><dd>${agency.agency_phone} || ${agency.agency_email}</dd>	
+				#if ($null.isNull($agency.agency_name))
+					<dt>Agency:</dt><dd>${agency.agency_name}</dd>	
+					<dt>Contact:</dt><dd>${agency.agency_phone} || ${agency.agency_email}</dd>	
+				#end
 				<dt>Meal Plan:</dt><dd>${reservation.mealPlanName}</dd>
-				
 			</dl>
 		</div>
 		

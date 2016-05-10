@@ -228,7 +228,7 @@
 					<c:if test="${reservation.reservation_type == 3}">
 						<label><b>Banco Nacional<b> # 100-01-013-005132-7 (CRC) </label>	<br>
 						<label><b>Banco Nacional<b> # 100-02-013-600411-3 (USD) </label>	<br>
-						<label><b>Bac San José<b> #906486436 (CRC) #906,490,388 (USD)	<br>
+						<label><b>Bac San José<b> #906486436 (CRC) #906490388 (USD)	<br>
 						<label><b>Beneficiary:<b> CANOPY SAN LORENZO S.A. </label>	<br>
 					</c:if>
 					<c:if test="${reservation.reservation_type != 3}">
