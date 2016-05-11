@@ -52,4 +52,10 @@
 			</tfoot>
 			<tbody></tbody>
 		</table>
+		<div style="width: 30%; float: left;">
+			<dl class="list" style="font-size:14px;">
+				<dt style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:14px;">Total People Today:</dt>	
+				<dd style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:14px;"><c:out value="${qty}" /></dd> 	
+			</dl>
+		</div>	
 	</div>		

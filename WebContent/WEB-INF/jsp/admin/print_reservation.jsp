@@ -197,7 +197,17 @@
 							<td style="text-align: center;"><c:out value="${charge.charge_item_desc}" /></td>
 							<td style="text-align: center;"><c:out value="${charge.charge_qty}" /></td>
 							<c:if test="${reservation.reservation_type != 3}">
-							<td style="text-align: center;"><c:out value="${charge.charge_nights}" /></td>
+								<c:if test="${charge.charge_item_name == 'Room'}">
+									<td style="text-align: center;"><c:out value="${charge.charge_nights}" /></td>
+								</c:if>
+								<c:if test="${charge.charge_item_name != 'Room'}">
+									<c:if test="${charge.charge_nights > 1}">
+										<td style="text-align: center;"><c:out value="${charge.charge_nights}" /></td>
+									</c:if>
+									<c:if test="${charge.charge_nights <= 1}">
+										<td style="text-align: center;">X</td>
+									</c:if>
+								</c:if>
 							</c:if>
 							<td style="text-align: center;"><c:out value="${charge.charge_rate}" /></td>
 							<td style="text-align: center;"><c:out value="${charge.charge_total_format}" /></td>
