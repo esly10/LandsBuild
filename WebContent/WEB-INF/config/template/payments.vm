@@ -168,14 +168,14 @@
 							#if ( $cal.monthNumber == $item.monthNumber )
 								#if ( $cal.year == $item.year )
 									<tr>
-										<td>${item.receiveDateFormated}</td> 
+										<td style="width:80">${item.receiveDateFormated}</td> 
 										<td>${item.reservationNumber}</td> 
 										<td>${item.methodName}</td> 
 										<td>${item.transaction_no}</td>
 										<td>${item.amount}</td>
-										<td>${item.guestName}</td>
-										<td>${item.agencyName}</td> 
-								 	</tr>
+										<td style="word-wrap: break-word;">${item.guestName}</td>
+										<td style="word-wrap: break-word;">${item.agencyName}</td> 
+									</tr>
 								#end
 							#end
 					#end

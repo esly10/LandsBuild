@@ -33,8 +33,8 @@
 										<td><c:out value="${item.methodName}" /></td> 
 										<td><c:out value="${item.transaction_no}" /></td>
 										<td><c:out value="${item.amount}" /></td>
-										<td><c:out value="${item.guestName}" /></td>
-										<td><c:out value="${item.agencyName}" /></td> 
+										<td style="word-wrap: break-word;"><c:out value="${item.guestName}" /></td>
+										<td style="word-wrap: break-word;"><c:out value="${item.agencyName}" /></td> 
 								 	</tr>
 							 	</c:if>		
 					 	</c:if>	

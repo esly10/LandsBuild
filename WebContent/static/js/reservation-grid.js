@@ -3403,7 +3403,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 											    forceSelection: true
 											},
 											{
-											    xtype: 'numberfield',
+											    xtype: 'textfield',
 											    id: 'transaction_no',
 											    name: 'transaction_no',
 											    width: 135,
