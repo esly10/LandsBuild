@@ -341,7 +341,7 @@
 			    	    				name: '<div title="'+title+'"><div style="height:20px;line-height: 12px;">'+record.data.guest_name+'</div></div>',
 		    	    				    sectionID: record.data.rr_room_id,
 		    	    				    start: moment(record.data.rr_reservation_in).add('hours', -12),
-		    	    				    end: moment(record.data.rr_reservation_out).add('hours', -12),
+		    	    				    end: moment(record.data.rr_reservation_out).add('hours', -13),
 		    	    				    classes: 'item-status-'+record.data.reservation_status,
 		    	    				    data:record.data //#FFFF00
 		    	    				}

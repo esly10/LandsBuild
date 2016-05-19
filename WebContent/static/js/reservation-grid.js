@@ -3076,8 +3076,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     			values, Ext.getCmp("radio-info").getForm().getFieldValues()
     		);		        			
 
-			Ext.getCmp("colum1charges").items.item(0).store;
-			Ext.getCmp("colum1charges").items.item(0).store.getCount();
+			//Ext.getCmp("colum1charges").items.item(0).store;
+			//Ext.getCmp("colum1charges").items.item(0).store.getCount();
 		
 			var val = "";
 			if(Ext.getCmp("days_advance_field").getValue() != ""){
@@ -3544,7 +3544,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			                	    	Ext.growl.message('Success', 'Payment has been updated.');
 			                	    	var sum = 0.00;
 		    		    				paymentStore.each(function(record,id){
-			    	    					sum += record.data.amount;
+			    	    					sum += parseFloat(record.data.amount);
 			    	    				});
 		    		    				
 		    		    				var balance = Ext.util.Format.number((parseFloat(Ext.getCmp("total_changes").getValue()) - parseFloat(sum)), '0.00');
