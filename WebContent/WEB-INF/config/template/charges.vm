@@ -231,16 +231,17 @@
 	</div>
 	
 	<div style="width: 100%; float: left;">
-		#if ($agencySize > 0)
-			<table  class="tableCharge"  style="width:100%; float: right;";>
-				 <tr><td colspan=6 style="background:#037dcf;">Agency Charges: </td></tr>
-				  <tr>
+			#if ($agencySize > 0)
+				<table  class="tableCharge"  style="width:100%; float: right;";>
+					 <tr><td colspan=6 style="background:#6666cc;">Agency</td></tr>
+					 <tr><td colspan=6 style="border-top: 1px solid #000; background:#FFFFFF; color:#6666cc; font-size:14px; font-weight: bold; ">Charges</td></tr>
+					   <tr>
 				    <th>Item</th><th>Description</th><th>Qty</th>
 				    #if ($reservation.reservation_type != 3)<th>Nights</th>#end
-				    <th>Rate</th> <th>Total</th>
-				  </tr>
-				#foreach($item in ${agencyCharges})
-				 <tr>
+				   	 <th>Rate</th> <th>Total</th>
+				 	 </tr>
+					#foreach($item in ${agencyCharges})
+					 <tr>
 						<td>${item.charge_item_name}</td> 
 						<td>${item.charge_item_desc}</td>
 						<td>${item.charge_qty}</td>
@@ -250,68 +251,119 @@
 						<td>$ ${item.charge_rate}</td>
 						
 						<td>$ ${item.charge_total}</td>								
-				 </tr>		
-				#end
-				
-				<tr><td colspan=4 style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2 style="border-top: 1px solid #000;">$ ${reservation.agencyCharges}</td></tr>
-				<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.agencyFormatTax}</td></tr>
-				
-				<tr><td colspan=4>Paid:</td><td colspan=2;  style="color:red;">$ ${reservation.agencyPaid}</td></tr>		
-				<tr><td colspan=4>Total:</td><td colspan=2>$ ${reservation.totalAgency}</td></tr>
+				 	</tr>		
+					#end
+				</table>
 			
-			</table>
-		#end
-		<hr>
-		#if ($guestSize > 0)
-			<table class="tableCharge" style="width:100%;  float: right;";>
-			<tr><td colspan=6 style="background:#037dcf;">Guest Charges: </td></tr>
-				  <tr>
-				    <th>Item</th><th>Description</th><th>Qty</th>
-				    #if ($reservation.reservation_type != 3)<th>Nights</th>#end
-				    <th>Rate</th><th>Total</th>
-				  </tr>
-				#foreach($item in ${guestCharges})
-				 <tr>
-						<td>${item.charge_item_name}</td> 
-						<td>${item.charge_item_desc}</td>
-						<td>${item.charge_qty}</td>
-						#if ($reservation.reservation_type != 3)
-							<td>${item.charge_nights}</td>
+			#if ($agencyPaySize > 0)
+					<table  class="tableCharge"  style="width:100%; float: right;";>
+						<tr><td colspan=5 style="border-top: 1px solid #000;  background:#FFFFFF; color:#6666cc;">Payments</td></tr>
+						  <tr>
+						    <th>Payment Date</th><th>Receive Date</th><th>Method</th><th>Transaction</th><th>Amount</th>
+						  </tr>
+						#foreach($item in ${agencyPayments})	
+						 <tr>
+								<td>${item.paymentDateFormat}</td> 
+								<td>${item.receiveDateFormat}</td> 
+								<td>${item.methodName}</td>
+								<td>${item.transaction_no}</td>
+								<td>$ ${item.amount}</td>
+						 </tr>		
 						#end
-						<td>$ ${item.charge_rate}</td>
-						
-						<td>$ ${item.charge_total}</td>							
-				 </tr>		
+					</table>
+			#end
+				#if ($agencySize > 0)
+					<table  class="tableCharge"  style="width:100%; float: right;";>
+						<tr><td colspan=6 style="border-top: 1px solid #000; background:#FFFFFF; color:#6666cc;">Totals: </td></tr>
+						<tr><td colspan=4 style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2 style="border-top: 1px solid #000;">$ ${reservation.agencyCharges}</td></tr>
+						<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.agencyFormatTax}</td></tr>
+						<tr><td colspan=4>Paid:</td><td colspan=2;  style="color:red;">$ ${reservation.agencyPaid}</td></tr>		
+						<tr><td colspan=4>Total:</td><td colspan=2>$ ${reservation.totalAgency}</td></tr>
+					</table>
 				#end
-				
-				<tr><td colspan=4  style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2  style="border-top: 1px solid #000;">$ ${reservation.guestCharges}</td></tr>
-				<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.guestFormatTax}</td></tr>
-				
-				<tr><td colspan=4>Paid:</td><td colspan=2  style="color:red;">$ ${reservation.guestPaid}</td></tr>	
-				<tr><td colspan=4>Total:</td><td colspan=2>$ ${reservation.totalGuest}</td></tr>
+			<table class="tableCharge" style="width:100%;";>
+				<tr><td colspan=6 style="background:#6666cc;">Totals: </td></tr> 	
+				 <tr >
+						<td style="font-size:18px;">Balance</td> 
+						<td style="font-size:18px;">$ ${reservation.totalAgency}</td>
+				 </tr>		
 			</table>
 		#end
-		<hr>
-		<table class="tableCharge" style="width:100%;";>
-		<tr><td colspan=6 style="background:#037dcf;">Totals: </td></tr>
-			  <tr>
-			    <th>Folio</th><th>Amount</th>
-			  </tr>
-			
-			 <tr>
-					<td>Agency</td> 
-					<td>$ ${reservation.totalAgency}</td>
-			 </tr>	
-			  <tr>
-					<td>Guest</td> 
-					<td>$ ${reservation.totalGuest}</td>
-			 </tr>	
-			 <tr >
-					<td style="font-size:18px;">Balance</td> 
-					<td style="font-size:18px;">$ ${reservation.totalCharges}</td>
-			 </tr>		
-		</table>
+		#if ($agencySize < 1)
+			<dl class="list"; style="font-size:14px;">
+				<dt style="background:#FFFFFF; color:#330066; text-align:center; padding:5px; font-size:24px;">There are no associated charges to Agency</dt>	
+				<dd style="background:#FFFFFF; color:#330066; text-align:center; padding:5px; font-size:24px;"></dd> 	
+			</dl>
+		#end
+
 	<hr>
+	
+	#if ($guestSize > 0)
+				<table  class="tableCharge"  style="width:100%; float: right;";>
+					 <tr><td colspan=6 style="background:#339966;">Guest</td></tr>
+					 <tr><td colspan=6 style="border-top: 1px solid #000; background:#FFFFFF; color:#339966; font-size:14px; font-weight: bold; ">Charges</td></tr>
+					    <tr>
+						    <th>Item</th><th>Description</th><th>Qty</th>
+						    #if ($reservation.reservation_type != 3)<th>Nights</th>#end
+						    <th>Rate</th><th>Total</th>
+						  </tr>
+						#foreach($item in ${guestCharges})
+						 <tr>
+								<td>${item.charge_item_name}</td> 
+								<td>${item.charge_item_desc}</td>
+								<td>${item.charge_qty}</td>
+								#if ($reservation.reservation_type != 3)
+									<td>${item.charge_nights}</td>
+								#end
+								<td>$ ${item.charge_rate}</td>
+								
+								<td>$ ${item.charge_total}</td>							
+						 </tr>		
+						#end
+				</table>
+			
+			#if ($guestPaySize > 0)
+					<table  class="tableCharge"  style="width:100%; float: right;";>
+						<tr><td colspan=5 style="border-top: 1px solid #000;  background:#FFFFFF; color:#339966;">Payments</td></tr>
+						  <tr>
+						    <th>Payment Date</th><th>Receive Date</th><th>Method</th><th>Transaction</th><th>Amount</th>
+						  </tr>
+						#foreach($item in ${guestPayments})	
+						 <tr>
+								<td>${item.paymentDateFormat}</td> 
+								<td>${item.receiveDateFormat}</td> 
+								<td>${item.methodName}</td>
+								<td>${item.transaction_no}</td>
+								<td>$ ${item.amount}</td>
+						 </tr>		
+						#end
+					</table>
+			#end
+				#if ($guestSize > 0)
+					<table  class="tableCharge"  style="width:100%; float: right;";>
+						<tr><td colspan=6 style="border-top: 1px solid #000; background:#FFFFFF; color:#339966;">Totals: </td></tr>
+						<tr><td colspan=4  style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2  style="border-top: 1px solid #000;">$ ${reservation.guestCharges}</td></tr>
+						<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.guestFormatTax}</td></tr>
+						
+						<tr><td colspan=4>Paid:</td><td colspan=2  style="color:red;">$ ${reservation.guestPaid}</td></tr>	
+						<tr><td colspan=4>Total:</td><td colspan=2>$ ${reservation.totalGuest}</td></tr>
+					</table>
+				#end
+			<table class="tableCharge" style="width:100%;";>
+				<tr><td colspan=6 style="background:#339966;">Totals: </td></tr> 	
+				 <tr >
+						<td style="font-size:18px;">Balance</td> 
+						<td style="font-size:18px;">$ ${reservation.totalGuest}</td>
+				 </tr>		
+			</table>
+		#end
+		#if ($guestSize < 1)
+			<dl class="list"; style="font-size:14px;">
+				<dt style="background:#FFFFFF; color:#339966; text-align:center; padding:5px; font-size:24px;">There are no associated charges to Guest</dt>	
+				<dd style="background:#FFFFFF; color:#339966; text-align:center; padding:5px; font-size:24px;"></dd> 	
+			</dl>
+		#end
+	
 </div>
 </body>
 </html>
