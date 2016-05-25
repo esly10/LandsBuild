@@ -189,7 +189,7 @@
 						<dt>Adults:</dt><dd>${item.reservation_adults}</dd>
 						<dt>Children:</dt><dd>${item.reservation_children}</dd>
 						<dt>Guides:</dt><dd>${item.reservation_guides}</dd>
-						<dt style="text-decoration: underline;">Total:</dt><dd style="text-decoration: underline;">${item.reservation_rooms_occupancy} </dd>
+						<dt style="text-decoration: underline;">Total:</dt><dd style="text-decoration: underline;">${item.reservation_event_participants} </dd>
 						<dt></dt><dd></dd>
 						
 					</dl>

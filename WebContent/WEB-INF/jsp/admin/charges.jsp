@@ -55,15 +55,16 @@
 	<div style="width: 100%; float: left;">
 			<c:if test = "${agencySize > 0}">	
 				<table  class="tableCharge"  style="width:100%; float: right;";>
-					 <tr><td colspan=6 style="background:#037dcf;">Agency</td></tr>
-					 <tr><td colspan=6 style="border-top: 1px solid #000; background:#FFFFFF; color:#4d79ff; font-size:14px; font-weight: bold; ">Charges</td></tr>
+					 <tr><td colspan=7 style="background:#037dcf;">Agency</td></tr>
+					 <tr><td colspan=7 style="border-top: 1px solid #000; background:#FFFFFF; color:#4d79ff; font-size:14px; font-weight: bold; ">Charges</td></tr>
 					  <tr>
-					    <th>Item</th><th>Description</th><th>Qty</th>
+					    <th>Date</th><th>Item</th><th>Description</th><th>Qty</th>
 					    <c:if test="${reservation.reservation_type != 3}"><th style="">Nights</th></c:if>
 					    <th>Rate</th><th>Total</th>
 					  	</tr>
 						<c:forEach items="${agencyCharges}" var="item">	
 						 <tr>
+						 		<td><c:out value="${item.chargeDateFormat}" /></td>
 								<td><c:out value="${item.charge_item_name}" /></td> 
 								<td><c:out value="${item.charge_item_desc}" /></td>
 								<td><c:out value="${item.charge_qty}" /></td>
@@ -106,15 +107,16 @@
 		</c:if>
 		<c:if test = "${guestSize > 0}">	
 				<table  class="tableCharge"  style="width:100%; float: right;";>
-					 <tr><td colspan=6 style="background:#037dcf;">Guest</td></tr>
-					 <tr><td colspan=6 style="border-top: 1px solid #000; background:#FFFFFF; color:#4d79ff; font-size:14px; font-weight: bold; ">Charges</td></tr>
+					 <tr><td colspan=7 style="background:#037dcf;">Guest</td></tr>
+					 <tr><td colspan=7 style="border-top: 1px solid #000; background:#FFFFFF; color:#4d79ff; font-size:14px; font-weight: bold; ">Charges</td></tr>
 					   <tr>
-						    <th>Item</th><th>Description</th><th>Qty</th>
+						    <th>Date</th><th>Item</th><th>Description</th><th>Qty</th>
 						    <c:if test="${reservation.reservation_type != 3}"><th style="">Nights</th></c:if>
 						    <th>Rate</th><th>Total</th>
 						  </tr>
 						<c:forEach items="${guestCharges}" var="item">	
 						 <tr>
+						 		<td><c:out value="${item.chargeDateFormat}" /></td> 
 								<td><c:out value="${item.charge_item_name}" /></td> 
 								<td><c:out value="${item.charge_item_desc}" /></td>
 								<td><c:out value="${item.charge_qty}" /></td>

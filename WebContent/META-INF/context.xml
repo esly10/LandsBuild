@@ -3,7 +3,7 @@
 	     	<Resource name="jdbc/CiteWriteDB" auth="Container" type="javax.sql.DataSource"
             maxActive="100" maxIdle="30" maxWait="10000" removeAbandoned="true"
             username="root" password="techuso" driverClassName="com.mysql.jdbc.Driver" 
-             url="jdbc:mysql://localhost:3306/landsinlove_server"/> 
+             url="jdbc:mysql://localhost:3306/lilprueba"/> 
              <!--url="jdbc:mysql://localhost:3306/testlil"/> -->
            
             <!--   url="jdbc:mysql://localhost:3306/citewriteserver_pm"/> -->

@@ -50,7 +50,7 @@
 						<dt>Adults:</dt><dd><c:out value="${item.reservation_adults}" /></dd>
 						<dt>Children:</dt><dd><c:out value="${item.reservation_children}" /></dd>
 						<dt>Guides:</dt><dd><c:out value="${item.reservation_guides}" /></dd>
-						<dt style="text-decoration: underline;">Total:</dt><dd style="text-decoration: underline;"><c:out value="${item.reservation_rooms_occupancy}" /> </dd>
+						<dt style="text-decoration: underline;">Total:</dt><dd style="text-decoration: underline;"><c:out value="${item.reservation_event_participants}" /> </dd>
 						<dt></dt><dd></dd>
 						
 					</dl>
