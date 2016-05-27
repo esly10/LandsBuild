@@ -254,7 +254,8 @@ Ext.onReady(function(){
 		                                }
 		                            ] // close items for first column
 		                        },{   // column #1
-		                            columnWidth: '350px',
+		                            //columnWidth: '350px',
+		                        	columnWidth: .4,
 		                            layout: 'form',
 		                            items: [
 		                                    {   
@@ -289,6 +290,34 @@ Ext.onReady(function(){
 		        								    }
 		        								}
 		                                }
+		                            ] // close items for first column
+		                        },{   // column #1
+		                            columnWidth: .25,
+		                            layout: 'form',
+		                            items: [
+		                                    {   
+		                                     xtype: 'textfield', 
+		 		                             id: 'event_number',
+		 									 fieldLabel: '   Event Lookup',
+		 									align: 'right' 
+		                                }
+		                                
+		                            ] // close items for first column
+		                        },{   // column #1
+		                            columnWidth: .05,
+		                            layout: 'form',
+		                            items: [
+		                                {  	  	xtype: 'button',
+		 										align: 'right' ,
+		 										buttonAlign:'right',
+		                                		text: 'Apply',
+		                			            width: 60,
+		                			            handler: function(){
+		                			               var params = filterForm.getForm().getFieldValues();
+		                			               store.baseParams = params;
+		                			              store.load({params: {start: 0, limit: pageLimit}});
+		                			            }
+		                			        }
 		                            ] // close items for first column
 		                        }],
 		                    },{
