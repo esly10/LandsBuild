@@ -1320,8 +1320,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																								 name: 'reservation_ignore_tax',
 																								 labelSeparator: '',
 																								 hideLabel: true,
-																								 boxLabel: 'Included',
-																								 fieldLabel: 'Included',
+																								 boxLabel: 'Room Tax Included',
+																								 fieldLabel: 'Room Tax Included',
 																								 listeners:{
 																					        		check: function(self, newVal, oldVal) {																	        			
 																					        			/*if(!newVal){
