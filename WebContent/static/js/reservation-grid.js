@@ -48,7 +48,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			    htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Res Number:</label></dt>');
 			    htmlInfo.push('<dd style="width: 145px;"><label id="res_number">'+string_number+'</label></dd>'); // Res Number													   
 			    htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Status:</label></dt>');
-			    htmlInfo.push('<dd style="width: 145px;"><label id="status">No Show</label></dd>'); // Status
+			    htmlInfo.push('<dd style="width: 145px;"><label id="status">Open</label></dd>'); // Status
 			    htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Created date:</label></dt>');
 				htmlInfo.push('<dd style="width: 145px;"><label id="user">'+create+'</label></dd>'); // user name		
 				htmlInfo.push('<dt style="width: 139px;"><label class="x-form-item">Updated date:</label></dt>');
@@ -63,6 +63,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
             		params:{'reservation_id': panel.reservation_id},
 	    			callback: function () {
 	    				var taxSum = 0.00;
+	    				var roomSum = 0.00;
 		        		var servSum = 0.00;
 	    				chargesStore.each(function(record,id){
 	    					panel.total_charges += parseFloat(record.data.charge_total);
@@ -83,7 +84,12 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    							charge_nits = parseInt(record.data.charge_nights);
 	    						}
 	    						
-	    						taxSum += ( (record.data.charge_qty*record.data.charge_rate)* parseInt(charge_nits));
+	    						if(record.data.charge_item_name == "Room" || record.data.charge_item_name == "Room NS"){
+		    						roomSum += ((record.data.charge_qty*record.data.charge_rate)* charge_nits);
+		    					}
+		    					if(record.data.charge_item_name == "Restaurant" ||record.data.charge_item_name == "Rest/Bar"){
+		    						taxSum += ((record.data.charge_qty*record.data.charge_rate)* charge_nits);
+		 	    				}
 	    					}
 	    					/*if(record.data.charge_item_name == "Restaurant" || record.data.charge_item_name == "Rest/Bar"){
 	    						servSum += (record.data.charge_qty*record.data.charge_rate);
@@ -92,13 +98,13 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			        		
 	    				});
 	    				
-	    				if(taxSum > 1){
-	    					if(panel.reservationInfo.reservation_ignore_tax == "1"){
+	    				if(Ext.getCmp("reservation_ignore_tax").getValue() == "0"){
+		        			taxSum += roomSum;
+		        		}
+		        		
+		        		
+		        		if(taxSum > 1){
 		        			taxSum = (13*taxSum)/100;
-	    					}else {
-	    						taxSum = 0.00;
-	    					}
-		        			
 		        		}
 		        		/*if(servSum > 1){
 		        			if(panel.reservationInfo.reservation_ignore_service == "0"){
@@ -1318,9 +1324,9 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																								 fieldLabel: 'Included',
 																								 listeners:{
 																					        		check: function(self, newVal, oldVal) {																	        			
-																					        			if(!newVal){
+																					        			/*if(!newVal){
 																					        				Ext.getCmp("reservation_tax").setValue("0.00");
-																					        			}
+																					        			}*/
 																					        			
 																					        			ChargeGrid.fireEvent("click");	
 																					        		}
@@ -2028,6 +2034,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	        				Ext.getCmp("check_in_radio").enable();
 																	        					Ext.getCmp("canceled").setValue(false);
 																	        				Ext.getCmp("no_show_radio").setValue(false);
+																	        				Ext.getCmp("open_radio").setValue(false);
 																	        			}else{
 																	        				Ext.getCmp("canceled").disable();
 																	        				Ext.getCmp("check_out_radio").disable();
@@ -2053,6 +2060,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	        				Ext.getCmp("check_out_radio").setValue(false);
 																	        				Ext.getCmp("check_in_radio").setValue(false);
 																	        				Ext.getCmp("no_show_radio").setValue(false);
+																	        				Ext.getCmp("open_radio").setValue(false);
 																	        				Ext.getCmp("confirmmed").enable();
 																	        				Ext.getCmp("check_out_radio").disable();
 																	        				Ext.getCmp("check_in_radio").disable();
@@ -2079,6 +2087,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																		        			Ext.getCmp("confirmmed").setValue(true);																		        			
 																		        			Ext.getCmp("check_in_radio").setValue(false);
 																		        			Ext.getCmp("check_out_radio").setValue(false);
+																		        			Ext.getCmp("open_radio").setValue(false);
 																		        			Ext.getCmp("check_out_radio").disable();
 																	        			}
 																	        			
@@ -2108,6 +2117,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	        				Ext.getCmp("canceled").setValue(false);
 																	        				Ext.getCmp("canceled").enable();
 																	        				Ext.getCmp("no_show_radio").setValue(false);
+																	        				Ext.getCmp("open_radio").setValue(false);
 																	        			}else {
 																	        				document.getElementById("status").innerHTML = "Check-In";		
 																		        			Ext.getCmp("check_in_radio").setValue(true);
@@ -2131,6 +2141,31 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	        				Ext.getCmp("canceled").setValue(false);
 																	        				Ext.getCmp("check_in_radio").setValue(false);
 																	        				Ext.getCmp("check_out_radio").setValue(false);
+																	        				Ext.getCmp("open_radio").setValue(false);
+																	        			}														        			
+																	        		}
+																	        	}
+																	        },
+																	        {
+																	        	xtype: 'checkbox',
+																	        	id: 'open_radio',
+																	        	name: 'open_radio',
+																	        	fieldLabel: 'Open',
+																        		listeners:{
+																	        		check: function(self, newVal, oldVal) {
+																	        			if(newVal){
+																	        				document.getElementById("status").innerHTML = "Open";
+																	        				Ext.getCmp("canceled").enable();
+																	        				Ext.getCmp("confirmmed").enable();
+																	        				Ext.getCmp("check_in_radio").enable();
+																	        				Ext.getCmp("check_out_radio").enable();
+																	        				Ext.getCmp("no_show_radio").enable();
+																	        				
+																	        				Ext.getCmp("confirmmed").setValue(false);
+																	        				Ext.getCmp("canceled").setValue(false);
+																	        				Ext.getCmp("check_in_radio").setValue(false);
+																	        				Ext.getCmp("check_out_radio").setValue(false);
+																	        				Ext.getCmp("no_show_radio").setValue(false);
 																	        			}														        			
 																	        		}
 																	        	}
@@ -2834,6 +2869,9 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			        				Ext.getCmp("check_out_radio").setValue(true);
 			        				Ext.getCmp("check_out_radio").enable(true);
 			        				Ext.getCmp("check_in_radio").enable(true);			        				
+	    						}else if(panel.reservationInfo[prop] == 5){
+	    							document.getElementById("status").innerHTML = "Open";	    							
+	    							Ext.getCmp("open_radio").setValue(true);		        				
 	    						}else {
 	    							document.getElementById("status").innerHTML = "n/a";
 	    							Ext.getCmp("no_show_radio").setValue(true);			
@@ -3946,14 +3984,16 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		        	'click' : function(){
 		        		
 		        		// update row charge_total of grid 
-		        		var calculate_tax = 0;
+		        		/*var calculate_tax = 0;
 		        		if(Ext.getCmp("reservation_ignore_tax").getValue() == "0"){
 		        			calculate_tax = 1;
-		        		}
+		        		}*/
 		        		
 		        		var calculate_tax_serv = 0;//Ext.getCmp("reservation_ignore_service").getValue();
 		        		var sum = 0.00;
 		        		var taxSum = 0.00;
+		        		var roomSum = 0.00;
+		        		var taxIncluded= Ext.getCmp("reservation_ignore_tax").getValue();
 		        		var servSum = 0.00;
 		        		chargesStore.each(function(record,id){				    					
 		        			var charge_nits;
@@ -3970,21 +4010,28 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     						}
 	    					record.set('charge_total',((record.data.charge_qty*record.data.charge_rate)* parseInt(charge_nits)));	
 	    					sum += ((record.data.charge_qty*record.data.charge_rate)*charge_nits);
-	    					if(record.data.charge_item_name == "Room" || record.data.charge_item_name == "Room NS" || 
-	    					   record.data.charge_item_name == "Restaurant" ||record.data.charge_item_name == "Rest/Bar"){
-	    						taxSum += ((record.data.charge_qty*record.data.charge_rate)* charge_nits);
+	    					if(record.data.charge_item_name == "Room" || record.data.charge_item_name == "Room NS"){
+	    						roomSum += ((record.data.charge_qty*record.data.charge_rate)* charge_nits);
 	    					}
+	    					if(record.data.charge_item_name == "Restaurant" ||record.data.charge_item_name == "Rest/Bar"){
+	    						taxSum += ((record.data.charge_qty*record.data.charge_rate)* charge_nits);
+	 	    				}
 	    					/*if(record.data.charge_item_name == "Restaurant" || record.data.charge_item_name == "Rest/Bar"){
 	    						servSum += (record.data.charge_qty*record.data.charge_rate);
 	    					}*/
 	    				});
 		        		
+		        		if(Ext.getCmp("reservation_ignore_tax").getValue() == "0"){
+		        			taxSum += roomSum;
+		        		}
+		        		
+		        		
 		        		if(taxSum > 1){
-		        			if(!calculate_tax){
+		        			//if(!calculate_tax){
 		        			taxSum = (13*taxSum)/100;
-		        			}else {
-		        				taxSum = 0.00;
-		        			}
+		        			//}else {
+		        			//	taxSum = 0.00;
+		        			//}
 		        			
 		        		}
 		        		/*if(servSum > 1){
@@ -3999,7 +4046,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		        		Ext.getCmp("reservation_tax").setValue(Ext.util.Format.number(taxSum, '0.00'));
 		        		//Ext.getCmp("services").setValue(Ext.util.Format.number(servSum, '0.00'));
 		        		
-		        		Ext.getCmp("sub_total").setValue('$'+Ext.util.Format.number(sum, '0.00'));
+		        		//Ext.getCmp("sub_total").setValue('$'+Ext.util.Format.number(sum, '0.00'));
+		        		Ext.getCmp("sub_total").setValue(Ext.util.Format.number(sum, '0.00'));
 		        		Ext.getCmp("total_changes").setValue(Ext.util.Format.number((sum+taxSum+servSum), '0.00'));
 		        		
 		        		var balance = Ext.util.Format.number(((sum+taxSum+servSum) - parseFloat(Ext.getCmp("total_paid").getValue())), '0.00');

@@ -333,7 +333,7 @@
 						title += "Check Out: "+ moment(record.data.rr_reservation_out).add('hours', -12).toLocaleString()+"&#10;";
 									
 						
-						if(record.data.reservation_status != 2){ // canceled "2" not show
+						if(record.data.reservation_status != 2 && record.data.reservation_status != 6){ // canceled "2" not show
 							arrayCalendar.push(
 									{
 		    	    				    id: 'res_'+id,
