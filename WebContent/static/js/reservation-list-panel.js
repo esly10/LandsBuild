@@ -401,7 +401,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 										            'StatusValue',
 										            'StatusDisplay'
 										        ],
-										        data: [[1, 'Confirmed'],[2, 'Canceled'],[3, 'Check In'],[4, 'Check Out'],[5, 'Open'],[6, 'No Show'],[7, 'Confirm & Checkin'],[8, 'All']]  
+										        data: [[1, 'Confirmed'],[2, 'Canceled'],[3, 'Check In'],[4, 'Check Out'],[5, 'Open'],[6, 'No Show'],[7, 'Confirm, Open & Checkin'],[8, 'All']]  
 										    }),
 										    valueField: 'StatusValue',
 											displayField: 'StatusDisplay',
