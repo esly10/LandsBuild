@@ -100,7 +100,7 @@
 					<table  class="tableCharge"  style="width:100%; float: right;";>
 						<tr><td colspan=6 style="border-top: 1px solid #000; background:#FFFFFF; color:#339966;">Totals: </td></tr>
 						<tr><td colspan=4 >Sub Total:</td><td colspan=2>$ <c:out value="${reservation.guestCharges}" /></td></tr>
-						<tr><td colspan=4>Tax:</td><td colspan=2>$ <c:out value="${reservation.guestFormatTax}" /></td></tr>
+						<tr><td colspan=4>Tax:</td><td colspan=2> <c:out value="${reservation.guestFormatTax}" /></td></tr>
 						<tr><td colspan=4>Paid:</td><td colspan=2  style="color:red;">$ <c:out value="${reservation.guestPaid}" /></td></tr>	
 						<tr><td colspan=4>Total:</td><td colspan=2>$ <c:out value="${reservation.totalGuest}" /></td></tr>
 					</table>

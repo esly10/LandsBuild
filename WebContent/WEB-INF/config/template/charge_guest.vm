@@ -278,7 +278,7 @@
 					<table  class="tableCharge"  style="width:100%; float: right;";>
 						<tr><td colspan=6 style="border-top: 1px solid #000; background:#FFFFFF; color:#339966;">Totals: </td></tr>
 						<tr><td colspan=4  style="border-top: 1px solid #000;">Sub Total:</td><td colspan=2  style="border-top: 1px solid #000;">$ ${reservation.guestCharges}</td></tr>
-						<tr><td colspan=4>Tax:</td><td colspan=2>$ ${reservation.guestFormatTax}</td></tr>
+						<tr><td colspan=4>Tax:</td><td colspan=2> ${reservation.guestFormatTax}</td></tr>
 						
 						<tr><td colspan=4>Paid:</td><td colspan=2  style="color:red;">$ ${reservation.guestPaid}</td></tr>	
 						<tr><td colspan=4>Total:</td><td colspan=2>$ ${reservation.totalGuest}</td></tr>

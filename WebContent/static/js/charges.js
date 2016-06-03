@@ -52,6 +52,26 @@ Ext.onReady(function(){
 				autoLoad: {params:{start:0, limit: this.pageLimit}}
 			});
 			
+			var eventStore = new Ext.data.JsonStore
+			({
+				url: _contextPath + '/rooms/eventList',
+				root: 'reservations',
+		        totalProperty: 'count',
+		        remoteSort: true, 
+		        fields: [
+		            'reservation_number',
+		            'reservation_type',
+		            'reservation_status',
+		            'reservation_id'
+		        ],
+				sortInfo: {
+					field: 'reservation_number',
+					direction: 'ASC'
+				},
+				baseParams: {IS_DELETE: 0 },
+				autoLoad: {params:{start:0, limit: this.pageLimit}}
+			});
+			
 			var ChargeList = function(viewer, config) {
 			    this.viewer = viewer;
 			    Ext.apply(this, config);
@@ -111,6 +131,8 @@ Ext.onReady(function(){
 			
 			};
 			
+			
+
 			Ext.extend(ChargeList, Ext.grid.GridPanel, {
 			    listeners:{
 			    	rowdblclick: function(grid, index, event )
@@ -165,6 +187,133 @@ Ext.onReady(function(){
 			    	       */ ]
 			    }
 			});
+			
+			
+			var EventList = function(viewer, config) {
+			    this.viewer = viewer;
+			    Ext.apply(this, config);
+			
+			    this.store = eventStore,
+			    this.colModel = new Ext.grid.ColumnModel({
+			        defaults: {
+			            width: 150,
+			            sortable: true
+			        },
+			        columns: [
+			               {header: '', sortable: true, dataIndex: 'room_no', width: 20, 
+					            	renderer : function(value, meta, eventStore) {
+					            		meta.style = "background-color:#4f5f6f; color: #FFFFFF; height:24px; font-size: 12px;  font-weight: bold; width: 20px; ";
+					            		 if(eventStore.data.reservation_status == 3) {
+						            	        meta.style = "background-color:#33cc33; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 20px;";
+						            	        return "IN";
+						            	 }
+					            		 if(eventStore.data.reservation_status == 1) {
+						            	        meta.style = "background-color:#ff8000; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 20px;";
+						            	        return "CF";
+						            	 }
+					            		 return	 "OP";
+					            	}
+			                  },
+				            {header: 'Event Number', sortable: false, dataIndex: 'room_no', width: 110, 
+				            	renderer : function(value, meta, eventStore) {
+				            		meta.style = "background-color:#E1E1E1; height:24px; width: 110px;";
+				            		 if(eventStore.data.reservation_status == 3) {
+					            	        meta.style = "background-color:#ccff99; height:24px; width: 110px;";
+					            	        return eventStore.data.reservation_number;
+					            	    }
+				            		 if(eventStore.data.reservation_status == 1) {
+				            	        meta.style = "background-color:#ffd9b3; height:24px; width: 110px;";
+				            	        return eventStore.data.reservation_number;
+				            		 }	
+				            		 return eventStore.data.reservation_number;
+				            }
+			           } 
+			        ]
+			    });
+			    this.viewConfig = {
+			        forceFit: true
+			    };
+			
+			    EventList.superclass.constructor.call(this, 
+			    {
+			        region: 'center',
+			        id: 'event-list-grid',
+			        loadMask: {msg:'Loading Charge...'},
+			
+			        sm: new Ext.grid.RowSelectionModel
+			        ({
+			            singleSelect:true
+			        }),
+			
+			        viewConfig: 
+			        {
+			            forceFit:true,
+			            enableRowBody:true,
+			            showPreview:false,
+			            getRowClass : this.applyRowClass
+			        }
+			    });
+			
+			};
+			
+			
+			
+			Ext.extend(EventList, Ext.grid.GridPanel, {
+			    listeners:{
+			    	rowdblclick: function(grid, index, event )
+			    	{
+			    		var record = grid.getStore().getAt(index);
+			    		var tabs = Ext.getCmp('chargetabs');
+
+			    		var chargePanel = tabs.find('id', 'Room-' + record.data.room_id + ' (' + Ext.getCmp('filter_date') + ')');
+			    		if(chargePanel.length > 0)
+			    		{
+			    			tabs.setActiveTab(chargePanel[0]);
+			    		}
+			    		else
+			    		{
+				    		chargePanel = new ChargeTabPanel({charge: record.data, date: Ext.getCmp('filter_date')   });
+							tabs.add(chargePanel);
+							tabs.setActiveTab(chargePanel.id);
+			    		}
+			    		
+			    	}
+			    },tbar: {
+			    	xtype: 'toolbar',
+			    	items: [/*'Date: ', 
+			    	       {
+			    				xtype: 'datefield',
+					            fieldLabel: 'Date',
+					            emptyText:"Now",
+					            value: '',
+					            enableKeyEvents: true,
+					            format: 'Y-m-d H:i:s',
+								submitFormat: 'Y-m-d H:i:s',
+								submitValue : true,
+								altFormats: 'Y-m-d',
+								width: 150,
+								anchor: "12%",
+								id: 'filter_date',
+								name: 'filter_date',
+								listeners : {
+									select: function (t,n,o) {
+								    	chargeStore.baseParams = {date: t.value};
+								    	chargeStore.load({params: {start: 0, limit: pageLimit}});
+						            },
+						            change: function (t,n,o) {
+								    	chargeStore.baseParams = {date: t.value};
+								    	chargeStore.load({params: {start: 0, limit: pageLimit}});
+						            },
+								   render : function(datefield) {
+								        datefield.setValue(new Date());
+								    }
+								}
+			    	        }
+			    	       */ ]
+			    }
+			});
+			
+			
 			//myDateField.setValue(new Date());
 			var ChargeListMenu = function(grid, index, event)
 			{
@@ -368,13 +517,17 @@ Ext.onReady(function(){
 			            border: false,
 			            frame: false,
 			            items: [{
-							title: false,
+			            	
 			                region:'west',
-			                xtype: 'container',
+			                collapsible: true,
+							collapsed:false,
+							title: 'Rooms',
+							collapseMode: 'mini',
+			                //xtype: 'container',
 			                margins: '5 0 5 5',
 			                border: false,
 			                split: true,
-			                collapsible: false,
+			                //collapsible: false,
 			                width: 200,
 			                collapsible: true,   // make collapsible
 			                layout: 'fit',
@@ -401,6 +554,17 @@ Ext.onReady(function(){
 							//width: '100%',
 							height:80,
 							items: [filterForm]
+						},{
+			            	title: 'Events',
+							collapsible: true,
+							collapsed:false,
+							collapseMode: 'mini',
+							region:'east',
+							layout: 'fit',
+							margins: '0 0 0 0',
+							//width: '100%',
+							width: 200,
+							items: [new EventList()]
 						}]
 			        });
 			        ChargeManager.superclass.initComponent.apply(this, arguments);
