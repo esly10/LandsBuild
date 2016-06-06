@@ -38,7 +38,13 @@ ChargeAgencyPanel = Ext.extend(Ext.Panel, {
 					
 					handler: function(){
 						
-		            	var room_id = panel.charge.room_id;
+						var isEvent= panel.event;
+						var room_id = null;
+						if(isEvent ==0){
+							room_id = panel.charge.room_id;
+						}else{
+							room_id = panel.charge.reservation_id;
+						}
 		            	var date = panel.date.value;
 		            	var selector=2;
 		    			var body = Ext.getBody();
@@ -56,7 +62,7 @@ ChargeAgencyPanel = Ext.extend(Ext.Panel, {
 		    		        name: 'hidden-iframe',
 		    		       
 		    				scripts : true, 
-		    		        src: _contextPath + "/rooms/exportPDF?room_id="+ room_id + "&date=" + date + "&selector=" + selector
+		    		        src: _contextPath + "/rooms/exportPDF?room_id="+ room_id + "&date=" + date + "&selector=" + selector+ "&event=" + isEvent
 		    		      });    		
 		    		
 		            },text: 'Export'});
@@ -96,17 +102,26 @@ ChargeAgencyPanel = Ext.extend(Ext.Panel, {
 					
 		}
 			
+			var newId = null;
+			var roomParameter= null;
+			if(panel.event ==0){
+				newId = panel.charge.room_id;
+				roomParameter =   panel.charge.room_id
+			}else{
+				newId = panel.charge.reservation_number;
+				roomParameter =   panel.charge.reservation_id;
+			}
 			
 			var config = 
 			{
 				xtype: 'panel',
 			    title: 'Agency Charges',
-			    id: 'chargetab-agency-' + panel.charge.room_id,
+			    id: 'chargetab-agency-' + newId,
 			    padding: 5,
 			    bodyCssClass: 'x-citewrite-panel-body',
 			    autoScroll: true,
 			    buttonAlign: 'left',
-			    autoLoad : { url : _contextPath + '/rooms/details', scripts : true, params: {room_id: panel.charge.room_id, date: panel.date.value, selector: 2  } },
+			    autoLoad : { url : _contextPath + '/rooms/details', scripts : true, params: {room_id: roomParameter, date: panel.date.value, selector: 2, event: panel.event  } },
 			    buttons:  buttons
 			};
 			Ext.apply(this, Ext.apply(this.initialConfig, config));

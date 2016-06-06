@@ -147,7 +147,7 @@ Ext.onReady(function(){
 			    		}
 			    		else
 			    		{
-				    		chargePanel = new ChargeTabPanel({charge: record.data, date: Ext.getCmp('filter_date')   });
+				    		chargePanel = new ChargeTabPanel({charge: record.data, date: Ext.getCmp('filter_date'), isEvent: 0 });
 							tabs.add(chargePanel);
 							tabs.setActiveTab(chargePanel.id);
 			    		}
@@ -265,14 +265,14 @@ Ext.onReady(function(){
 			    		var record = grid.getStore().getAt(index);
 			    		var tabs = Ext.getCmp('chargetabs');
 
-			    		var chargePanel = tabs.find('id', 'Room-' + record.data.room_id + ' (' + Ext.getCmp('filter_date') + ')');
+			    		var chargePanel = tabs.find('id', 'Event-' + record.data.reservation_id + ' (' + record.data.reservation_number + ')');
 			    		if(chargePanel.length > 0)
 			    		{
 			    			tabs.setActiveTab(chargePanel[0]);
 			    		}
 			    		else
 			    		{
-				    		chargePanel = new ChargeTabPanel({charge: record.data, date: Ext.getCmp('filter_date')   });
+				    		chargePanel = new ChargeTabPanel({charge: record.data, date: Ext.getCmp('filter_date'), isEvent: 1   });
 							tabs.add(chargePanel);
 							tabs.setActiveTab(chargePanel.id);
 			    		}
@@ -481,23 +481,35 @@ Ext.onReady(function(){
 			ChargeTabPanel = Ext.extend(Ext.TabPanel, {
 				charge: null,
 				date: null,
+				isEvent: 0,
+				
+					
 				bodyCssClass: 'x-citewrite-panel-body',
 				initComponent: function()
 			    {
+					var idTest= null;
+					var tittleTest= null;
+					if (this.isEvent==0){
+						idTest= 'Room-' + this.charge.room_id + ' (' + this.date.value+ ')';
+						tittleTest='Room- '+ this.charge.room_no + ' (' + this.date.value+ ')';
+					}else{
+						idTest= 'Event-' + this.charge.reservation_id + ' (' + this.charge.reservation_number+ ')';
+						tittleTest='Event- '+ this.charge.reservation_id + ' (' + this.charge.reservation_number+ ')';
+					}
 					var config = {
-							id: 'Room-' + this.charge.room_id + ' (' + this.date.value+ ')',
-							title:'Room- '+ this.charge.room_no + ' (' + this.date.value+ ')',
-							tabPosition: 'bottom',
-							activeTab: 0,
-							closable: true,
-							autoDestroy: true,
-							enableTabScroll: true,
-						    items: [
-						            new ChargeGeneralPanel({charge: this.charge, date: this.date}),
-						            new ChargeAgencyPanel({charge: this.charge, date: this.date}),
-						            new ChargeGuestPanel({charge: this.charge, date: this.date})
-								   ]
-						        };
+						id: idTest,
+						title:tittleTest,
+						tabPosition: 'bottom',
+						activeTab: 0,
+						closable: true,
+						autoDestroy: true,
+						enableTabScroll: true,
+						items: [
+						            new ChargeGeneralPanel({charge: this.charge, date: this.date, event: this.isEvent}),
+						            new ChargeAgencyPanel({charge: this.charge, date: this.date, event: this.isEvent}),
+						            new ChargeGuestPanel({charge: this.charge, date: this.date, event: this.isEvent})
+							   ]
+					    };
 					
 			        Ext.apply(this, Ext.apply(this.initialConfig, config));
 			        

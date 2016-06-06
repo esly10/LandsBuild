@@ -198,7 +198,7 @@
 			<dl class="list"; style="font-size:14px;">
 				<dt style="background:#FFFFFF; color:#001a66; text-align:center; padding:5px; font-size:24px;">Detail of Charges</dt>	
 				<dd style="background:#FFFFFF; color:#001a66; text-align:center; padding:5px; font-size:24px;"></dd> 	
-				<dt style="background:#FFFFFF; color:#4d79ff; text-align:left; padding:5px; font-size:14px;"><c:out value="${reservation.reservation_number}" /></dt>	
+				<dt style="background:#FFFFFF; color:#4d79ff; text-align:left; padding:5px; font-size:14px;">${reservation.reservation_number}</dt>	
 				<dd style="background:#FFFFFF; color:#4d79ff; text-align:center; padding:5px; font-size:14px;"></dd> 	 	
 				<hr>	 
 				<dt>Check in:</dt><dd>${reservation.reservation_check_in_format}</dd>
