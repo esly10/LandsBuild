@@ -1,25 +1,7 @@
 Ext.onReady(function(){
 
 	var pageLimit = 50;
-	/*datePicker = Ext.form.DateField({
-		xtype: 'datefield',
-        fieldLabel: 'Date',
-        emptyText:"Now",
-        value: '',
-        enableKeyEvents: true,
-        format: 'Y-m-d H:i:s',
-		submitFormat: 'Y-m-d H:i:s',
-		submitValue : true,
-		altFormats: 'Y-m-d',
-		width: 150,
-		anchor: "12%",
-		id: 'filter_date',
-		name: 'filter_date'
-	});*/
-	//var now = Date.now();
-	//datePicker.setValue(new Date());
-	
-	
+		
 	var manageCharges = Ext.get('nav-payment');
 	if(manageCharges != null)
 	{
@@ -31,12 +13,6 @@ Ext.onReady(function(){
 		        totalProperty: 'count',
 		        remoteSort: true,
 		        fields: [
-		                 /*'ROOM_ID',
-				            'room_no',
-				            'ROOM_TYPE',
-				            'STATUS',
-				            'LOCATION_X',
-				            'LOCATION_Y'*/		   
 		            'room_no',
 		            'room_id',
 		            'room_type',
@@ -68,8 +44,8 @@ Ext.onReady(function(){
 					field: 'reservation_number',
 					direction: 'ASC'
 				},
-				baseParams: {IS_DELETE: 0 },
-				autoLoad: {params:{start:0, limit: this.pageLimit}}
+				baseParams: {IS_DELETE: 0, number:"none" },
+				autoLoad: {params:{start:0, limit: 100}}
 			});
 			
 			var ChargeList = function(viewer, config) {
@@ -200,18 +176,29 @@ Ext.onReady(function(){
 			            sortable: true
 			        },
 			        columns: [
-			               {header: '', sortable: true, dataIndex: 'room_no', width: 20, 
+			               {header: '', sortable: true, dataIndex: 'room_no', width: 25, 
 					            	renderer : function(value, meta, eventStore) {
-					            		meta.style = "background-color:#4f5f6f; color: #FFFFFF; height:24px; font-size: 12px;  font-weight: bold; width: 20px; ";
+					            		meta.style = "background-color:#4f5f6f; color: #FFFFFF; height:24px; font-size: 12px;  font-weight: bold; width: 25px; ";
 					            		 if(eventStore.data.reservation_status == 3) {
-						            	        meta.style = "background-color:#33cc33; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 20px;";
+						            	        meta.style = "background-color:#33cc33; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 25px;";
 						            	        return "IN";
 						            	 }
 					            		 if(eventStore.data.reservation_status == 1) {
-						            	        meta.style = "background-color:#ff8000; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 20px;";
+						            	        meta.style = "background-color:#ff8000; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 25px;";
 						            	        return "CF";
 						            	 }
-					            		 return	 "OP";
+					            		 if(eventStore.data.reservation_status == 4) {
+						            	        meta.style = "background-color:#cc0000; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 25px;";
+						            	        return "OU";
+						            	 }
+					            		 if(eventStore.data.reservation_status == 5) {
+						            	        meta.style = "background-color:#29a3a3; height:24px; color: #FFFFFF; font-size: 12px; font-weight: bold; width: 25px;";
+						            	        return "OP";
+						            	 }
+					            		 if(eventStore.data.reservation_status == 2) {
+						            	        return "CA";
+						            	 }
+					            		 return	 "NS";
 					            	}
 			                  },
 				            {header: 'Event Number', sortable: false, dataIndex: 'room_no', width: 110, 
@@ -224,7 +211,15 @@ Ext.onReady(function(){
 				            		 if(eventStore.data.reservation_status == 1) {
 				            	        meta.style = "background-color:#ffd9b3; height:24px; width: 110px;";
 				            	        return eventStore.data.reservation_number;
-				            		 }	
+				            		 }
+				            		 if(eventStore.data.reservation_status == 4) {
+				            			  meta.style = "background-color:#ff9999; height:24px; width: 110px;";
+					            	        return eventStore.data.reservation_number;
+					            	 }
+				            		 if(eventStore.data.reservation_status == 5) {
+				            			  meta.style = "background-color:#99e6e6; height:24px; width: 110px;";
+					            	        return eventStore.data.reservation_number;
+					            	 }
 				            		 return eventStore.data.reservation_number;
 				            }
 			           } 
@@ -404,7 +399,7 @@ Ext.onReady(function(){
 		                            ] // close items for first column
 		                        },{   // column #1
 		                            //columnWidth: '350px',
-		                        	columnWidth: .4,
+		                        	columnWidth: .35,
 		                            layout: 'form',
 		                            items: [
 		                                    {   
@@ -462,9 +457,25 @@ Ext.onReady(function(){
 		                                		text: 'Apply',
 		                			            width: 60,
 		                			            handler: function(){
-		                			               var params = filterForm.getForm().getFieldValues();
-		                			               store.baseParams = params;
-		                			              store.load({params: {start: 0, limit: pageLimit}});
+		                			            	var number = Ext.getCmp("event_number").getValue();
+		                			            	eventStore.baseParams = {IS_DELETE: 0, number:number};
+		                			            	eventStore.load({params: {start: 0, limit: pageLimit}});
+		                			            }
+		                			        }
+		                            ] // close items for first column
+		                        },{   // column #1
+		                            columnWidth: .05,
+		                            layout: 'form',
+		                            items: [
+		                                {  	  	xtype: 'button',
+		 										align: 'right' ,
+		 										buttonAlign:'right',
+		                                		text: 'Clear',
+		                			            width: 60,
+		                			            handler: function(){
+		                			            	var number = "none";
+		                			            	eventStore.baseParams = {IS_DELETE: 0, number:number};
+		                			            	eventStore.load({params: {start: 0, limit: pageLimit}});
 		                			            }
 		                			        }
 		                            ] // close items for first column
