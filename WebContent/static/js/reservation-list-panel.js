@@ -440,13 +440,19 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 							    	   name: 'filter_checkIn',
 							    	   fieldLabel: 'CheckIn Start',
 							    	   anchor:'95%',
-							    	   xtype: 'datefield'
+							    	   xtype: 'datefield',
+							    	   listeners : {
+											  select: function (t,n,o) {
+												  Ext.getCmp('filter_checkOut').setValue(t.value);
+											   }
+										}
 							       },{
 										xtype: 'box',
 										height: 10
 							       },
 							       {
 							    	   name: 'filter_checkOut',
+							    	   id: 'filter_checkOut',
 							    	   fieldLabel: 'CheckIn End',
 							    	   anchor:'95%',
 							    	   xtype: 'datefield'
