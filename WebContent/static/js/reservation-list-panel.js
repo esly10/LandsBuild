@@ -474,7 +474,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 							                {boxLabel: 'Uptd Today', name: 'rb', inputValue: 5, height: 32},
 							                {boxLabel: 'Crtd Week', name: 'rb', inputValue: 2, height: 32},
 							                {boxLabel: 'Uptd Week', name: 'rb', inputValue: 4, height: 32},
-							                {boxLabel: 'Crtd Month', name: 'rb', inputValue: 6, height: 32},
+							                {boxLabel: 'Crtd Yesterday', name: 'rb', inputValue: 6, height: 32},
 							                {boxLabel: 'Uptd Month', name: 'rb', inputValue: 3, height: 32}                 
 						               
 						            ],
