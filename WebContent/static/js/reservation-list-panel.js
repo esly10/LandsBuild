@@ -127,12 +127,11 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 		                text: 'Add Reservation',
 		                cls: 'x-btn-text details',
 		                handler: function(btn, event){ 
-		                	var content = Ext.getCmp('content-panel');
-		                	content.update('');
-		                	content.removeAll();		        			
-		        			content.add(new ReservationPanel());
-		        			content.doLayout();
+		                	                	
+		                	var url =  "http://"+window.location.host+window.location.pathname+"reservation?reservation_id=0";						
+							window.open(url); 
 		        			return;
+		        			
 		                }
 		             }];
 	    }
@@ -242,13 +241,18 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 	        listeners: {'rowcontextmenu': this.showContextMenu,
 					'rowdblclick': function(grid, index, event)
 						{
+							var record = grid.getStore().getAt(index);
+							var url =  "http://"+window.location.host+window.location.pathname+"reservation?reservation_id="+record.data.reservation_id;						
+							window.open(url); 
+		        			return;
+		        			/*
 							event.stopEvent();
 							var record = grid.getStore().getAt(index);
 							var content = Ext.getCmp('content-panel');
 		        			content.removeAll(true);			
 		        			content.add(new ReservationPanel({'reservationInfo' : record.data}));
 		        			content.doLayout();
-		        			return;
+		        			return;*/
 							
 					}, scope: this }
 	    });
@@ -566,7 +570,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 		var panel = this;
 		var record = grid.getStore().getAt(index);
 		
-		var items = new Array({
+		var items = new Array(/*{
 					text: 'Details',
 					handler: function() 
 					{
@@ -575,6 +579,15 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 	        			content.removeAll(true);			
 	        			content.add(new ReservationPanel({'reservationInfo' : record.data}));
 	        			content.doLayout();
+	        			return;
+					}
+				},*/
+				{
+					text: 'Details New Tab',
+					handler: function() 
+					{						
+						var url =  "http://"+window.location.host+window.location.pathname+"reservation?reservation_id="+record.data.reservation_id;						
+						window.open(url); 
 	        			return;
 					}
 				});

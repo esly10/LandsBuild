@@ -4,11 +4,16 @@ Ext.onReady(function(){
 	{
 		
 		invoice.on('click',function(){
-			var content = Ext.getCmp('content-panel');
+			
+			var url =  "http://"+window.location.host+window.location.pathname+"reservation?reservation_id=0";						
+			window.open(url); 
+			return;
+			
+			/*var content = Ext.getCmp('content-panel');
 			content.removeAll(true);			
 			content.add(new ReservationPanel());
 			content.doLayout();
-			return;
+			return;*/
 		});//end onclick 
 	}
 });

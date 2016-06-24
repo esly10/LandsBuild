@@ -41,4 +41,5 @@
 	
 	<mvc:view-controller path="/" view-name="index" />
 	<mvc:view-controller path="/login" view-name="login" />	
+	<mvc:view-controller path="/reservation" view-name="index" />			
 </beans>

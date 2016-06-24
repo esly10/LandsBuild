@@ -3183,11 +3183,16 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 						Ext.growl.message('Success!', 'Reservation has been saved.');
 						
 						if(type == "done"){
+							if(window.location.pathname.split("/").pop() == "reservation"){
+								window.close();
+								return;
+							}else {
 							var content = Ext.getCmp('content-panel');
 							content.removeAll(true);						
 							content.add(new ReservationListPanel());
 							content.doLayout();
 							return;
+						}
 						}
 					
 					}else{

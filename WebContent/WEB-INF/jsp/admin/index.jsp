@@ -5,6 +5,7 @@
 <%@ page import="com.cambiolabs.citewrite.data.User" %>
 <%
 	User cwUser = User.getCurrentUser();
+	String reservation_id = request.getParameter("reservation_id");
 	pageContext.setAttribute("user", cwUser);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,6 +42,7 @@
 		var _isAdmin = <%= (cwUser.isAdmin())?"true":"false" %>;
 		var _contextPath = '<%= request.getContextPath() %>/admin';
 		var _rootContextPath = '<%= request.getContextPath() %>';
+		var _is_id_reservation = '<%= reservation_id %>';
 	</script>
 		
 	<link rel="stylesheet" type="text/css" href="<c:url value="/static/js/library/ext/ux/fileuploadfield/css/fileuploadfield.css" />"/>
@@ -152,6 +154,50 @@
         
     <script type="text/javascript">
     Ext.onReady(function(){
+    	
+    	if(_is_id_reservation != "" && _is_id_reservation >= 0){
+    		if(_is_id_reservation > 0){   			
+    		
+	    		Ext.Ajax.request({
+	    			  url: _contextPath + '/reservation/reservationList',
+	    			   success: function(response, opts){
+	    				    data = Ext.decode(response.responseText);
+	    				   
+	    				    var content = Ext.getCmp('content-panel');
+	    		            content.update('');
+	    		            content.removeAll();
+	    				    content.add(new ReservationPanel({'reservationInfo' : data.reservations[0]}));
+	    					content.doLayout();
+	    					
+	    					$jQuery("#tool-options").hide();
+	    					$jQuery("#navigation-panel span").hide();
+	    					$jQuery('head title', window.parent.document).text('Reservation Tab');
+	    					
+	    					return;
+	    			   },
+	    			   failure: function(response, opts){
+	    				   Ext.Msg.show({
+	    					   title:'Error!',
+	    					   msg: 'Error loading Agency information.',
+	    					   buttons: Ext.Msg.OK,
+	    					   icon: Ext.MessageBox.ERROR
+	    					});
+	    			   },
+	    			   params: {reservation_id: _is_id_reservation}
+	    		});
+    		}else {
+    			var content = Ext.getCmp('content-panel');
+	        	content.update('');
+	        	content.removeAll();		        			
+				content.add(new ReservationPanel());
+				content.doLayout();
+				$jQuery("#tool-options").hide();
+				$jQuery("#navigation-panel span").hide();
+				$jQuery('head title', window.parent.document).text('Reservation Tab');
+				return;
+    		}
+    		
+    	}else {
     	var nav = Ext.getCmp('navigation-panel');
     	nav.doLayout();    	
     	
@@ -160,6 +206,7 @@
 		content.add(new CalendarPanel());
 		content.doLayout();
 		return;
+    	}
     });
     </script>
 </body>
