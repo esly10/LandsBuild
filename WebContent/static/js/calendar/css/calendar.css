@@ -15,8 +15,8 @@ body {
 /*/'1', 'Confirmed'*/
 
 .time-sch-item.item-status-1 {
-  	background-color: #35A0F0;
-  	border-color: #E1E1E1; 
+  	background-color: #0072c7;
+  	border-color: #0072c7; 
 }
 
 .time-sch-item.item-status-1:hover {
@@ -38,8 +38,8 @@ body {
  
 /*'3', 'Check in' */
 .time-sch-item.item-status-3 {
-  border-color: #E1E1E1; 
-  	background-color: #49E34C; 
+  border-color: #009a03; 
+  	background-color: #009a03; 
 }
 .time-sch-item.item-status-3:hover {
 	background-color: #ff5555;

@@ -46,8 +46,8 @@
 			background: -moz-linear-gradient(center top, #4F5F6F 5%, #4F5F6F 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4F5F6F',
 				endColorstr='#4F5F6F');
-			background-color: #4F5F6F;
-			color: #FFFFFF;
+			background-color: #FFFFFF;
+			color: #000000;
 			font-size:  16px;
 			font-weight: normal;
 			padding: 5px 3px;
@@ -157,7 +157,7 @@
 		<div class="mealplan" style="width: 100%; float: left;">
 		 <hr>  
 		<table>
-			  <thead>
+			  <thead style="background:#FFFFFF; color:#000000;">
 				  <tr>
 				    <th>Room No</th><th>Guest Name</th><th>Qty</th><th>Plan</th><th style="text-align:center;">Breakfast</th> <th style="text-align:center;">Launch</th><th style="text-align:center;">Dinner</th>
 				  </tr>

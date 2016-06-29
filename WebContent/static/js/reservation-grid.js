@@ -3873,7 +3873,20 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                editor: new fm.NumberField({
 	                    allowBlank: false,
 	                    allowNegative: false,
-	                    maxValue: 10000
+	                    enableKeyEvents: true,
+	                    maxValue: 10000,
+	                    listeners: {
+	                        
+	                        keydown:    {
+	                            element: 'el',
+	                            fn: function(e,el){	                               
+	                            	if(el.keyCode == 13){	                            		
+	                            		panel.calculateResults();
+	                            	}
+	                            }
+	                        }            
+	                       
+	                    }
 	                })
 	            },{
 	                id: 'charge_nights',
@@ -3892,7 +3905,20 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                	}		            	 
 	        		},
 	                editor: new fm.TextField({
-	                    allowBlank: false
+	                    allowBlank: false,
+	                    enableKeyEvents: true,
+	                    listeners: {
+	                        
+	                        keydown:    {
+	                            element: 'el',
+	                            fn: function(e,el){	                               
+	                            	if(el.keyCode == 13){	                            		
+	                            		panel.calculateResults();
+	                            	}
+	                            }
+	                        }            
+	                       
+	                    }
 	                })
 	            },{
 	            	id:'charge_rate',
@@ -3905,7 +3931,16 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    allowBlank: false,
 	                    allowNegative: false,
 	                    maxValue: 100000,
+	                    enableKeyEvents: true,
 	                    listeners:{
+	                    	keydown:    {
+	                            element: 'el',
+	                            fn: function(e,el){	                               
+	                            	if(el.keyCode == 13){	                            		
+	                            		panel.calculateResults();
+	                            	}
+	                            }
+	                        },
 	                    	edit : function(self,newValue,oldValue){
 				        		  /*self.gridEditor.col;
 				        		   self.gridEditor.row;
@@ -3984,15 +4019,79 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		        {
 		        	'rowcontextmenu': panel.showContextMenuCharges,	
 		        	change : function(){
-		        		alert("change");
+		        		//alert("change");
 		        	},
 		        	'click' : function(){
+		        		panel.calculateResults();
+		        	}
+		        },
+	            tbar: [{
+	                text: 'Add Row',
+	                handler : function(){
 		        		
-		        		// update row charge_total of grid 
-		        		/*var calculate_tax = 0;
-		        		if(Ext.getCmp("reservation_ignore_tax").getValue() == "0"){
-		        			calculate_tax = 1;
-		        		}*/
+	                	// access the Record constructor through the grid's store
+	                   // var Data = ChargeGrid.getStore().recordType;
+	                    var Data = Ext.data.Record.create([
+	                                   {name: 'charge_id', mapping : "charge_id", type: 'int'},
+	                                   {name: 'charge_reservation_id', mapping : "charge_reservation_id", type: 'int'},
+	                                   {name: 'charge_item_name', mapping : "charge_item_name", type: 'string'},
+	                                   {name: 'charge_item_desc',  mapping : "charge_item_desc",  type: 'string'},
+	                                   {name: 'charge_qty',  mapping : "charge_qty",  type: 'int'},
+	                                   {name: 'charge_nights',  mapping : "charge_nights",  type: 'string'},
+	                                   {name: 'charge_rate',  mapping : "charge_rate",  type: 'float'},
+	                                   {name: 'charge_total',  mapping : "charge_total",  type: 'float'},
+	                                   {name: 'charge_folio',  mapping : "charge_folio"},
+	                                   {name: 'unique_id',  mapping : "unique_id"},
+								                         ]);
+	                    var d = new Data({
+	                    	charge_id: 	0,
+	                    	charge_reservation_id: 	panel.reservation_id,
+	                    	charge_item_name: 	'',
+	                    	charge_item_desc: 	'',
+	                    	charge_qty: 		1,
+	                    	charge_nights:		'X', 	
+	                    	charge_rate: 		0,
+	                    	charge_total: 		0,
+	                    	charge_folio: 		'Guest',
+	                    	unique_id: 			panel.uniqueID()	                    	
+	                    });
+	                    ChargeGrid.stopEditing();
+	                    chargesStore.insert(chargesStore.data.length, d);
+	                    ChargeGrid.startEditing(chargesStore.data.length, 0);
+	                }
+	            },
+	            '-',
+	            {
+	                text: 'Refresh',
+	                handler : function(){
+	                	
+	                	if(panel.reservation_id > 0){
+	                		panel.loadCharges();
+	                		ChargeGrid.fireEvent("click");
+	                		Ext.growl.message('Success', 'Refreshed!');
+	                	}else {
+	                		//ChargeGrid.fireEvent("click");
+	                		Ext.growl.message('Error!', 'You must save the reservation information before save a charges.');
+	        	    		return false;
+	                	}
+	                	
+	                }
+	            }]
+	        });
+
+	     
+	    		    	
+	    	return ChargeGrid;
+	    	
+	    },
+	    calculateSubTotal: function (grid){
+	    	sum = 0;
+	    	grid.getStore().each(function(record,id){
+	    		sum  += record.data.charge_total;
+			});	    	
+	    	Ext.getCmp("sub_total").setValue('$'+Ext.util.Format.number(sum, '0.00'));	    	
+	    },
+	    calculateResults: function(){
 		        		
 		        		var calculate_tax_serv = 0;//Ext.getCmp("reservation_ignore_service").getValue();
 		        		var sum = 0.00;
@@ -4059,73 +4158,6 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		        		Ext.getCmp("balance").setValue(balance);
 		        		
 		        		//panel.calculateSubTotal(ChargeGrid);
-		        	}
-		        },
-	            tbar: [{
-	                text: 'Add Row',
-	                handler : function(){
-	                	
-	                	// access the Record constructor through the grid's store
-	                   // var Data = ChargeGrid.getStore().recordType;
-	                    var Data = Ext.data.Record.create([
-	                                   {name: 'charge_id', mapping : "charge_id", type: 'int'},
-	                                   {name: 'charge_reservation_id', mapping : "charge_reservation_id", type: 'int'},
-	                                   {name: 'charge_item_name', mapping : "charge_item_name", type: 'string'},
-	                                   {name: 'charge_item_desc',  mapping : "charge_item_desc",  type: 'string'},
-	                                   {name: 'charge_qty',  mapping : "charge_qty",  type: 'int'},
-	                                   {name: 'charge_nights',  mapping : "charge_nights",  type: 'string'},
-	                                   {name: 'charge_rate',  mapping : "charge_rate",  type: 'float'},
-	                                   {name: 'charge_total',  mapping : "charge_total",  type: 'float'},
-	                                   {name: 'charge_folio',  mapping : "charge_folio"},
-	                                   {name: 'unique_id',  mapping : "unique_id"},
-								                         ]);
-	                    var d = new Data({
-	                    	charge_id: 	0,
-	                    	charge_reservation_id: 	panel.reservation_id,
-	                    	charge_item_name: 	'',
-	                    	charge_item_desc: 	'',
-	                    	charge_qty: 		1,
-	                    	charge_nights:		'X', 	
-	                    	charge_rate: 		0,
-	                    	charge_total: 		0,
-	                    	charge_folio: 		'Guest',
-	                    	unique_id: 			panel.uniqueID()	                    	
-	                    });
-	                    ChargeGrid.stopEditing();
-	                    chargesStore.insert(chargesStore.data.length, d);
-	                    ChargeGrid.startEditing(chargesStore.data.length, 0);
-	                }
-	            },
-	            '-',
-	            {
-	                text: 'Refresh',
-	                handler : function(){
-	                	
-	                	if(panel.reservation_id > 0){
-	                		panel.loadCharges();
-	                		ChargeGrid.fireEvent("click");
-	                		Ext.growl.message('Success', 'Refreshed!');
-	                	}else {
-	                		//ChargeGrid.fireEvent("click");
-	                		Ext.growl.message('Error!', 'You must save the reservation information before save a charges.');
-	        	    		return false;
-	                	}
-	                	
-	                }
-	            }]
-	        });
-
-	     
-	    		    	
-	    	return ChargeGrid;
-	    	
-	    },
-	    calculateSubTotal: function (grid){
-	    	sum = 0;
-	    	grid.getStore().each(function(record,id){
-	    		sum  += record.data.charge_total;
-			});	    	
-	    	Ext.getCmp("sub_total").setValue('$'+Ext.util.Format.number(sum, '0.00'));	    	
 	    },
 	    showContextMenuCharges: function(grid, index, event)
 		{
