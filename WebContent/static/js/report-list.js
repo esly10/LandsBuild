@@ -15,7 +15,8 @@ Ext.onReady(function(){
 				[5,"Meal Plan"],
 				[6,"Payments"],
 				[7,"Statuses"],
-				[8,"Ocupancy"]
+				[8,"Ocupancy"],
+				[9,"HouseKeeper"]
 				],
 				reader: new Ext.data.ArrayReader( { id: 'id' },	['id',  'Name',]) 
 			}) ;
@@ -79,6 +80,8 @@ Ext.onReady(function(){
 			            	    	meta.style = "background-color:#16df9d; background-image: url("+_rootContextPath+"/static/images/status-report.png);  background-repeat: no-repeat; background-position: center;  height:50px;";
 			            	    }else if(dataStore.data.id == 8) {
 			            	    	meta.style = "background-color:#fd8838; background-image: url("+_rootContextPath+"/static/images/monthly-report.png); background-repeat: no-repeat; background-position: center;  height:50px;";
+			            	    }else if(dataStore.data.id == 9) {
+			            	    	meta.style = "background-color:#002db3; background-image: url("+_rootContextPath+"/static/images/cleaner-report.png); background-repeat: no-repeat; background-position: center;  height:50px;";
 			            	    }else{
 			            	    	meta.style = "background-color:gray; background-image: url(/"+_rootContextPath+"/static/images/monthly-report.png); background-repeat: no-repeat; background-position: center;  height:50px;";
 			            	    }
@@ -167,6 +170,15 @@ Ext.onReady(function(){
 			    			Ext.getCmp("filter_start").hide();
 				    		Ext.getCmp("filter_end").hide();
 				    		Ext.getCmp("filter_year").show();
+				    		Ext.getCmp("filter_pay").hide();
+				    		Ext.getCmp("filter_button").show();
+				    		Ext.getCmp("filter_pdf").hide();
+				    		Ext.getCmp("filter_password").hide();
+			    		}else if(record.data.id== 9){
+			    			Ext.getCmp("filterRegion").expand();
+			    			Ext.getCmp("filter_start").show();
+				    		Ext.getCmp("filter_end").hide();
+				    		Ext.getCmp("filter_year").hide();
 				    		Ext.getCmp("filter_pay").hide();
 				    		Ext.getCmp("filter_button").show();
 				    		Ext.getCmp("filter_pdf").hide();

@@ -3877,14 +3877,35 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    maxValue: 10000,
 	                    listeners: {
 	                        
-	                        keydown:    {
+	                    	blur:    {
 	                            element: 'el',
 	                            fn: function(e,el){	                               
-	                            	if(el.keyCode == 13){	                            		
+	                            		                            		
 	                            		panel.calculateResults();
-	                            	}
+	                            	
 	                            }
-	                        }            
+	                        },keypress:    {
+	                            element: 'el',
+	                            fn: function(e,el){	                               
+	                            		                            		
+	                            		panel.calculateResults();
+	                            	
+	                            }
+	                        },keyup:    {
+	                            element: 'el',
+	                            fn: function(e,el){	                               
+	                            		                            		
+	                            		panel.calculateResults();
+	                            	
+	                            }
+	                        },keydown:    {
+	                            element: 'el',
+	                            fn: function(e,el){	                               
+	                            		                            		
+	                            		panel.calculateResults();
+	                            	
+	                            }
+	                        }                  
 	                       
 	                    }
 	                })
