@@ -17,8 +17,8 @@
 	</div>	
 		<div class="mealplan" style="width: 100%; float: left;">
 		 <hr>  
-		<table>
-			  <thead>
+		<table border="1">
+	 		  <thead>
 				  <tr>
 				  <th>Room No</th>
 				  <c:forEach items="${calendar}" var="item">	
@@ -27,17 +27,16 @@
 				  </tr>
 			  </thead>
 			 
-			<c:forEach items="${rooms}" var="item">	
+			<c:forEach items="${reservationsweek}" var="item">	
 			 <tr>
-			 		<td><c:out value="${item.ROOM_NO}" /></td>
-			 		
-			 		<td></td>
-					<td></td> 
-					<td></td>
-					<td></td>
-					<td></td> 
-					<td></td>
-					<td></td>							
+			 		<td><c:out value="${item.roomid}" /></td>
+			 		<td><c:out value="${item.name1}" /></td>
+					<td><c:out value="${item.name2}" /></td> 
+					<td><c:out value="${item.name3}" /></td>
+					<td><c:out value="${item.name4}" /></td>
+					<td><c:out value="${item.name5}" /></td> 
+					<td><c:out value="${item.name6}" /></td>
+					<td><c:out value="${item.name7}" /></td>							
 			 </tr>		
 			</c:forEach>
 			
