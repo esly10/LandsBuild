@@ -3877,33 +3877,12 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    maxValue: 10000,
 	                    listeners: {
 	                        
-	                    	blur:    {
+	                    	change:    {
 	                            element: 'el',
 	                            fn: function(e,el){	                               
-	                            		                            		
+	                            	setTimeout(function() {   //calls click event after a certain time
 	                            		panel.calculateResults();
-	                            	
-	                            }
-	                        },keypress:    {
-	                            element: 'el',
-	                            fn: function(e,el){	                               
-	                            		                            		
-	                            		panel.calculateResults();
-	                            	
-	                            }
-	                        },keyup:    {
-	                            element: 'el',
-	                            fn: function(e,el){	                               
-	                            		                            		
-	                            		panel.calculateResults();
-	                            	
-	                            }
-	                        },keydown:    {
-	                            element: 'el',
-	                            fn: function(e,el){	                               
-	                            		                            		
-	                            		panel.calculateResults();
-	                            	
+	                            	}, 200);
 	                            }
 	                        }                  
 	                       
@@ -3930,12 +3909,12 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    enableKeyEvents: true,
 	                    listeners: {
 	                        
-	                        keydown:    {
+	                    	change:    {
 	                            element: 'el',
 	                            fn: function(e,el){	                               
-	                            	if(el.keyCode == 13){	                            		
+	                            	setTimeout(function() {   //calls click event after a certain time
 	                            		panel.calculateResults();
-	                            	}
+	                            	}, 200);
 	                            }
 	                        }            
 	                       
@@ -3954,26 +3933,15 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	                    maxValue: 100000,
 	                    enableKeyEvents: true,
 	                    listeners:{
-	                    	keydown:    {
+	                    	change:    {
 	                            element: 'el',
 	                            fn: function(e,el){	                               
-	                            	if(el.keyCode == 13){	                            		
+	                            	setTimeout(function() {   //calls click event after a certain time
 	                            		panel.calculateResults();
+	                            	}, 200);
 	                            	}
 	                            }
-	                        },
-	                    	edit : function(self,newValue,oldValue){
-				        		  /*self.gridEditor.col;
-				        		   self.gridEditor.row;
-				        		    var sm = articlesListGrid.getSelectionModel().getSelected();
-				        		   */				        		   
-				        		   /*var sm = ChargeGrid.getSelectionModel().selection.record;
-				        		   sm.set('charge_total',newValue);
-				        		   panel.calculateSubTotal(ChargeGrid);*/
 				        		  
-				        		   /*var grid = ChargeGrid;
-				        		   var models = grid.getStore().getRange();*/
-				               }				          
 				        }
 	                })
 	            },{

@@ -12,6 +12,19 @@
 		}
 	}
 </script>
+<style>
+	@page {
+	        size:A4 landscape;
+	        margin: 0;
+	       
+	    }
+	@media print {
+        html, body {
+          
+            -webkit-print-color-adjust: exact;       
+        }
+    }
+</style>
 <style type="text/css">
 		 .mealplan table {
 			border-collapse: collapse;
@@ -58,9 +71,10 @@
 		}
 		
 		.mealplan table tbody td {
-			color: #4F5F6F;
-			font-size: 12px;
-			font-weight: normal;
+			 color: #4F5F6F;
+    		font-size: 12px;
+    		font-weight: normal;
+    		border: 1px solid black;
 		}
 		
 		.mealplan table tbody .alt td {
