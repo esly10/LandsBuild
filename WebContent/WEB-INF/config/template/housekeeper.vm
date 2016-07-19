@@ -12,18 +12,11 @@
 		}
 	}
 </script>
-<style>
-	@page {
-	        size:A4 landscape;
-	        margin: 0;
-	       
-	    }
-	@media print {
-        html, body {
-          
-            -webkit-print-color-adjust: exact;       
-        }
+<style type="text/css" media="print">
+    @page { 
+        size: landscape;
     }
+   
 </style>
 <style type="text/css">
 		 .mealplan table {
@@ -50,7 +43,7 @@
 		}
 		
 		.mealplan table td,.datagrid table th {
-			padding: 5px 5px;
+			padding: 0px 0px;
 		}
 		
 		.mealplan table thead th {
@@ -63,7 +56,7 @@
 			color: #000000;
 			font-size:  16px;
 			font-weight: normal;
-			padding: 5px 3px;
+			padding: 0px 0px;
 		}
 		
 		.mealplan table thead th:first-child {
@@ -71,7 +64,7 @@
 		}
 		
 		.mealplan table tbody td {
-			 color: #4F5F6F;
+			 color: #000000;
     		font-size: 12px;
     		font-weight: normal;
     		border: 1px solid black;
@@ -79,7 +72,7 @@
 		
 		.mealplan table tbody .alt td {
 			background: #E1E1E1;
-			color: #4F5F6F;
+			color: #000000;
 		}
 		
 		.mealplan table tbody td:first-child {
@@ -101,7 +94,7 @@
 		}
 		
 		.mealplan table tfoot td div {
-			padding: 2px;
+			padding: 0px;
 		}
 		
 		.mealplan table tfoot td ul {
@@ -118,7 +111,7 @@
 		.mealplan table tfoot li a {
 			text-decoration: none;
 			display: inline-block;
-			padding: 2px 8px;
+			padding: 0px 0px;
 			margin: 1px;
 			color: #FFFFFF;
 			border: 1px solid #999999;
@@ -147,11 +140,7 @@
 		div.dhtmlx_window_active,div.dhx_modal_cover_dv {
 			position: fixed !important;
 		}
-		
-		@page {
-	        size:a4;
-	        margin: 0;
-	    }
+	
 </style>
 
 </head>
@@ -159,10 +148,10 @@
 	<div style="width: 100%; float: left;">
 		<div style="width: 100%; float: left;">
 			<dl class="list" style="font-size:14px;">
-				<dt style="background:#FFFFFF; color:#002db3; text-align:center; padding:5px; font-size:24px;">HouseKeeper Report</dt>	
-				<dd style="background:#FFFFFF; color:#002db3; text-align:center; padding:5px; font-size:24px;"></dd> 	
-				<dt style="background:#FFFFFF; color:#00b8e6; text-align:left; padding:5px; font-size:14px;">${start.formatdate}</dt>
-				<dd style="background:#FFFFFF; color:#00b8e6; text-align:center; padding:5px; font-size:14px;"></dd> 	
+				<dt style="background:#FFFFFF; color:#000000; text-align:center; padding:5px; font-size:24px;">HouseKeeper Report</dt>	
+				<dd style="background:#FFFFFF; color:#000000; text-align:center; padding:5px; font-size:24px;"></dd> 	
+				<dt style="background:#FFFFFF; color:#000000; text-align:left; padding:5px; font-size:14px;">${start.formatdate}</dt>
+				<dd style="background:#FFFFFF; color:#000000; text-align:center; padding:5px; font-size:14px;"></dd> 	
 				
 			</dl>
 		</div>	
@@ -199,26 +188,7 @@
 					#else
 						<td bgcolor="#ffff4d">${item.name3}</td>
 					#end
-					#if (!$item.name4)
-						<td></td>
-					#else
-						<td bgcolor="#ffff4d">${item.name4}</td>
-					#end
-					#if (!$item.name5)
-						<td></td>
-					#else
-						<td bgcolor="#ffff4d">${item.name5}</td>
-					#end
-					#if (!$item.name6)
-						<td></td>
-					#else
-						<td bgcolor="#ffff4d">${item.name6}</td>
-					#end
-					#if (!$item.name7)
-						<td></td>
-					#else
-						<td bgcolor="#ffff4d">${item.name7}</td>
-					#end									
+								
 			 </tr>		
 			#end
 			
