@@ -14,7 +14,7 @@
 </script>
 <style type="text/css" media="print">
     @page { 
-        size: landscape;
+        margin: 5mm 5mm 5mm 5mm; 
     }
    
 </style>
@@ -47,14 +47,14 @@
 		}
 		
 		.mealplan table thead th {
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4F5F6F
-				), color-stop(1, #4F5F6F));
-			background: -moz-linear-gradient(center top, #4F5F6F 5%, #4F5F6F 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4F5F6F',
-				endColorstr='#4F5F6F');
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #FFFFFF
+				), color-stop(1, #FFFFFF));
+			background: -moz-linear-gradient(center top, #FFFFFF 5%, #FFFFFF 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF',
+				endColorstr='#FFFFFF');
 			background-color: #FFFFFF;
 			color: #000000;
-			font-size:  16px;
+			font-size:  12px;
 			font-weight: normal;
 			padding: 0px 0px;
 		}
@@ -65,9 +65,11 @@
 		
 		.mealplan table tbody td {
 			 color: #000000;
-    		font-size: 12px;
+    		font-size: 11px;
     		font-weight: normal;
     		border: 1px solid black;
+    		height: 27px;
+    		width: 12%;
 		}
 		
 		.mealplan table tbody .alt td {
@@ -134,8 +136,8 @@
 			background-color: #4F5F6F;
 		}
 		dl {}
-		dl.list dt { clear: left; float: left; width: 130px; font-weight: bold;  height: 15px; line-height: 15px; margin-bottom: 2px; white-space: nowrap; color: #0D324C; }
-		dl.list dd { margin-left:105px; /*width: 300px;*/ overflow: hidden; height: 15px; line-height: 15px; margin-bottom: 10px; color: #4F5F6F;}
+		dl.list dt { clear: left; float: left; width: 130px; font-weight: bold;  height: 10px; line-height: 10px; margin-bottom: 0px; white-space: nowrap; color: #0D324C; }
+		dl.list dd { margin-left:105px; /*width: 300px;*/ overflow: hidden; height: 10px; line-height: 10px; margin-bottom: 1px; color: #4F5F6F;}
 		dl.list dt.spacer { height: 10px; line-height:0px; width: 275px; margin-bottom: 0px; float: none; }
 		div.dhtmlx_window_active,div.dhx_modal_cover_dv {
 			position: fixed !important;
@@ -146,13 +148,10 @@
 </head>
 <body onload="myFunction();">
 	<div style="width: 100%; float: left;">
-		<div style="width: 100%; float: left;">
+		<div style="width: 100%; float: right;">
 			<dl class="list" style="font-size:14px;">
-				<dt style="background:#FFFFFF; color:#000000; text-align:center; padding:5px; font-size:24px;">HouseKeeper Report</dt>	
-				<dd style="background:#FFFFFF; color:#000000; text-align:center; padding:5px; font-size:24px;"></dd> 	
-				<dt style="background:#FFFFFF; color:#000000; text-align:left; padding:5px; font-size:14px;">${start.formatdate}</dt>
-				<dd style="background:#FFFFFF; color:#000000; text-align:center; padding:5px; font-size:14px;"></dd> 	
-				
+				<dt style="background:#FFFFFF; color:#000000; text-align:center; padding:2px; font-size:18px; float: center;"><center>HouseKeeper Report</center></dt>	
+				<dd style="background:#FFFFFF; color:#000000; text-align:center; padding:2px; font-size:14px; float: right;"><center>${start.formatdate}</center></dd> 			
 			</dl>
 		</div>	
 	</div>	
@@ -173,7 +172,7 @@
 			 <tr>
 			 		<td>${item.roomid}</td>
 			 		#if (!$item.name1)
-						<td></td>
+						<td ></td>
 					#else
 						<td bgcolor="#ffff4d">${item.name1}</td>
 					#end
@@ -188,7 +187,26 @@
 					#else
 						<td bgcolor="#ffff4d">${item.name3}</td>
 					#end
-								
+					#if (!$item.name4)
+						<td></td>
+					#else
+						<td bgcolor="#ffff4d">${item.name4}</td>
+					#end
+					#if (!$item.name5)
+						<td></td>
+					#else
+						<td bgcolor="#ffff4d">${item.name5}</td>
+					#end
+					#if (!$item.name6)
+						<td></td>
+					#else
+						<td bgcolor="#ffff4d">${item.name6}</td>
+					#end
+					#if (!$item.name7)
+						<td></td>
+					#else
+						<td bgcolor="#ffff4d">${item.name7}</td>
+					#end		
 			 </tr>		
 			#end
 			
