@@ -15,6 +15,7 @@
 <style type="text/css" media="print">
     @page { 
         margin: 5mm 5mm 5mm 5mm; 
+        contentType="text/html; charset=UTF-8";
     }
    
 </style>
@@ -30,6 +31,7 @@
 			border-collapse: collapse;
 			text-align: left;
 			width: 100%;
+			table-layout: fixed;
 		}
 		
 		.mealplan {
@@ -68,8 +70,11 @@
     		font-size: 11px;
     		font-weight: normal;
     		border: 1px solid black;
-    		height: 27px;
+    		height: 28px;
     		width: 12%;
+    		overflow:hidden;
+    		white-space:nowrap;
+    		text-overflow: ellipsis;
 		}
 		
 		.mealplan table tbody .alt td {
@@ -163,14 +168,14 @@
 				  <th>Room</th>
 				  
 				   	#foreach($item in ${calendar})
-				    	<th>${item.formatsmall}</th>
+				    	<th style="font-weight: bold;">${item.formatsmall}</th>
 				  	#end
 				  </tr>
 			  </thead>
 			 
 			 #foreach($item in ${reservationsweek})
 			 <tr>
-			 		<td>${item.roomid}</td>
+			 		<td style="font-weight: bold; font-size:14px; text-align:center;">${item.roomid}</td>
 			 		#if (!$item.name1)
 						<td ></td>
 					#else
