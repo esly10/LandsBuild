@@ -165,7 +165,7 @@
 		<table border="1">
 	 		  <thead>
 				  <tr>
-				  <th>Room</th>
+				  <th style="font-weight: bold;">Room</th>
 				  
 				   	#foreach($item in ${calendar})
 				    	<th style="font-weight: bold;">${item.formatsmall}</th>
