@@ -2973,6 +2973,16 @@ ReservationPanel = Ext.extend(Ext.Panel, {
        		}
     		}    	
     		
+    		/*if((Ext.getCmp("charge_nights").getValue()!="X") && (Ext.getCmp("charge_nights").getValue()==Ext.getCmp("reservation_nights").getValue())){
+   			 Ext.Msg.show({
+					   title:'Error!',
+					   msg: 'the nights must match the rooms.',
+					   buttons: Ext.Msg.OK,
+					   icon: Ext.MessageBox.ERROR
+				});
+   			 return false;
+    		}*/
+    		
     		if(!Ext.getCmp("radio-info").getForm().isValid()){
     			 Ext.Msg.show({
  					   title:'Error!',
