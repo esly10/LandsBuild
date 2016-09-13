@@ -871,6 +871,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																		    allowBlank: false,
 																		    listeners:{
 																		    	change : function(val){
+																		    		var value_ngts = val.getValue();
 																		    		var now = Ext.getCmp("reservation_check_in").getValue();
 																		    		if(now != ""){
 																		    			now.setDate(now.getDate() + parseInt(val.getValue()));
@@ -895,6 +896,17 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	    			        }
 																	    			     });
 																		    		}
+																		    																				    		
+																		    		chargesStore.each(function(record,id){				    					
+																	        			if(record.data.charge_item_name == "Room" || record.data.charge_item_name == "Room NS"){
+																	        				if(value_ngts == 1){
+																	        					record.set('charge_nights',"X");
+																	        				} else {
+																	        					record.set('charge_nights',value_ngts);
+																	        				}
+																    					}
+																    				});
+																		    		panel.calculateResults();
 																		    																				    		
 																		    	}
 																		    }
@@ -3011,6 +3023,26 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    submitReservaion: function(type){
 	    	
 	    	var panel = this;
+	    	var check_error = false;
+	    	var value_ngts = Ext.getCmp("reservation_nights").getValue();
+	    	chargesStore.each(function(record,id){				    					
+    			if(record.data.charge_item_name == "Room" || record.data.charge_item_name == "Room NS"){
+    				if(value_ngts != record.data.charge_nights){
+    					check_error = true;
+    					Ext.Msg.show({
+    	  					   title:'Error!',
+    	  					   msg: 'Nights field and Nights in Room row of Charges grid must be the same.',
+    	  					   buttons: Ext.Msg.OK,
+    	  					   icon: Ext.MessageBox.ERROR
+    		    			});
+    					return false;
+    				}
+				}
+			});
+	    	
+	    	if(check_error){
+	    		return false;
+	    	}
 	    	if(Ext.getCmp("reservation_type").getValue() == 3){
 	    		if(Ext.getCmp("reservation_event_date").getValue() == "")
 	    		{
