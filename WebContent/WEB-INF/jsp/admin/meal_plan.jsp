@@ -26,9 +26,9 @@
 			 
 			<c:forEach items="${reservations}" var="item">	
 			 <tr>
-			 		<td><c:out value="${item.firstRoom}" /></td>
+			 		<td><c:out value="${item.rr_room_id}" /></td>
 			 		<td><c:out value="${item.guestName}" /></td>
-					<td><c:out value="${item.reservation_rooms_occupancy}" /></td> 
+					<td><c:out value="${item.qtyRooms}" /></td> 
 					<td><c:out value="${item.mealPlanName}" /></td>
 					<td style="text-align:center;"><input type="checkbox"></td>
 					<td style="text-align:center;"><input type="checkbox"></td>

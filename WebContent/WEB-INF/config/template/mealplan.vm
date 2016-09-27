@@ -174,9 +174,9 @@
 			 #foreach($item in ${reservations})
 			
 			 <tr> 
-			 		<td>${item.firstRoom}</td>
+			 		<td>${item.rr_room_id}</td>
 			 		<td>${item.guestName}</td>
-					<td>${item.reservation_rooms_occupancy}</td> 
+					<td>${item.qtyRooms}</td> 
 					<td>${item.mealPlanName}</td>
 					<td style="text-align:center;"><div class="chk"></div></td>
 					<td style="text-align:center;"><div class="chk"></td>
