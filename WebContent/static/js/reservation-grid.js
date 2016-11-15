@@ -3111,6 +3111,42 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    	}
 	    	}
 	    	
+	    	if(type == "update"){
+	    		if(Ext.getCmp("reservation_type").getValue() != 3){
+	    			if(multiRomms.getValue() == "" && Ext.getCmp("reservation_type").getValue() != 3){
+	    				 Ext.Msg.show({
+	     					   title:'Error!',
+	     					   msg: 'Room(s) are required.',
+	     					   buttons: Ext.Msg.OK,
+	     					   icon: Ext.MessageBox.ERROR
+	     				});
+	        			return false;
+	    			}else {
+	    				var qty = Ext.getCmp("reservation_rooms_qty").getValue();
+	    				if(multiRomms.getValue().split(";").size() != qty && Ext.getCmp("reservation_type").getValue() != 3){
+	    					Ext.Msg.show({
+		     					   title:'Error!',
+		     					   msg: 'You need to select '+ qty+' Rom(s)',
+		     					   buttons: Ext.Msg.OK,
+		     					   icon: Ext.MessageBox.ERROR
+		     				});
+		        			return false;
+	    				}
+	    				
+	    			}
+	    			
+	    			if(!panel.isValid()){
+		    			return false;
+		    		}
+		    	} else {
+		    		if(!panel.isValid()){
+		    			return false;
+	    		}    		
+		    			
+	    	}
+	    	}
+	    	
+	    	
 	    	
 	    	
 	    	var res_number = document.getElementById("res_number").innerHTML;
