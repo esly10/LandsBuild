@@ -3276,7 +3276,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 					}else{
 						 Ext.Msg.show({
 							   title:'Error!',
-							   msg: 'First you need to pay the reservation before switching to CheckOut',
+							   msg: 'First you need to pay the reservation before switching to CheckOut or there is an error with the selected room number',
 							   buttons: Ext.Msg.OK,
 							   icon: Ext.MessageBox.ERROR
 							});
@@ -3286,7 +3286,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			    failure : function(response) {
 			    	 Ext.Msg.show({
 						   title:'Error!',
-						   msg: 'First you need to pay the reservation before switching to CheckOut',
+						   msg: 'First you need to pay the reservation before switching to CheckOut or there is an error with the selected room number',
 						   buttons: Ext.Msg.OK,
 						   icon: Ext.MessageBox.ERROR
 						});
