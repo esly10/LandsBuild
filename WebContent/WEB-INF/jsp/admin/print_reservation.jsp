@@ -227,6 +227,10 @@
 					<td style="border-bottom: 1px #000000;border-bottom-style: solid; text-align: right;"><c:out value="${tax}" /></td>
 				</tr>
 				<tr>
+					<td style="width:800px;"><b>Paid:</b></td>
+					<td style="border-bottom: 1px #000000;border-bottom-style: solid; text-align: right;"><c:out value="${paid}" /></td>
+				</tr>
+				<tr>
 					<td style="width:800px;"><b>Total:</b></td>
 					<td style="border-bottom: 1px #000000;border-bottom-style: solid; text-align: right;"><b><c:out value="${total}" /></b></td>
 				</tr>
