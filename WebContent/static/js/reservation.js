@@ -9,11 +9,11 @@ Ext.onReady(function(){
 			window.open(url); 
 			return;
 			
-			/*var content = Ext.getCmp('content-panel');
+			var content = Ext.getCmp('content-panel');
 			content.removeAll(true);			
 			content.add(new ReservationPanel());
 			content.doLayout();
-			return;*/
+			return;
 		});//end onclick 
 	}
 });

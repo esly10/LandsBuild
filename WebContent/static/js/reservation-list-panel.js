@@ -63,6 +63,7 @@ ReservationListPanel = Ext.extend(Ext.Panel, {
 	            'card_exp', 
 	            'card_type', 
 	            'reservation_tax',
+	            'reservation_bank',
 	            'reservation_event_date',
 	            'reservation_event_participants',
 	            'reservation_ignore_service',

@@ -2191,6 +2191,57 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 										    ]
 										},
 										{
+											xtype: 'fieldset',
+										    title: 'Bank Accounts',
+										    id: 'bank-panel',
+										    padding: 5,
+										    style:'padding:5px; border-left: 0px;border-right: 0px;',
+										    bodyCssClass: 'x-citewrite-panel-body',
+										    bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
+										    autoScroll: true,
+										    buttonAlign: 'left',
+										    items: 
+										    [
+												{
+													xtype: 'form',
+												    title: '',
+												    id: 'bank-info',
+												    padding: 5,
+												    //hidden:true,
+												    border:false,
+												    bodyCssClass: 'x-citewrite-panel-body',
+												    bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
+												    autoScroll: true,
+												    buttonAlign: 'left',
+												    items:[
+														{
+												            xtype: 'radiogroup',
+												            fieldLabel: 'Bank Account',
+												            id: 'bank_account',
+												            itemCls: 'x-check-group-alt',
+												            value:0,
+												            columns: 2,
+												            items: [
+												                    {boxLabel: 'Pretty Days', name: 'bank', inputValue:0, height: 32},
+													                {boxLabel: 'Canopy San Lorenzo', name: 'bank', inputValue: 1, height: 32}             
+												               
+												            ],
+												            listeners: {
+												            	change: function(field, newValue, oldValue, eOpts){
+												            		Ext.getCmp("reservation_bank").setValue(newValue.inputValue);
+												                }
+												            }
+														},{
+									                    	xtype: 'hidden',
+									    					id: 'reservation_bank',
+									    					name: 'reservation_bank',
+									    					value: 0
+									                    }														
+												     ]
+												}									    		
+										    ]
+										},
+										{
 											xtype: 'panel',
 										    title: '',
 										    id: 'button-panel',
@@ -2799,6 +2850,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		},
 	    loadDataReservation : function(){
 	    	panel = this;
+	    	var content = Ext.getCmp('content-panel');
+        	content.doLayout();
 	    	//Ext.getCmp('event-info').hide();
 	    	 
 	    	Ext.getCmp("event-info").hide();
@@ -2845,9 +2898,11 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 		 	    			        }
 		 	    			     });	 
 		    				}
-	    				 }else {
+	    				 }else if(prop == "reservation_bank"){
+	    					 var val = panel.reservationInfo[prop];
+	    					 Ext.getCmp("bank_account").setValue(panel.reservationInfo[prop]);
+	    				 } {
 	    					 Ext.getCmp(prop).setValue(panel.reservationInfo[prop]);
-	    					
 	    				 }
 	    				 
 	    			 } else {
@@ -3190,7 +3245,12 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		Ext.apply
     		(
     			values, Ext.getCmp("radio-info").getForm().getFieldValues()
-    		);		        			
+    		);	
+    		
+    		Ext.apply
+    		(
+    			values, Ext.getCmp("bank-info").getForm().getFieldValues()
+    		);	
 
 			//Ext.getCmp("colum1charges").items.item(0).store;
 			//Ext.getCmp("colum1charges").items.item(0).store.getCount();
