@@ -2901,7 +2901,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    				 }else if(prop == "reservation_bank"){
 	    					 var val = panel.reservationInfo[prop];
 	    					 Ext.getCmp("bank_account").setValue(panel.reservationInfo[prop]);
-	    				 } {
+	    				 }else {
 	    					 Ext.getCmp(prop).setValue(panel.reservationInfo[prop]);
 	    				 }
 	    				 
