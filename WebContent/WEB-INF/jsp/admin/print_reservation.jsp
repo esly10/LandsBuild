@@ -151,7 +151,7 @@
 				</tr>
 				<tr>
 					<td style="width:230px;"><b>STAY DATES:</b></td>
-					<td style="border-bottom: 1px #000000;border-bottom-style: solid;"><span style="background-color: yellow;"><c:out value="${reservation.reservation_check_in_format}" /> &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${reservation.reservation_check_out_format}" /> &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp; <c:out value="${reservation.reservation_nights}" /> Night(s)</span></td>
+					<td style="border-bottom: 1px #000000;border-bottom-style: solid;"><span style="background-color: yellow;"><c:out value="${reservation.reservation_check_in_format }" /> &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${reservation.reservation_check_out_format}" /> &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp; <c:out value="${reservation.reservation_nights}" /> Night(s)</span></td>
 				</tr>
 				<tr>
 					<td style="width:230px;"><b>PLAN:</b></td>
@@ -239,17 +239,17 @@
 			<div style="width:900px; height:80px; position:relative;">
 				<div style="float:left; width:425px">
 					<span style="font-size:18px"><b><u>PAYMENT DETAILS:</u></b></span>	<br>
-					<c:if test="${reservation.reservation_type == 3}">
+					<c:if test="${reservation.reservation_bank == 1}">
 						<label><b>Banco Nacional<b> # 100-01-013-005132-7 (CRC) </label>	<br>
 						<label><b>Banco Nacional<b> # 100-02-013-600411-3 (USD) </label>	<br>
 						<label><b>Bac San José<b> #906486436 (CRC) #906490388 (USD)	<br>
-						<label><b>Beneficiary:<b> CANOPY SAN LORENZO S.A. </label>	<br>
+						<label><b>Beneficiary:<b> CANOPY SAN LORENZO S.A. Ced. 3-101-411403</label>	<br>
 					</c:if>
-					<c:if test="${reservation.reservation_type != 3}">
+					<c:if test="${reservation.reservation_bank != 1}">
 						<label><b>Banco Nacional<b> # 100-01-013-005188-2 (CRC)  </label>	<br>
 						<label><b>Banco Nacional<b> # 100-02-013-600429-6 (USD) </label>	<br>
 						<label><b>Bac San José<b> #909516734 (CRC) #909517005 (USD)	<br>
-						<label><b>Beneficiary:<b> Pretty Days Development S.A.</label>	<br>
+						<label><b>Beneficiary:<b> Pretty Days Development S.A. Ced. 3-101-456388</label>	<br>
 					</c:if>
 					
 				</div>
@@ -277,7 +277,7 @@
 				<label><b>Payment Terms: </b><c:out value="${reservation.reservation_payment_terms_name}" /></label><br>
 				<label><b>For Hotel Reception Usage: </b>Payment confirm Yes / No</label><br>
 			</div>
-			<br><br><br>
+			<br>
 			<table style="width:900px;">
 				<tr>
 					<td style="font-size:16px"><b><u>Confirmation is subject to payment </b></u></td>
