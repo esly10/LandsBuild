@@ -1735,7 +1735,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 															},
 															{
 															    xtype: 'box',
-															    height: 15										    
+															    height: 5										    
 															},
 															{
 															    xtype: 'textfield',
@@ -1746,7 +1746,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 															    fieldLabel: 'Transport Notes'													    
 															},{
 															    xtype: 'box',
-															    height: 15										    
+															    height: 5										    
 															},
 															{
 															    xtype: 'textfield',
@@ -1757,7 +1757,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 															    fieldLabel: 'Internal Notes'													    
 															},{
 															    xtype: 'box',
-															    height: 15										    
+															    height: 5										    
 															},
 															{
 															    xtype: 'textfield',
@@ -1803,7 +1803,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																    fieldLabel: 'Name'													    
 																},{
 																    xtype: 'box',
-																    height: 15										    
+																    height: 0										    
 																},
 																{
 																			    xtype: 'checkbox',
@@ -1952,7 +1952,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																    fieldLabel: 'No'													    
 																},{
 																    xtype: 'box',
-																    height: 15										    
+																    height: 5										    
 																},
 																{
 																    xtype: 'textfield',
@@ -1964,7 +1964,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																    fieldLabel: 'Exp'													    
 																},{
 																    xtype: 'box',
-																    height: 15										    
+																    height: 5										    
 																},
 																{
 																	  xtype: 'combo',
@@ -1985,7 +1985,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																		mode: 'local'
 																},{
 																    xtype: 'box',
-																    height: 15										    
+																    height: 0										    
 																}
 													          ]
 											    	}
@@ -2025,7 +2025,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 														    bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
 															items:[
 																{
-																	columnWidth: .45, 
+																	columnWidth: .3, 
 														    		layout: 'form',
 														    		border: false,
 														    		id: 'colum1radio',
@@ -2080,42 +2080,42 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	        			}																	        			 
 																	        		}
 																	        	}
-																	        },
-																	        {
-																	        	xtype: 'checkbox',
-																	        	id: 'check_in_radio',
-																	        	disabled: true,
-																	        	name: 'check_in',
-																	        	fieldLabel: 'Check-In',
-																	        	listeners:{
-																	        		check: function(self, newVal, oldVal) {
-																	        			if(newVal){
-																	        				document.getElementById("status").innerHTML = "Check-In";
-																	        				Ext.getCmp("canceled").setValue(false);
-																	        				Ext.getCmp("check_out_radio").enable();
-																	        				Ext.getCmp("no_show_radio").setValue(false);
-																	        			}else {																	        																					        				
-																		        			document.getElementById("status").innerHTML = "Confirmmed";		
-																		        			Ext.getCmp("confirmmed").setValue(true);																		        			
-																		        			Ext.getCmp("check_in_radio").setValue(false);
-																		        			Ext.getCmp("check_out_radio").setValue(false);
-																		        			Ext.getCmp("open_radio").setValue(false);
-																		        			Ext.getCmp("check_out_radio").disable();
-																	        			}
-																	        			
-																	        		}
-																	        	}
 																	        }
 																	 ]
 																},
 																{
-																	columnWidth: .50, 
+																	columnWidth: .3, 
 														    		layout: 'form',
 														    		border: false,
 														    		id: 'colum2radio',
 														    		bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
 																	items: [
-																	        
+
+																			{
+																				xtype: 'checkbox',
+																				id: 'check_in_radio',
+																				disabled: true,
+																				name: 'check_in',
+																				fieldLabel: 'Check-In',
+																				listeners:{
+																					check: function(self, newVal, oldVal) {
+																						if(newVal){
+																							document.getElementById("status").innerHTML = "Check-In";
+																							Ext.getCmp("canceled").setValue(false);
+																							Ext.getCmp("check_out_radio").enable();
+																							Ext.getCmp("no_show_radio").setValue(false);
+																						}else {																	        																					        				
+																			    			document.getElementById("status").innerHTML = "Confirmmed";		
+																			    			Ext.getCmp("confirmmed").setValue(true);																		        			
+																			    			Ext.getCmp("check_in_radio").setValue(false);
+																			    			Ext.getCmp("check_out_radio").setValue(false);
+																			    			Ext.getCmp("open_radio").setValue(false);
+																			    			Ext.getCmp("check_out_radio").disable();
+																						}
+																						
+																					}
+																				}
+																			},
 																	        {
 																	        	xtype: 'checkbox',
 																	        	id: 'check_out_radio',
@@ -2137,6 +2137,14 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 																	        		}
 																	        	}
 																	        },
+																	]
+																},{
+																	columnWidth: .3, 
+														    		layout: 'form',
+														    		border: false,
+														    		id: 'colum3radio',
+														    		bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
+																	items: [																	        
 																	        {
 																	        	xtype: 'checkbox',
 																	        	id: 'no_show_radio',
@@ -2187,6 +2195,80 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 															]
 														}														
 												     ]
+												}									    		
+										    ]
+										},{
+											xtype: 'fieldset',
+										    title: 'Additional Items',
+										    id: 'additional-panel',
+										    padding: 5,
+										    style:'padding:5px; border-left: 0px;border-right: 0px;',
+										    bodyCssClass: 'x-citewrite-panel-body',
+										    bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
+										    autoScroll: true,
+										    buttonAlign: 'left',
+										    items: 
+										    [
+												{
+													xtype: 'form',
+												    title: '',
+												    id: 'add-items',
+												    padding: 5,
+												    //hidden:true,
+												    border:false,
+												    bodyCssClass: 'x-citewrite-panel-body',
+												    bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
+												    autoScroll: true,
+												    buttonAlign: 'left',
+												    items:[{
+															layout: 'column',
+															itemCls: 'items-radio',
+															style:{
+																border:'0px'
+															},
+															border: false,
+															bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
+															items:[
+																{
+																	columnWidth: .45, 
+																	layout: 'form',
+																	border: false,
+																	id: 'additems1',
+																	bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
+																	items: [      
+																					{
+																						xtype: 'checkbox',
+																			        	id: 'reservation_add_flowers',
+																			        	name: 'reservation_add_flowers',
+																			        	fieldLabel: 'Flowers',
+																					},{
+																						xtype: 'checkbox',
+																			        	id: 'reservation_add_transportation',
+																			        	name: 'reservation_add_transportation',
+																			        	fieldLabel: 'Transportation',
+																                    }													
+																            ]
+																},{
+																	columnWidth: .45, 
+																	layout: 'form',
+																	border: false,
+																	id: 'additems2',
+																	bodyStyle: 'padding-left: 0px; padding-bottom: 0px; background-color: #F1F1F1;',
+																	items: [      
+																					{
+																						xtype: 'checkbox',
+																			        	id: 'reservation_add_bedsetup',
+																			        	name: 'reservation_add_bedsetup',
+																			        	fieldLabel: 'Bed Setup',
+																                    },{
+																						xtype: 'checkbox',
+																			        	id: 'reservation_add_others',
+																			        	name: 'reservation_add_others',
+																			        	fieldLabel: 'Others',
+																                    }														
+																            ]
+																}]
+												    }]
 												}									    		
 										    ]
 										},
@@ -2901,6 +2983,18 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 	    				 }else if(prop == "reservation_bank"){
 	    					 var val = panel.reservationInfo[prop];
 	    					 Ext.getCmp("bank_account").setValue(panel.reservationInfo[prop]);
+	    				 }else if(prop == "reservation_add_flowers"){
+	    					 var val = panel.reservationInfo[prop];
+	    					 Ext.getCmp("reservation_add_flowers").setValue(panel.reservationInfo[prop]);
+	    				 }else if(prop == "reservation_add_transportation"){
+	    					 var val = panel.reservationInfo[prop];
+	    					 Ext.getCmp("reservation_add_transportation").setValue(panel.reservationInfo[prop]);
+	    				 }else if(prop == "reservation_add_bedsetup"){
+	    					 var val = panel.reservationInfo[prop];
+	    					 Ext.getCmp("reservation_add_bedsetup").setValue(panel.reservationInfo[prop]);
+	    				 }else if(prop == "reservation_add_others"){
+	    					 var val = panel.reservationInfo[prop];
+	    					 Ext.getCmp("reservation_add_others").setValue(panel.reservationInfo[prop]);
 	    				 }else {
 	    					 Ext.getCmp(prop).setValue(panel.reservationInfo[prop]);
 	    				 }
@@ -3251,6 +3345,10 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		(
     			values, Ext.getCmp("bank-info").getForm().getFieldValues()
     		);	
+    		Ext.apply
+    		(
+    			values, Ext.getCmp("add-items").getForm().getFieldValues()
+    		);
 
 			//Ext.getCmp("colum1charges").items.item(0).store;
 			//Ext.getCmp("colum1charges").items.item(0).store.getCount();

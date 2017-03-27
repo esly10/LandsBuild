@@ -8,7 +8,11 @@ body {
 .time-sch-item.item-status-3,
 .time-sch-item.item-status-4,
 .time-sch-item.item-status-5,
-.time-sch-item.item-status-6
+.time-sch-item.item-status-6,
+.time-sch-item.item-status-7,
+.time-sch-item.item-status-8,
+.time-sch-item.item-status-9,
+.time-sch-item.item-status-10
 {
 	    height: 20px;
 }
@@ -72,6 +76,44 @@ body {
   	background-color: #FFFF00;
   	color:#000000;
 }
+
+/*'7', 'Bed' */
+.time-sch-item.item-status-7 {
+  	border-color: #000000; 
+  	background-color: #000000; 
+}
+.time-sch-item.item-status-7:hover {
+	background-color: #ff5555; 
+}
+
+/*'8', 'Transportation' */
+.time-sch-item.item-status-8 {
+  	border-color: #7440D8; 
+  	background-color: #7440D8; 
+}
+.time-sch-item.item-status-8:hover {
+	background-color: #ff5555; 
+}
+
+/*'9', 'Others' */
+.time-sch-item.item-status-9 {
+  	border-color: #8E8E8E; 
+  	background-color: #8E8E8E; 
+}
+.time-sch-item.item-status-9:hover {
+	background-color: #ff5555; 
+}
+
+/*'10', 'Flowers' */
+.time-sch-item.item-status-10 {
+  	border-color: #FF63F3; 
+  	background-color: #FF63F3; 
+}
+.time-sch-item.item-status-10:hover {
+	background-color: #ff5555; 
+}
+
+
 .time-sch-item.item-status-0:hover {
 	background-color: #ff5555; 
 }

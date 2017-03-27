@@ -52,7 +52,11 @@
 			'reservation_children',
 			'reservation_guides',
 			'reservation_event_date',					
-			'reservation_event_participants'
+			'reservation_event_participants',
+			'reservation_add_flowers',
+			'reservation_add_transportation',
+			'reservation_add_bedsetup',					
+			'reservation_add_others'
         ],
 		sortInfo: {
 			field: 'room_no',
@@ -331,7 +335,25 @@
 						title += "Type: "+type+"&#10;";
 						title += "Check In: "+ moment(record.data.rr_reservation_in).add('hours', -12).toLocaleString()+"&#10;";
 						title += "Check Out: "+ moment(record.data.rr_reservation_out).add('hours', -12).toLocaleString()+"&#10;";
-									
+						var cssclass = record.data.reservation_status;
+						if (record.data.reservation_status==1){
+ 	    				    	if (record.data.reservation_add_others==1){
+ 	    				    		cssclass =9;
+ 	    				    		title += "Other request"+"&#10;";
+ 	    				    	}
+ 	    				    	if (record.data.reservation_add_bedsetup==1){
+ 	    				    		cssclass =7;
+ 	    				    		title += "Bed set up request"+"&#10;";
+ 	    				    	}
+ 	    				    	if(record.data.reservation_add_flowers==1){
+ 	    				    		cssclass =10;
+ 	    				    		title += "Flowers request"+"&#10;";
+ 	    				    	}
+ 	    				    	if(record.data.reservation_add_transportation==1){
+ 	    				    		cssclass =8;
+ 	    				    		title += "Transportation request"+"&#10;";
+ 	    				    	}
+ 	    				}
 						
 						if(record.data.reservation_status != 2 && record.data.reservation_status != 6){ // canceled "2" not show
 							arrayCalendar.push(
@@ -342,7 +364,7 @@
 		    	    				    sectionID: record.data.rr_room_id,
 		    	    				    start: moment(record.data.rr_reservation_in).add('hours', -12),
 		    	    				    end: moment(record.data.rr_reservation_out).add('hours', -13),
-		    	    				    classes: 'item-status-'+record.data.reservation_status,
+		    	    				    classes: 'item-status-'+cssclass,
 		    	    				    data:record.data //#FFFF00
 		    	    				}
 		    				);
