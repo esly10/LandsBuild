@@ -3954,7 +3954,8 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 			       // trackMouseOver:false,
 			       // disableSelection:false,
 			        //height:200,
-			        store: paymentStore,
+			        //store: paymentStore,
+			        store : paymentStore,
 			        frame: true,			       	    	    	
 			        // grid columns
 			        colModel: payentsColumnModel,			        
@@ -3976,7 +3977,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 						}, scope: this }
 			        // paging bar on the bottom
 			    });
-			    			    
+	    	   paymentStore.load({params:{'reservation_id': panel.reservation_id}});			    
 	    	   return paymentGridPanel;
         },
         showContextMenuPayment: function(grid, index, event)    	{

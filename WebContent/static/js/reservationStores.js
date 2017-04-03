@@ -66,7 +66,7 @@ agencyStore= new Ext.data.JsonStore({
 			field: 'payment_date',
 			direction: 'DESC'
 		},
-		autoLoad: {}
+		autoLoad: false
     });
 	
 	guestsStore = new Ext.data.JsonStore({
