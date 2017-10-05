@@ -135,10 +135,18 @@
 	        TimeScheduler.Options.AllowResizing = false;
 
 	        TimeScheduler.Options.Events.ItemClicked = Calendar.Item_Clicked;
-			        TimeScheduler.Options.Events.ItemDblClick = Calendar.Item_Dbl_Clicked;
+			TimeScheduler.Options.Events.ItemDblClick = Calendar.Item_Dbl_Clicked;
 	        TimeScheduler.Options.Events.ItemDropped = Calendar.Item_Dragged;
 	        TimeScheduler.Options.Events.ItemResized = Calendar.Item_Resized;
-
+	        TimeScheduler.Options.Events.ItemEventMouseEnter = Calendar.Item_hover_enter;
+	        TimeScheduler.Options.Events.ItemMouseEnter = Calendar.Item_hover_enter;
+	        TimeScheduler.Options.Events.ItemEventMouseLeave = Calendar.Item_hover_leave;
+	        TimeScheduler.Options.Events.ItemMouseLeave = Calendar.Item_hover_leave;
+	        
+	        
+	        
+	       
+	        		
 	        //TimeScheduler.Options.Events.ItemMovement = Calendar.Item_Movement;
 	        //TimeScheduler.Options.Events.ItemMovementStart = Calendar.Item_MovementStart;
 	        //TimeScheduler.Options.Events.ItemMovementEnd = Calendar.Item_MovementEnd;
@@ -187,10 +195,36 @@
 	    },
 
 	    Item_Clicked: function (item) {
-	        console.log(item);
-			      
-			    },
-			    Item_Dbl_Clicked: function (item) {
+	    	console.log(item);
+		},
+		Item_hover_leave: function (item){ 
+			console.log("Salgo");
+			//item.Element.context.classList.remove("item-hover");
+			//item.Element.context.classList.add("item-status-"+item.data.reservation_status);
+			var x = document.getElementsByClassName("item-res-"+item.data.rr_reservation_id);
+			if (x!=null){
+				for (var i=0; i<x.length; i++){
+					
+					x[i].style.backgroundColor = "";
+					x[i].style.color = "";
+				}
+			}
+			
+		},
+		Item_hover_enter: function (item){
+			console.log("Entro");
+			//item.Element.context.classList.remove("item-status-"+item.data.reservation_status);
+			var x = document.getElementsByClassName("item-res-"+item.data.rr_reservation_id);
+			
+			for (var i=0; i<x.length; i++){
+				
+				x[i].style.backgroundColor = "#ff5555";
+				x[i].style.color = "#ffffff";
+			}
+			
+			//item.Element.context.classList.add("item-hover");
+		},
+		Item_Dbl_Clicked: function (item) {
 			        console.log(item);
 
 			        /*
@@ -202,41 +236,45 @@
 		        	    alert( "Data Saved: " + msg );
 		        	});*/
 			        
-			        Ext.Ajax.request({
-			        	   url: _contextPath + '/reservation/reservationList',
-						   params: { reservation_id: item.data.rr_reservation_id},
-						   success: function(p1, p2)
-						   {
-							   var response = Ext.decode(p1.responseText);
-							   if(response.success)
-							   {
-								   var data = response.reservations[0];
-								   
-								   var content = Ext.getCmp('content-panel');
-				        		   content.removeAll(true);			
-				        		   content.add(new ReservationPanel({'reservationInfo' : data}));
-				        		   content.doLayout();
-				        		   return; 
-							   }
-							   else
-							   {
-								   Ext.Msg.show({
-									   title:'Failure',
-									   msg:  response.msg,
-									   buttons: Ext.Msg.OK,
-									   icon: Ext.MessageBox.ERROR
-									});
-							   }
-	    },
-						   failure: function(){ 
-							   Ext.Msg.show({
-								   title:'Failure',
-								   msg:  'Error getting data.',
-								   buttons: Ext.Msg.OK,
-								   icon: Ext.MessageBox.ERROR
-								});
-						   }
-						}); 
+
+			    Ext.Ajax.request({
+				url : _contextPath + '/reservation/reservationList',
+				params : {
+					reservation_id : item.data.rr_reservation_id
+				},
+				success : function(p1, p2) {
+					var response = Ext.decode(p1.responseText);
+					if (response.success) {
+						var data = response.reservations[0];
+						var nweurl =  "http://"+window.location.host+window.location.pathname+"reservation?reservation_id="+data.reservation_id;	
+						
+						window.open(nweurl); 
+						return;
+						var content = Ext.getCmp('content-panel');
+						content.removeAll(true);
+						content.add(new ReservationPanel({
+							'reservationInfo' : data
+						}));
+						content.doLayout();
+						return;
+					} else {
+						Ext.Msg.show({
+							title : 'Failure',
+							msg : response.msg,
+							buttons : Ext.Msg.OK,
+							icon : Ext.MessageBox.ERROR
+						});
+					}
+				},
+				failure : function() {
+					Ext.Msg.show({
+						title : 'Failure',
+						msg : 'Error getting data.',
+						buttons : Ext.Msg.OK,
+						icon : Ext.MessageBox.ERROR
+					});
+				}
+			}); 
 
 			    },
 	    Item_Dragged: function (item, sectionID, start, end) {
@@ -354,19 +392,24 @@
  	    				    		title += "Transportation request"+"&#10;";
  	    				    	}
  	    				}
+						var clases = 'item-status-'+cssclass;
+						var clases2 = 'item-res-'+record.data.rr_reservation_id;
+;
 						
 						if(record.data.reservation_status != 2 && record.data.reservation_status != 6){ // canceled "2" not show
 							arrayCalendar.push(
 									{
-		    	    				    id: 'res_'+id,
-			    	    				//name: '<div title="'+title+'"><div>'+record.data.guest_name+'</div><div>'+type+', '+record.data.reservation_number+'</div></div>',
-			    	    				name: '<div title="'+title+'"><div style="height:20px;line-height: 12px;">'+record.data.guest_name+'</div></div>',
-		    	    				    sectionID: record.data.rr_room_id,
-		    	    				    start: moment(record.data.rr_reservation_in).add('hours', -12),
-		    	    				    end: moment(record.data.rr_reservation_out).add('hours', -13),
-		    	    				    classes: 'item-status-'+cssclass,
-		    	    				    data:record.data //#FFFF00
-		    	    				}
+				    	    				    id: 'res_'+id,
+					    	    				//name: '<div title="'+title+'"><div>'+record.data.guest_name+'</div><div>'+type+', '+record.data.reservation_number+'</div></div>',
+					    	    				name: '<div title="'+title+'"><div style="height:20px;line-height: 12px;">'+record.data.guest_name+'</div></div>',
+				    	    				    sectionID: record.data.rr_room_id,
+				    	    				    start: moment(record.data.rr_reservation_in).add('hours', -12),
+				    	    				    end: moment(record.data.rr_reservation_out).add('hours', -13),
+				    	    				   // classes: 'item-status-'+cssclass,
+				    	    				    classes: clases+ " "+clases2,
+				    	    				  //  classes: clases2,
+				    	    				    data:record.data 
+				    	    				}
 		    				);
 						}
 							

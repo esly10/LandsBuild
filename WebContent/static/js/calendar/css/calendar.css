@@ -57,7 +57,13 @@ body {
 .time-sch-item.item-status-4:hover {
 	background-color: #ff5555; 
 }
+.time-sch-item.item-hover {
+	background-color: #EDF5AA !important; 
+}
 
+.time-sch-item.item-hover:hover {
+	background-color: #EDF5AA !important; 
+}
 
  /*'6', 'No Show   n/a' */
 .time-sch-item.item-status-5 {
