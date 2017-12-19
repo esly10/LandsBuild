@@ -272,6 +272,9 @@ var TimeScheduler = {
         if(document.getElementById("print_buton_calendar") === null){
         	$jQuery( ".time-sch-period-container" ).append( '<a id="print_buton_calendar" onclick="printContent()" class="time-sch-period-button time-sch-button" href="#">Print</a>' ); //$( "h2" )
         }
+        if(document.getElementById("refresh_buton_calendar") === null){
+        	$jQuery( ".time-sch-period-container" ).append( '<a id="refresh_buton_calendar" onclick="refreshContent()" class="time-sch-period-button time-sch-button" href="#">Refresh</a>' ); //$( "h2" )
+        }
         
     },
 
