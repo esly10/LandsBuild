@@ -24,7 +24,7 @@
 		border:1px solid #C0C0C0;
 		border-collapse:collapse;
 		padding:5px;
-		width:900px;
+		width:100%;
 	}
 	.demo th {
 		border:1px solid #C0C0C0;
@@ -39,9 +39,9 @@
 	#footer {    
 	    clear: both;
 	 	 position:fixed;
-	    bottom:0;
+	    margin-top:15px;
 		text-align:center;
-		width:900px;
+		width:100%;
 	}
 	
 	@page {
@@ -57,10 +57,10 @@
     } 
 	</style>
 	
-	<body onload="myFunction();">
+	<body onload="myFunction();" style="padding:10px 20px;">
 		<br><br>
 		<div id="content">
-			<div id="title" style="width:900px; text-align:center">
+			<div id="title" style="width:100%; text-align:center">
 				
 				<c:if test="${reservation.reservation_type == 3}">
 					<span style="font-size:20px">ECOAD Eco Aventura SRL </span><br>
@@ -80,10 +80,10 @@
 				<span style="font-size:23px"><b><u>RESERVATION CONFIRMATION</u></b></span><br>
 			</div>
 			<br><br>
-			<div style="width:900px; text-align:left;">
+			<div style="width:100%; text-align:left;">
 				<c:if test="${agency.agency_name != null}">
 	    			<span><b>To: </b></span><c:out value="${agency.agency_name}" /> <br>
-					<table style="width:900px;">
+					<table style="width:100%;">
 						
 						<tr>
 							<td><b>Address: </b><c:out value="${agency.address}" /></td>
@@ -110,7 +110,7 @@
 				
 				<c:if test="${agency.agency_name == null}">
 				<span><b>To: </b></span><c:out value="${guest.name}" /> <br>
-				<table style="width:900px;">
+				<table style="width:100%;">
 					<tr>
 						<td><b>Address: </b><c:out value="${guest.address}" /></td>
 						<td><b>Tel: </b><c:out value="${guest.phone}" /></td>
@@ -140,7 +140,7 @@
 			<br>
 			<span style="font-size:18px"><b><u>STAY DETAILS:</u></b></span>
 			
-			<table style="width:900px;">
+			<table style="width:100%;">
 				<tr>
 					<td style="width:230px;"><b>NAME:</b></td>
 					<td style="border-bottom: 1px #000000;border-bottom-style: solid;"><span style="background-color: yellow;"><c:out value="${guest.name}" /></span></td>
@@ -215,9 +215,9 @@
 					</c:forEach>				
 				</tbody>
 			</table>
-			<div style="width:900px; height:80px;"></div>
+			<div style="width:100%; height:10px;"></div>
 			<hr>
-			<table style="width:900px; text-align: right;">
+			<table style="width:100%; text-align: right;">
 				<tr>
 					<td style="width:800px;"><b>Subtotal:</b></td>
 					<td style="border-bottom: 1px #000000;border-bottom-style: solid; text-align: right;"><c:out value="${subtotal}" /></td>
@@ -236,7 +236,7 @@
 				</tr>
 			</table>
 			<br>
-			<div style="width:900px; height:80px; position:relative;">
+			<div style="width:100%; height:80px; position:relative;">
 				<div style="float:left; width:425px">
 					<span style="font-size:18px"><b><u>PAYMENT DETAILS:</u></b></span>	<br>
 					<c:if test="${reservation.reservation_bank == 1}">
@@ -253,9 +253,9 @@
 					</c:if>
 					
 				</div>
-				<div style="float: left;   width: 425px;    border-left-style: solid;    border-left-color: #000000;    border-left-width: 2px;    padding-left: 10px;">
+				<div style="float: left;   width: 370px;    border-left-style: solid; margin-top:20px;    border-left-color: #000000;    border-left-width: 2px;    padding-left: 10px;">
 					<span style="font-size:18px"><b><u>CREDIT CARD DETAILS:</u></b></span>	
-					<table style="width:425px;">
+					<table style="width:360px;">
 						<tr>
 							<td  style="width:80px;"><b>No:</b></td>
 							<td style="border-bottom: 1px #000000;border-bottom-style: solid;"><c:out value="${reservation.card_no}" /></td>
@@ -278,14 +278,12 @@
 				<label><b>For Hotel Reception Usage: </b>Payment confirm Yes / No</label><br>
 			</div>
 			<br>
-			<table style="width:900px;">
+			<table style="width:100%; margin-top:15px;">
 				<tr>
 					<td style="font-size:16px"><b><u>Confirmation is subject to payment </b></u></td>
 					<td style="border-top: 1px #000000;border-top-style: solid; text-align: center;">Customer Signature</td>
 				</tr>
 			</table>
-		
-			<br>
 			<div id="footer">
 				<span>Reservations: US +1 408-215-1000 / CR +506 2447-9331 - Email: reservations@landsinlove.com</span><br>
 				<span>San Ramón, Alajuela, Costa Rica. www.landsinlove.com</span><br>
