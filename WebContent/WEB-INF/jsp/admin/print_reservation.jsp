@@ -63,7 +63,7 @@
 			<div id="title" style="width:900px; text-align:center">
 				
 				<c:if test="${reservation.reservation_type == 3}">
-					<span style="font-size:20px">Canopy San Lorenzo </span><br>
+					<span style="font-size:20px">ECOAD Eco Aventura SRL </span><br>
 				</c:if>
 				
 				<c:if test="${reservation.reservation_type != 3}">
@@ -240,15 +240,15 @@
 				<div style="float:left; width:425px">
 					<span style="font-size:18px"><b><u>PAYMENT DETAILS:</u></b></span>	<br>
 					<c:if test="${reservation.reservation_bank == 1}">
-						<label><b>Banco Nacional<b> # 100-01-013-005132-7 (CRC) </label>	<br>
-						<label><b>Banco Nacional<b> # 100-02-013-600411-3 (USD) </label>	<br>
-						<label><b>Bac San José<b> #906486436 (CRC) #906490388 (USD)	<br>
-						<label><b>Beneficiary:<b> CANOPY SAN LORENZO S.A. Ced. 3-101-411403</label>	<br>
+						<label><b>Banco Nacional<b> # 100-01-020-006176-7 (CRC) </label>	<br>
+						<label><b>Banco Nacional<b> # 100-02-020-600413-2 (USD) </label>	<br>
+						<!--<label><b>Bac San JosÃ©<b> #906486436 (CRC) #906490388 (USD)	<br>-->
+						<label><b>Beneficiary:<b> ECOAD Eco Aventura SRL Ced. 3-102-694853</label>	<br>
 					</c:if>
 					<c:if test="${reservation.reservation_bank != 1}">
 						<label><b>Banco Nacional<b> # 100-01-013-005188-2 (CRC)  </label>	<br>
 						<label><b>Banco Nacional<b> # 100-02-013-600429-6 (USD) </label>	<br>
-						<label><b>Bac San José<b> #909516734 (CRC) #909517005 (USD)	<br>
+						<label><b>Bac San JosÃ©<b> #909516734 (CRC) #909517005 (USD)	<br>
 						<label><b>Beneficiary:<b> Pretty Days Development S.A. Ced. 3-101-456388</label>	<br>
 					</c:if>
 					
@@ -288,7 +288,7 @@
 			<br>
 			<div id="footer">
 				<span>Reservations: US +1 408-215-1000 / CR +506 2447-9331 - Email: reservations@landsinlove.com</span><br>
-				<span>San Ramón, Alajuela, Costa Rica. www.landsinlove.com</span><br>
+				<span>San RamÃ³n, Alajuela, Costa Rica. www.landsinlove.com</span><br>
 			</div>
 		</div>
 	</body>
