@@ -242,7 +242,7 @@
 					<c:if test="${reservation.reservation_bank == 1}">
 						<label><b>Banco Nacional<b> # 100-01-020-006176-7 (CRC) </label>	<br>
 						<label><b>Banco Nacional<b> # 100-02-020-600413-2 (USD) </label>	<br>
-						<!--<label><b>Bac San José<b> #906486436 (CRC) #906490388 (USD)	<br>-->
+						<label><b>BAC San José<b> #938485984 (CRC) #938485976 (USD)	<br>
 						<label><b>Beneficiary:<b> ECOAD Eco Aventura SRL Ced. 3-102-694853</label>	<br>
 					</c:if>
 					<c:if test="${reservation.reservation_bank != 1}">
