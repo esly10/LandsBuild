@@ -2305,7 +2305,7 @@ ReservationPanel = Ext.extend(Ext.Panel, {
 												            columns: 2,
 												            items: [
 												                    {boxLabel: 'Pretty Days', name: 'bank', inputValue:0, height: 32},
-													                {boxLabel: 'Canopy San Lorenzo', name: 'bank', inputValue: 1, height: 32}             
+													                {boxLabel: 'ECOAD Eco Aventura', name: 'bank', inputValue: 1, height: 32}             
 												               
 												            ],
 												            listeners: {
@@ -3565,14 +3565,14 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		        ],
     		        data: [
     		               ['none', 'none'],
-    		               ['100­01­013­005188­2','Pretty Days BN CRC #100-01-013-005188-2'],
-    		               ['100­02­013­600429­6','Pretty Days BN USD #100-02-013-600429-6'],
+    		               ['100-01-013-005188-2','Pretty Days BN CRC #100-01-013-005188-2'],
+    		               ['100-02-013-600429-6','Pretty Days BN USD #100-02-013-600429-6'],
     		               ['909516734','Pretty Days BAC CRC #909516734'],
     		               ['909517005','Pretty Days BAC USD #909517005'],
-    		               ['100­01­013­005132­7','Canopy BN CRC #100-01-013-005132-7'],
-    		               ['100­02­013­600411­3','Canopy BN USD #100-02-013-600411-3'],
-    		               ['906486436','Canopy BAC CRC #906486436'],
-    		               ['906490388','Canopy BAC USD #906490388']
+    		               ['100-01-020-006176-7','ECOAD BN CRC #100-01-020-006176-7'],
+    		               ['100-02-020-600413-2','ECOAD BN USD #100-02-020-600413-2'],
+						   ['938485984','ECOAD BAC CRC #938485984'],
+    		               ['938485976','ECOAD BAC USD #938485976']
     		              ]
     		    });
         	}else {
@@ -3584,14 +3584,18 @@ ReservationPanel = Ext.extend(Ext.Panel, {
     		        ],
     		        data: [
     		               ['none', 'none'],
-    		               ['100­01­013­005188­2','Pretty Days BN CRC #100-01-013-005188-2'],
-    		               ['100­02­013­600429­6','Pretty Days BN USD #100-02-013-600429-6'],
+    		               ['100Í°1Í°13Í°05188Í²','Pretty Days BN CRC #100-01-013-005188-2'],
+    		               ['100Í°2Í°13Í¶00429Í¶','Pretty Days BN USD #100-02-013-600429-6'],
     		               ['909516734','Pretty Days BAC CRC #909516734'],
     		               ['909517005','Pretty Days BAC USD #909517005'],
-    		               ['100­01­013­005132­7','Canopy BN CRC #100-01-013-005132-7'],
-    		               ['100­02­013­600411­3','Canopy BN USD #100-02-013-600411-3'],
+    		               /*['100Í°1Í°13Í°05132Í·','Canopy BN CRC #100-01-013-005132-7'],
+    		               ['100Í°2Í°13Í¶00411Í³','Canopy BN USD #100-02-013-600411-3'],
     		               ['906486436','Canopy BAC CRC #906486436'],
-    		               ['906490388','Canopy BAC USD #906490388']
+    		               ['906490388','Canopy BAC USD #906490388'],*/
+						   ['100-01-020-006176-7','ECOAD BN CRC #100-01-020-006176-7'],
+    		               ['100-02-020-600413-2','ECOAD BN USD #100-02-020-600413-2'],
+						   ['938485984','ECOAD BAC CRC #938485984'],
+    		               ['938485976','ECOAD BAC USD #938485976']
     		               ]
     		    });
         	}
