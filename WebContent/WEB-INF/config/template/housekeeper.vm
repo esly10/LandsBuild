@@ -2,8 +2,8 @@
 <head>
 <script type="text/javascript">
 	function myFunction(){
-		var ua = window.navigator.userAgent; 
-		var msie = ua.indexOf("MSIE "); 
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
 		if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)){
 			 window.document.execCommand("print", false, null);
 		}
@@ -13,11 +13,11 @@
 	}
 </script>
 <style type="text/css" media="print">
-    @page { 
-        margin: 5mm 5mm 5mm 5mm; 
+    @page {
+        margin: 5mm 5mm 5mm 5mm;
         contentType="text/html; charset=UTF-8";
     }
-   
+
 </style>
 <style type="text/css">
 		 .mealplan table {
@@ -25,15 +25,15 @@
 			text-align: left;
 			width: 100%;
 		}
-		
-		
+
+
 		.mealplan table {
 			border-collapse: collapse;
 			text-align: left;
 			width: 100%;
 			table-layout: fixed;
 		}
-		
+
 		.mealplan {
 			font: normal 12px/150% Verdana, Helvetica, sans-serif;
 			background: #fff;
@@ -43,11 +43,11 @@
 			-moz-border-radius: 3px;
 			border-radius: 3px;
 		}
-		
+
 		.mealplan table td,.datagrid table th {
 			padding: 0px 0px;
 		}
-		
+
 		.mealplan table thead th {
 			background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #FFFFFF
 				), color-stop(1, #FFFFFF));
@@ -60,11 +60,11 @@
 			font-weight: normal;
 			padding: 0px 0px;
 		}
-		
+
 		.mealplan table thead th:first-child {
 			border: none;
 		}
-		
+
 		.mealplan table tbody td {
 			 color: #000000;
     		font-size: 11px;
@@ -76,45 +76,45 @@
     		white-space:nowrap;
     		text-overflow: ellipsis;
 		}
-		
+
 		.mealplan table tbody .alt td {
 			background: #E1E1E1;
 			color: #000000;
 		}
-		
+
 		.mealplan table tbody td:first-child {
 			border-left: none;
 		}
-		
+
 		.mealplan table tbody tr:last-child td {
 			border-bottom: none;
 		}
-		
+
 		.mealplan table tfoot td div {
 			border-top: 1px solid #FFFFFC;
 			background: #E1E1E1;
 		}
-		
+
 		.mealplan table tfoot td {
 			padding: 0;
 			font-size: 12px
 		}
-		
+
 		.mealplan table tfoot td div {
 			padding: 0px;
 		}
-		
+
 		.mealplan table tfoot td ul {
 			margin: 0;
 			padding: 0;
 			list-style: none;
 			text-align: right;
 		}
-		
+
 		.mealplan table tfoot  li {
 			display: inline;
 		}
-		
+
 		.mealplan table tfoot li a {
 			text-decoration: none;
 			display: inline-block;
@@ -132,7 +132,7 @@
 				endColorstr='#4F5F6F');
 			background-color: #4F5F6F;
 		}
-		
+
 		.mealplan table tfoot ul.active,.datagrid table tfoot ul a:hover {
 			text-decoration: none;
 			border-color: #999697;
@@ -147,7 +147,7 @@
 		div.dhtmlx_window_active,div.dhx_modal_cover_dv {
 			position: fixed !important;
 		}
-	
+
 </style>
 
 </head>
@@ -155,33 +155,33 @@
 	<div style="width: 100%; float: left;">
 		<div style="width: 100%; float: right;">
 			<dl class="list" style="font-size:14px;">
-				<dt style="background:#FFFFFF; color:#000000; text-align:center; padding:2px; font-size:18px; float: center;"><center>HouseKeeper Report</center></dt>	
-				<dd style="background:#FFFFFF; color:#000000; text-align:center; padding:2px; font-size:14px; float: right;"><center>${start.formatdate}</center></dd> 			
+				<dt style="background:#FFFFFF; color:#000000; text-align:center; padding:2px; font-size:18px; float: center;"><center>HouseKeeper Report</center></dt>
+				<dd style="background:#FFFFFF; color:#000000; text-align:center; padding:2px; font-size:14px; float: right;"><center>${start.formatdate}</center></dd>
 			</dl>
-		</div>	
-	</div>	
+		</div>
+	</div>
 		<div class="mealplan" style="width: 100%; float: left;">
-		 <hr>  
+		 <hr>
 		<table border="1">
 	 		  <thead>
 				  <tr>
 				  <th style="font-weight: bold;">Room</th>
-				  
+
 				   	#foreach($item in ${calendar})
 				    	<th style="font-weight: bold;">${item.formatsmall}</th>
 				  	#end
 				  </tr>
 			  </thead>
-			 
+
 			 #foreach($item in ${reservationsweek})
 			 <tr>
-			 		<td style="font-weight: bold; font-size:14px; text-align:center;">${item.roomid}</td>
+			 		<td style="font-weight: bold; font-size:14px; text-align:center;">${item.roomno}</td>
 			 		#if (!$item.name1)
 						<td ></td>
 					#else
 						<td bgcolor="#ffff4d">${item.name1}</td>
 					#end
-			 		
+
 			 		#if (!$item.name2)
 						<td></td>
 					#else
@@ -211,11 +211,11 @@
 						<td></td>
 					#else
 						<td bgcolor="#ffff4d">${item.name7}</td>
-					#end		
-			 </tr>		
+					#end
+			 </tr>
 			#end
-			
+
 		</table>
-		
-	</div>		
+
+	</div>
 </html>

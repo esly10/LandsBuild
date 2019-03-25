@@ -7,33 +7,33 @@
 	<div style="width: 100%; float: left;">
 		<div style="width: 100%; float: left;">
 			<dl class="list" style="font-size:14px;">
-				<dt style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:24px;">Meal Plan Report</dt>	
-				<dd style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:24px;"></dd> 	
-				<dt style="background:#FFFFFF; color:#CA337E; text-align:left; padding:5px; font-size:14px;"><c:out value="${date.formatdate}" /></dt>	
-				<dd style="background:#FFFFFF; color:#CA337E; text-align:center; padding:5px; font-size:14px;"></dd> 	
-				<dt></dt><dd></dd>	
+				<dt style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:24px;">Meal Plan Report</dt>
+				<dd style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:24px;"></dd>
+				<dt style="background:#FFFFFF; color:#CA337E; text-align:left; padding:5px; font-size:14px;"><c:out value="${date.formatdate}" /></dt>
+				<dd style="background:#FFFFFF; color:#CA337E; text-align:center; padding:5px; font-size:14px;"></dd>
+				<dt></dt><dd></dd>
 			</dl>
-		</div>	
-	</div>	
+		</div>
+	</div>
 		<div class="mealplan" style="width: 100%; float: left;">
-		 <hr>  
+		 <hr>
 		<table>
 			  <thead>
 				  <tr>
 				    <th>Room No</th><th>Guest Name</th><th>Qty</th><th>Plan</th><th style="text-align:center;">Breakfast</th> <th style="text-align:center;">Launch</th><th style="text-align:center;">Dinner</th>
 				  </tr>
 			  </thead>
-			 
-			<c:forEach items="${reservations}" var="item">	
+
+			<c:forEach items="${reservations}" var="item">
 			 <tr>
-			 		<td><c:out value="${item.rr_room_id}" /></td>
+			 		<td><c:out value="${item.rr_room_no}" /></td>
 			 		<td><c:out value="${item.guestName}" /></td>
-					<td><c:out value="${item.qtyRooms}" /></td> 
+					<td><c:out value="${item.qtyRooms}" /></td>
 					<td><c:out value="${item.mealPlanName}" /></td>
 					<td style="text-align:center;"><input type="checkbox"></td>
 					<td style="text-align:center;"><input type="checkbox"></td>
-					<td style="text-align:center;"><input type="checkbox"></td>								
-			 </tr>		
+					<td style="text-align:center;"><input type="checkbox"></td>
+			 </tr>
 			</c:forEach>
 			<tfoot>
 				<tr>
@@ -54,8 +54,8 @@
 		</table>
 		<div style="width: 30%; float: left;">
 			<dl class="list" style="font-size:14px;">
-				<dt style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:14px;">Total People Today:</dt>	
-				<dd style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:14px;"><c:out value="${qty}" /></dd> 	
+				<dt style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:14px;">Total People Today:</dt>
+				<dd style="background:#FFFFFF; color:#802CD8; text-align:center; padding:5px; font-size:14px;"><c:out value="${qty}" /></dd>
 			</dl>
-		</div>	
-	</div>		
+		</div>
+	</div>
