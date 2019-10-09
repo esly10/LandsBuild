@@ -15,7 +15,8 @@ roomsStoreCalendar = new Ext.data.JsonStore({
 	fields : [ 'ROOM_ID', 'ROOM_NO', 'ROOM_TYPE', 'STATUS', 'LOCATION_X',
 			'LOCATION_Y' ],
 	sortInfo : {
-		field : 'ROOM_NO',
+		field : 'ROOM_ID',
+		//field : 'ROOM_NO',
 		direction : 'ASC'
 	},
 	baseParams : {}
@@ -60,7 +61,8 @@ roomsStoreCalendar.load({
 		roomsStoreCalendar.each(function(record, id) {
 			arrayRoomsCalendar.push({
 				id : record.data.ROOM_ID,
-				name : 'Room ' + record.data.ROOM_NO.toString()
+				name : record.data.ROOM_NO.toString()
+				//name : 'Room ' + record.data.ROOM_NO.toString()
 			});
 		});
 	}
